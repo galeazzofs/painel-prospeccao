@@ -1,15 +1,15 @@
 {
   "meta": {
-    "updatedAt": "2026-09-14T18:23:13.222Z",
+    "updatedAt": "2026-09-14T18:26:26.472Z",
     "monthLabel": "Setembro 2026",
     "monthStart": "2026-09-01",
     "monthEnd": "2026-09-30",
     "businessDays": 20,
     "businessDaysElapsed": 10,
-    "companiesTotal": 0,
+    "companiesTotal": 4,
     "availablePortes": [],
     "porteCounts": {
-      "all": 0
+      "all": 4
     }
   },
   "targets": [
@@ -44,15 +44,78 @@
       "target": 9
     }
   ],
-  "deals": [],
+  "deals": [
+    {
+      "id": "65043466511",
+      "company": "MRM Brasil — Prospecção | Maturidade Estratégica",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {},
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null
+    },
+    {
+      "id": "65035357998",
+      "company": "RD Saúde — Prospecção | Dores Operacionais",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {},
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null
+    },
+    {
+      "id": "65035568526",
+      "company": "Pessoa & Pessoa Advogados — Prospecção | Dores Operacionais",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {},
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null
+    },
+    {
+      "id": "65043494474",
+      "company": "Westwing Brasil — Prospecção | Renovação Próxima",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {},
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null
+    }
+  ],
   "filters": {
-    "setores": [],
-    "cns": [],
-    "evs": []
+    "setores": [
+      "— sem categoria"
+    ],
+    "cns": [
+      "Barbara Costa Borges"
+    ],
+    "evs": [
+      "Barbara Costa Borges"
+    ]
   },
   "debug": {
-    "totalDeals": 0,
-    "dealsWithoutPorte": 0,
+    "totalDeals": 4,
+    "dealsWithoutPorte": 4,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

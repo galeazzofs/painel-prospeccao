@@ -1,0 +1,13 @@
+{
+  "month": "2026-09",
+  "monthLabel": "Setembro 2026",
+  "businessDays": 20,
+  "targets": [
+    { "id": "72557853",  "name": "Mapeamento",     "target": 426 },
+    { "id": "24595559",  "name": "Em cadência",    "target": 364 },
+    { "id": "24595562",  "name": "Lead conectado", "target": 59  },
+    { "id": "24595560",  "name": "Qual. agendada", "target": 18  },
+    { "id": "24595561",  "name": "SQL",            "target": 13  },
+    { "id": "9102669",   "name": "SAO",            "target": 9   }
+  ]
+}

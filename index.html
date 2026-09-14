@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prospecção · Painel Executivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #FAFAF9; --surface: #FFFFFF; --surface-2: #F5F5F4;
+    --border: #E7E5E4; --border-strong: #D6D3D1;
+    --text-1: #0C0A09; --text-2: #44403C; --text-3: #78716C; --text-4: #A8A29E;
+    --accent: #1F5F3F; --accent-dark: #0F3D28; --accent-soft: #E8F2EC;
+    --positive: #15803D; --positive-soft: #F0FDF4;
+    --negative: #991B1B; --negative-soft: #FEF2F2;
+    --warning: #92400E; --warning-soft: #FEF3C7;
+    --blue: #1D4ED8; --blue-soft: #EFF6FF;
+    --shadow-sm: 0 1px 2px rgba(12,10,9,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--text-1);
+    font-family: 'Geist', -apple-system, sans-serif;
+    font-size: 14px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums;
+  }
+  .serif { font-family: 'Fraunces', Georgia, serif; font-weight: 400; letter-spacing: -0.02em; }
+  .mono  { font-family: 'Geist Mono', monospace; }
+  .app { max-width: 1320px; margin: 0 auto; padding: 32px 40px 80px; }
+
+  /* LOADING */
+  .state-screen { min-height: 60vh; display: grid; place-items: center; text-align: center; }
+  .state-screen .title { font-family: 'Fraunces', serif; font-size: 28px; color: var(--text-2); margin-bottom: 8px; }
+  .state-screen .sub   { color: var(--text-3); font-size: 14px; max-width: 480px; }
+  .spinner { width: 32px; height: 32px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; margin: 0 auto 20px; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .error-box { margin-top: 16px; background: var(--surface); border: 1px solid var(--border); padding: 16px 20px; border-radius: 8px; max-width: 520px; font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--negative); text-align: left; white-space: pre-wrap; }
+  .retry-btn { margin-top: 16px; background: var(--text-1); color: #fff; border: none; padding: 10px 18px; border-radius: 6px; font-family: inherit; font-size: 13px; cursor: pointer; }
+
+  /* TOPBAR */
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 28px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+  .brand { display: flex; align-items: baseline; gap: 14px; }
+  .brand-mark { width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); display: inline-grid; place-items: center; color: #fff; font-weight: 600; font-size: 13px; transform: translateY(4px); }
+  .brand-title { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+  .brand-sub   { font-size: 13px; color: var(--text-3); }
+  .topbar-right { display: flex; align-items: center; gap: 20px; font-size: 12px; color: var(--text-3); }
+  .live-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--positive); margin-right: 6px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  /* MONTH PROGRESS */
+  .month-bar { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
+  .month-label { font-size: 12px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin-bottom: 6px; }
+  .month-text { font-size: 14px; color: var(--text-1); }
+  .month-text .hl { padding: 2px 8px; border-radius: 4px; font-weight: 500; font-size: 12px; margin-right: 8px; }
+  .month-text .hl.ok   { background: var(--accent-soft); color: var(--accent); }
+  .month-text .hl.warn { background: var(--warning-soft); color: var(--warning); }
+  .prog-wrap { width: 280px; }
+  .prog-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-3); margin-bottom: 6px; }
+  .prog-bar { height: 4px; background: var(--surface-2); border-radius: 2px; overflow: hidden; }
+  .prog-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.8s cubic-bezier(.4,0,.2,1); }
+
+  /* SECTION */
+  .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px; margin-top: 40px; }
+  .section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); font-weight: 500; }
+  .section-sub { font-size: 12px; color: var(--text-4); }
+
+  /* SAO HERO */
+  .sao-hero { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px 32px; box-shadow: var(--shadow-sm); display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center; margin-bottom: 20px; }
+  .sao-ring { position: relative; width: 100px; height: 100px; }
+  .sao-ring svg { transform: rotate(-90deg); }
+  .sao-ring-label { position: absolute; inset: 0; display: grid; place-items: center; font-family: 'Fraunces', serif; font-size: 28px; letter-spacing: -0.03em; line-height: 1; }
+  .sao-ring-label small { font-size: 16px; color: var(--text-3); font-family: 'Geist', sans-serif; }
+  .sao-detail { display: flex; flex-direction: column; gap: 4px; }
+  .sao-detail-title { font-size: 13px; font-weight: 500; }
+  .sao-detail-sub { font-size: 12px; color: var(--text-3); }
+  .sao-stats { display: flex; flex-direction: column; gap: 10px; text-align: right; }
+  .sao-stat { font-size: 12px; color: var(--text-3); }
+  .sao-stat b { font-weight: 500; color: var(--text-1); }
+  .pace-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+  .pace-tag.ahead  { background: var(--positive-soft); color: var(--positive); }
+  .pace-tag.behind { background: var(--negative-soft); color: var(--negative); }
+  .pace-tag.on     { background: var(--accent-soft); color: var(--accent); }
+
+  /* FUNNEL TRACKER */
+  .tracker-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px 26px; box-shadow: var(--shadow-sm); }
+  .tracker-row { display: grid; grid-template-columns: 140px 1fr 70px 70px 90px 100px; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .tracker-row:last-child { border-bottom: none; }
+  .tracker-row.header { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-4); font-weight: 500; padding: 6px 0 10px; border-bottom: 1px solid var(--border-strong); }
+  .tracker-row.sao-row { background: var(--accent-soft); margin: 0 -26px; padding: 14px 26px; border-radius: 0 0 10px 10px; border-bottom: none; }
+  .tracker-name { font-weight: 500; color: var(--text-2); }
+  .tracker-bar-wrap { position: relative; height: 14px; background: var(--surface-2); border-radius: 4px; overflow: visible; }
+  .tracker-bar-fill { height: 100%; border-radius: 4px; transition: width 0.8s cubic-bezier(.4,0,.2,1); }
+  .tracker-bar-fill.ok   { background: var(--accent); }
+  .tracker-bar-fill.warn { background: var(--warning); }
+  .tracker-bar-fill.bad  { background: var(--negative); opacity: 0.7; }
+  .tracker-bar-fill.over { background: var(--positive); }
+  .pace-marker { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--text-1); border-radius: 1px; opacity: 0.5; z-index: 2; }
+  .pace-marker::after { content: ''; position: absolute; top: -4px; left: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--text-1); opacity: 0.4; }
+  .tracker-actual { font-weight: 500; text-align: right; }
+  .tracker-target { color: var(--text-3); text-align: right; }
+  .tracker-pct { text-align: right; font-family: 'Geist Mono', monospace; font-size: 12px; }
+  .tracker-pace { text-align: right; }
+
+  /* FILTER */
+  .filter-area { margin-bottom: 24px; display: flex; flex-direction: column; gap: 8px; }
+  .porte-filter-bar { display: flex; align-items: center; gap: 16px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow-sm); }
+  .filter-label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; padding-left: 4px; white-space: nowrap; }
+  .porte-tabs { display: flex; gap: 4px; flex: 1; }
+  .porte-tab { padding: 7px 14px; font-size: 13px; font-family: inherit; color: var(--text-3); background: transparent; border: none; border-radius: 7px; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 8px; }
+  .porte-tab:hover { background: var(--surface-2); color: var(--text-2); }
+  .porte-tab.active { background: var(--text-1); color: #fff; }
+  .porte-tab.active .porte-count { color: rgba(255,255,255,0.6); }
+  .porte-count { font-size: 11px; color: var(--text-4); }
+
+  /* KPI GRID */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 6px; transition: border-color 0.15s; }
+  .kpi:hover { border-color: var(--border-strong); }
+  .kpi-label { font-size: 12px; color: var(--text-3); }
+  .kpi-value { font-size: 32px; letter-spacing: -0.03em; line-height: 1; }
+  .kpi-value.muted { color: var(--text-4); }
+  .kpi-value small { font-size: 16px; color: var(--text-3); margin-left: 2px; }
+  .kpi-sub { font-size: 12px; color: var(--text-3); }
+
+  /* LOSS */
+  .loss-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .loss-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px 26px; box-shadow: var(--shadow-sm); }
+  .loss-total { font-family: 'Fraunces', serif; font-size: 42px; letter-spacing: -0.03em; line-height: 1; }
+  .loss-total.zero { color: var(--text-4); }
+  .loss-sub { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+  .loss-bar-list { display: flex; flex-direction: column; gap: 12px; }
+  .loss-bar-row { display: grid; grid-template-columns: 140px 1fr 40px; gap: 10px; align-items: center; font-size: 12px; }
+  .loss-bar-label { color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .loss-bar-outer { height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+  .loss-bar-fill  { height: 100%; border-radius: 4px; opacity: 0.6; transition: width 0.7s; }
+  .loss-bar-fill.stage  { background: var(--negative); }
+  .loss-bar-fill.reason { background: var(--warning); }
+  .loss-count { text-align: right; color: var(--text-3); font-size: 11px; }
+
+  /* TEAM */
+  .dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px 26px; box-shadow: var(--shadow-sm); }
+  .card-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+  .card-sub   { font-size: 12px; color: var(--text-3); margin-bottom: 20px; }
+  table.perf { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 14px; }
+  table.perf th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-4); font-weight: 500; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  table.perf th:last-child, table.perf td:last-child { text-align: right; }
+  table.perf td { padding: 12px; border-bottom: 1px solid var(--border); color: var(--text-2); }
+  table.perf tr:last-child td { border-bottom: none; }
+  table.perf tr:hover td { background: var(--surface-2); }
+  .person { display: flex; align-items: center; gap: 10px; }
+  .avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--surface-2); display: grid; place-items: center; font-size: 10px; color: var(--text-2); font-weight: 500; }
+  .perf-mini-bar { display: inline-block; width: 60px; height: 4px; background: var(--surface-2); border-radius: 2px; overflow: hidden; vertical-align: middle; margin-right: 8px; }
+  .perf-mini-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+  .rate-pill { font-size: 12px; font-weight: 500; }
+  .empty-row td { color: var(--text-4); text-align: center; padding: 24px; font-size: 12px; }
+
+  /* FOOTER */
+  .footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 11px; color: var(--text-4); }
+
+  .fade-in { animation: fadeUp 0.35s cubic-bezier(.4,0,.2,1) backwards; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 1100px) {
+    .app { padding: 24px 20px 60px; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .dual-grid, .loss-grid { grid-template-columns: 1fr; }
+    .sao-hero { grid-template-columns: 1fr; text-align: center; }
+    .tracker-row { grid-template-columns: 110px 1fr 55px 55px 70px 80px; gap: 8px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="state-screen">
+    <div><div class="spinner"></div><div class="title serif">Carregando painel…</div><div class="sub">Buscando dados de prospecção</div></div>
+  </div>
+</div>
+
+<script>
+// ============================================================================
+// PAINEL PROSPECÇÃO v1 — real vs meta mensal + pace tracking
+// ============================================================================
+const DATA_URL = './data.json';
+
+const STAGE_SDR_LOST = '24595564';
+const STAGE_OPP_LOST = 'closedlost';
+
+let gData = null;
+const filters = { porte: 'all' };
+
+// ---- Formatters ------------------------------------------------------------
+const DASH = '—';
+const isNil = v => v === null || v === undefined || (typeof v === 'number' && !isFinite(v));
+function fmt(v, type = 'auto') {
+  if (isNil(v)) return DASH;
+  switch (type) {
+    case 'int':  return Number(v).toLocaleString('pt-BR');
+    case 'pct':  return `${(Number(v) * 100).toFixed(1).replace('.', ',')}%`;
+    case 'pct0': return `${(Number(v) * 100).toFixed(0).replace('.', ',')}%`;
+    default: return String(v);
+  }
+}
+function fmtDate(iso) {
+  if (!iso) return DASH;
+  const d = new Date(iso);
+  const months = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  return `${String(d.getDate()).padStart(2,'0')} ${months[d.getMonth()]} ${d.getFullYear()} · ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+function timeAgo(iso) {
+  if (!iso) return DASH;
+  const mins = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
+  if (mins < 1) return 'agora mesmo';
+  if (mins < 60) return `há ${mins} min`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return `há ${hrs} h`;
+  return `há ${Math.floor(hrs / 24)} d`;
+}
+function initialsOf(name) {
+  if (!name) return '?';
+  const parts = name.split(' ').filter(Boolean);
+  return ((parts[0]?.[0] || '') + (parts[parts.length - 1]?.[0] || '')).toUpperCase().slice(0, 2) || '?';
+}
+
+// ---- Filters ---------------------------------------------------------------
+function applyFilters(deals) {
+  return deals.filter(d => {
+    if (filters.porte !== 'all' && d.porte !== filters.porte) return false;
+    return true;
+  });
+}
+
+// ---- Compute ---------------------------------------------------------------
+function computeMetrics(deals, targets, meta) {
+  const total = deals.length;
+  const pctTime = meta.businessDays > 0 ? meta.businessDaysElapsed / meta.businessDays : 0;
+
+  // Count actuals per target stage
+  const tracker = targets.map(t => {
+    const actual = deals.filter(d => d.stages[t.id]).length;
+    const pace = Math.round(t.target * pctTime);
+    const pctDone = t.target > 0 ? actual / t.target : 0;
+    const gap = actual - pace;
+    let status = 'on';
+    if (gap < -Math.max(1, t.target * 0.05)) status = 'behind';
+    else if (gap > Math.max(1, t.target * 0.05)) status = 'ahead';
+    return { ...t, actual, pace, pctDone, gap, status };
+  });
+
+  // Losses
+  const lostDeals = deals.filter(d => d.isLost);
+  const byStage = {}, byReason = {};
+  lostDeals.forEach(d => {
+    const st = d.lostStage || '— desconhecido';
+    const r  = d.lostReason || '— sem motivo registrado';
+    byStage[st] = (byStage[st] || 0) + 1;
+    byReason[r] = (byReason[r] || 0) + 1;
+  });
+
+  // Team: CNs
+  const cnMap = {};
+  deals.forEach(d => {
+    if (!d.cn) return;
+    if (!cnMap[d.cn]) cnMap[d.cn] = { name: d.cn, leads: 0, connected: 0 };
+    cnMap[d.cn].leads++;
+    if (d.stages['24595562']) cnMap[d.cn].connected++;
+  });
+  const cns = Object.values(cnMap).map(c => ({ ...c, rate: c.leads > 0 ? c.connected / c.leads : 0 }))
+                                  .sort((a, b) => b.leads - a.leads);
+
+  // Team: EVs
+  const evMap = {};
+  deals.filter(d => d.stages['9102669'] && d.ev).forEach(d => {
+    if (!evMap[d.ev]) evMap[d.ev] = { name: d.ev, opportunities: 0, pipeline: 0 };
+    if (!d.stages[STAGE_OPP_LOST]) {
+      evMap[d.ev].opportunities++;
+      evMap[d.ev].pipeline += (d.amount || 0);
+    }
+  });
+  const evs = Object.values(evMap).sort((a, b) => b.pipeline - a.pipeline);
+
+  return {
+    total, pctTime, tracker,
+    losses: {
+      total: lostDeals.length,
+      rate: total > 0 ? lostDeals.length / total : 0,
+      byStage:  Object.entries(byStage).map(([stage, count]) => ({ stage, count })).sort((a,b) => b.count - a.count),
+      byReason: Object.entries(byReason).map(([reason, count]) => ({ reason, count })).sort((a,b) => b.count - a.count),
+    },
+    team: { cns, evs }
+  };
+}
+
+// ---- Renderers -------------------------------------------------------------
+function renderTopbar(data) {
+  const meta = data.meta;
+  return `
+    <div class="topbar fade-in">
+      <div class="brand">
+        <div class="brand-mark">P</div>
+        <div>
+          <div class="brand-title">Prospecção</div>
+          <div class="brand-sub">Painel executivo · Pipo Saúde</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span><span class="live-dot"></span>Atualizado ${timeAgo(meta.updatedAt)}</span>
+        <span class="mono">${fmtDate(meta.updatedAt)}</span>
+      </div>
+    </div>`;
+}
+
+function renderMonthProgress(meta) {
+  const pct = meta.businessDays > 0 ? (meta.businessDaysElapsed / meta.businessDays * 100) : 0;
+  const remaining = meta.businessDays - meta.businessDaysElapsed;
+  const hlClass = pct > 70 ? 'warn' : 'ok';
+  return `
+    <div class="month-bar fade-in">
+      <div>
+        <div class="month-label">${meta.monthLabel}</div>
+        <div class="month-text">
+          <span class="hl ${hlClass}">Dia útil ${meta.businessDaysElapsed} de ${meta.businessDays}</span>
+          ${remaining > 0 ? `Restam <b>${remaining} dias úteis</b> para bater a meta.` : 'Último dia útil do mês.'}
+        </div>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-meta">
+          <span>${meta.monthStart?.slice(8,10)}/${meta.monthStart?.slice(5,7)}</span>
+          <span class="mono">${pct.toFixed(0)}%</span>
+          <span>${meta.monthEnd?.slice(8,10)}/${meta.monthEnd?.slice(5,7)}</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="width:${Math.min(100, pct)}%"></div></div>
+      </div>
+    </div>`;
+}
+
+function renderSaoHero(m) {
+  const sao = m.tracker.find(t => t.name === 'SAO') || m.tracker[m.tracker.length - 1];
+  if (!sao) return '';
+  const pct = sao.pctDone;
+  const radius = 40, circ = 2 * Math.PI * radius;
+  const offset = circ - (Math.min(1, pct) * circ);
+  const color = sao.status === 'ahead' ? 'var(--positive)' : sao.status === 'behind' ? 'var(--negative)' : 'var(--accent)';
+
+  return `
+    <div class="sao-hero fade-in">
+      <div class="sao-ring">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="${radius}" fill="none" stroke="var(--surface-2)" stroke-width="7"/>
+          <circle cx="50" cy="50" r="${radius}" fill="none" stroke="${color}" stroke-width="7"
+            stroke-dasharray="${circ}" stroke-dashoffset="${offset}" stroke-linecap="round"
+            style="transition: stroke-dashoffset 1s cubic-bezier(.4,0,.2,1)"/>
+        </svg>
+        <div class="sao-ring-label serif">${sao.actual}<small>/${sao.target}</small></div>
+      </div>
+      <div class="sao-detail">
+        <div class="sao-detail-title">SAOs no mês</div>
+        <div class="sao-detail-sub">
+          ${sao.actual < sao.target
+            ? `Faltam <b>${sao.target - sao.actual}</b> SAOs para bater a meta`
+            : `<span style="color:var(--positive)">Meta batida!</span> ${sao.actual - sao.target > 0 ? `+${sao.actual - sao.target} além` : ''}`}
+        </div>
+        <div style="margin-top: 6px;">
+          <span class="pace-tag ${sao.status}">
+            ${sao.status === 'ahead' ? '↑ À frente do pace' : sao.status === 'behind' ? '↓ Atrás do pace' : '→ No pace'}
+          </span>
+        </div>
+      </div>
+      <div class="sao-stats">
+        <div class="sao-stat">Pace esperado: <b>${sao.pace}</b></div>
+        <div class="sao-stat">Realizado: <b>${sao.actual}</b></div>
+        <div class="sao-stat">Gap: <b style="color:${sao.gap >= 0 ? 'var(--positive)' : 'var(--negative)'}">${sao.gap >= 0 ? '+' : ''}${sao.gap}</b></div>
+      </div>
+    </div>`;
+}
+
+function renderFilterBar(data) {
+  const meta = data.meta;
+  const portes = meta.availablePortes || [];
+  const counts = meta.porteCounts || {};
+  const tabs = [
+    { id: 'all', label: 'Todos', count: counts.all ?? 0 },
+    ...portes.map(p => ({ id: p, label: p, count: counts[p] ?? 0 }))
+  ];
+  return `
+    <div class="filter-area fade-in">
+      <div class="porte-filter-bar">
+        <span class="filter-label">Porte</span>
+        <div class="porte-tabs">
+          ${tabs.map(t => `
+            <button class="porte-tab ${filters.porte === t.id ? 'active' : ''}" data-porte="${t.id}">
+              ${t.label} <span class="porte-count">${fmt(t.count, 'int')}</span>
+            </button>`).join('')}
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderTracker(m) {
+  const rows = m.tracker.map((t, i) => {
+    const barPct = Math.min(100, t.pctDone * 100);
+    const pacePct = t.target > 0 ? Math.min(100, (t.pace / t.target) * 100) : 0;
+    const barClass = t.pctDone >= 1 ? 'over' : t.status === 'behind' ? (t.pctDone < m.pctTime * 0.7 ? 'bad' : 'warn') : 'ok';
+    const isSao = t.name === 'SAO';
+
+    return `
+      <div class="tracker-row${isSao ? ' sao-row' : ''} fade-in" style="animation-delay:${i * 50}ms">
+        <div class="tracker-name">${t.name}</div>
+        <div class="tracker-bar-wrap">
+          <div class="tracker-bar-fill ${barClass}" style="width:${barPct}%"></div>
+          <div class="pace-marker" style="left:${pacePct}%" title="Pace: ${t.pace}"></div>
+        </div>
+        <div class="tracker-actual" style="font-weight:600">${fmt(t.actual, 'int')}</div>
+        <div class="tracker-target">/${fmt(t.target, 'int')}</div>
+        <div class="tracker-pct">${fmt(t.pctDone, 'pct0')}</div>
+        <div class="tracker-pace">
+          <span class="pace-tag ${t.status}">
+            ${t.status === 'ahead' ? `+${t.gap}` : t.status === 'behind' ? `${t.gap}` : '='}
+            ${t.status === 'ahead' ? '↑' : t.status === 'behind' ? '↓' : '→'}
+          </span>
+        </div>
+      </div>`;
+  }).join('');
+
+  return `
+    <div class="section-header">
+      <div class="section-title">Funil vs Meta</div>
+      <div class="section-sub">Barra = realizado · Marcador = onde deveria estar (pace)</div>
+    </div>
+    <div class="tracker-card fade-in">
+      <div class="tracker-row header">
+        <div>Etapa</div><div>Progresso</div><div style="text-align:right">Real</div><div style="text-align:right">Meta</div><div style="text-align:right">%</div><div style="text-align:right">vs Pace</div>
+      </div>
+      ${rows}
+    </div>`;
+}
+
+function renderKPIs(m) {
+  const sao = m.tracker.find(t => t.name === 'SAO');
+  const sql = m.tracker.find(t => t.name === 'SQL');
+  const con = m.tracker.find(t => t.name === 'Lead conectado');
+  const cad = m.tracker.find(t => t.name === 'Em cadência');
+  return `
+    <div class="kpi-grid" style="margin-top: 20px;">
+      <div class="kpi fade-in">
+        <div class="kpi-label">Deals ativos</div>
+        <div class="kpi-value serif">${fmt(m.total, 'int')}</div>
+        <div class="kpi-sub">${fmt(m.total - m.losses.total, 'int')} ativos · ${fmt(m.losses.total, 'int')} perdidos</div>
+      </div>
+      <div class="kpi fade-in">
+        <div class="kpi-label">Taxa de conexão</div>
+        <div class="kpi-value serif">${con && cad ? fmt(cad.actual > 0 ? con.actual / cad.actual : 0, 'pct') : DASH}</div>
+        <div class="kpi-sub">${con ? fmt(con.actual, 'int') : 0} conectados de ${cad ? fmt(cad.actual, 'int') : 0} em cadência</div>
+      </div>
+      <div class="kpi fade-in">
+        <div class="kpi-label">Taxa de qualificação</div>
+        <div class="kpi-value serif">${sql && con ? fmt(con.actual > 0 ? sql.actual / con.actual : 0, 'pct') : DASH}</div>
+        <div class="kpi-sub">${sql ? fmt(sql.actual, 'int') : 0} SQLs de ${con ? fmt(con.actual, 'int') : 0} conectados</div>
+      </div>
+      <div class="kpi fade-in">
+        <div class="kpi-label">Conversão geral → SAO</div>
+        <div class="kpi-value serif">${sao ? fmt(m.total > 0 ? sao.actual / m.total : 0, 'pct') : DASH}</div>
+        <div class="kpi-sub">${sao ? fmt(sao.actual, 'int') : 0} SAOs de ${fmt(m.total, 'int')} mapeados</div>
+      </div>
+    </div>`;
+}
+
+function renderLosses(m) {
+  const l = m.losses;
+  if (l.total === 0) return '';
+  const maxStage = l.byStage[0]?.count || 1;
+  const maxReason = l.byReason[0]?.count || 1;
+  const stageRows = l.byStage.map(r => `
+    <div class="loss-bar-row"><div class="loss-bar-label">${r.stage}</div><div class="loss-bar-outer"><div class="loss-bar-fill stage" style="width:${(r.count/maxStage)*100}%"></div></div><div class="loss-count">${r.count}</div></div>`).join('');
+  const reasonRows = l.byReason.map(r => `
+    <div class="loss-bar-row"><div class="loss-bar-label">${r.reason}</div><div class="loss-bar-outer"><div class="loss-bar-fill reason" style="width:${(r.count/maxReason)*100}%"></div></div><div class="loss-count">${r.count}</div></div>`).join('');
+  return `
+    <div class="section-header"><div class="section-title">Análise de perdas</div><div class="section-sub">${fmt(l.total,'int')} deals perdidos · ${fmt(l.rate,'pct')} do total</div></div>
+    <div class="loss-grid">
+      <div class="loss-card fade-in">
+        <div style="margin-bottom:16px"><div class="loss-total serif">${fmt(l.total,'int')}</div><div class="loss-sub">por etapa</div></div>
+        <div class="loss-bar-list">${stageRows}</div>
+      </div>
+      <div class="loss-card fade-in">
+        <div style="margin-bottom:16px"><div style="font-size:13px;font-weight:500">Motivos de perda</div><div class="loss-sub">preenchidos no HubSpot</div></div>
+        <div class="loss-bar-list">${reasonRows || '<div style="color:var(--text-4);font-size:13px">Sem motivos registrados</div>'}</div>
+      </div>
+    </div>`;
+}
+
+function renderTeam(m) {
+  const cnRows = m.team.cns.length === 0
+    ? '<tr class="empty-row"><td colspan="4">Nenhum CN com leads no mês</td></tr>'
+    : m.team.cns.map(c => {
+        const maxRate = Math.max(...m.team.cns.map(x => x.rate || 0), 0.01);
+        return `<tr>
+          <td><div class="person"><div class="avatar">${initialsOf(c.name)}</div>${c.name}</div></td>
+          <td>${fmt(c.leads,'int')}</td><td>${fmt(c.connected,'int')}</td>
+          <td><span class="perf-mini-bar"><span class="perf-mini-bar-fill" style="width:${((c.rate||0)/maxRate)*100}%"></span></span><span class="rate-pill">${fmt(c.rate,'pct')}</span></td>
+        </tr>`;
+      }).join('');
+  const evRows = m.team.evs.length === 0
+    ? '<tr class="empty-row"><td colspan="3">Nenhum EV com oportunidades</td></tr>'
+    : m.team.evs.map(e => `<tr>
+        <td><div class="person"><div class="avatar">${initialsOf(e.name)}</div>${e.name}</div></td>
+        <td>${fmt(e.opportunities,'int')}</td><td>${e.pipeline > 0 ? `R$ ${fmt(e.pipeline,'int')}` : DASH}</td>
+      </tr>`).join('');
+  return `
+    <div class="section-header"><div class="section-title">Performance por pessoa</div></div>
+    <div class="dual-grid">
+      <div class="card fade-in">
+        <div class="card-title">Consultores de Negócio (CN)</div>
+        <div class="card-sub">Mapeamento → Lead conectado</div>
+        <table class="perf"><thead><tr><th>CN</th><th>Leads</th><th>Conect.</th><th>Taxa</th></tr></thead><tbody>${cnRows}</tbody></table>
+      </div>
+      <div class="card fade-in">
+        <div class="card-title">Executivos de Vendas (EV)</div>
+        <div class="card-sub">Oportunidades ativas</div>
+        <table class="perf"><thead><tr><th>EV</th><th>Oport.</th><th>Pipeline</th></tr></thead><tbody>${evRows}</tbody></table>
+      </div>
+    </div>`;
+}
+
+function renderFooter(data) {
+  const d = data.debug || {};
+  return `<div class="footer"><div>Fonte: HubSpot · sync n8n</div><div>${fmt(d.totalDeals,'int')} deals · sync diário</div></div>`;
+}
+
+// ---- Main render -----------------------------------------------------------
+function render() {
+  if (!gData) return;
+  const meta     = gData.meta;
+  const targets  = gData.targets || [];
+  const filtered = applyFilters(gData.deals || []);
+  const m        = computeMetrics(filtered, targets, meta);
+
+  document.getElementById('root').innerHTML = `
+    <div class="app">
+      ${renderTopbar(gData)}
+      ${renderMonthProgress(meta)}
+      ${renderFilterBar(gData)}
+      ${renderSaoHero(m)}
+      ${renderTracker(m)}
+      ${renderKPIs(m)}
+      ${renderLosses(m)}
+      ${renderTeam(m)}
+      ${renderFooter(gData)}
+    </div>`;
+
+  document.querySelectorAll('.porte-tab').forEach(btn => {
+    btn.addEventListener('click', () => { filters.porte = btn.dataset.porte; render(); });
+  });
+}
+
+function renderError(msg) {
+  document.getElementById('root').innerHTML = `
+    <div class="state-screen"><div>
+      <div class="title serif">Não foi possível carregar o painel</div>
+      <div class="sub">O arquivo <code>data.json</code> não foi encontrado ou tem estrutura inválida.</div>
+      <div class="error-box">${msg}</div>
+      <button class="retry-btn" onclick="loadData()">Tentar novamente</button>
+    </div></div>`;
+}
+
+async function loadData() {
+  try {
+    const resp = await fetch(`${DATA_URL}?t=${Date.now()}`, { cache: 'no-store' });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status} ao buscar ${DATA_URL}`);
+    const data = await resp.json();
+    if (!data.meta || !data.targets) throw new Error('Estrutura do data.json inválida (esperado: meta, targets, deals)');
+    gData = data;
+    render();
+  } catch (e) { renderError(e.message || String(e)); }
+}
+
+loadData();
+setInterval(loadData, 15 * 60 * 1000);
+</script>
+</body>
+</html>

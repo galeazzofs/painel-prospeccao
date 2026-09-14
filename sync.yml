@@ -1,34 +1,28 @@
-name: Sync HubSpot → data.json
+name: Sync HubSpot
 
 on:
   schedule:
-    # Roda todo dia às 11:00 UTC (08:00 BRT)
-    - cron: '0 11 * * *'
-  workflow_dispatch: # permite rodar manualmente pelo GitHub
+    - cron: '0 11,17 * * 1-5'   # 8h e 14h BRT, seg-sex
+  workflow_dispatch:
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # precisa pra commitar o data.json
-
+      contents: write
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
       - name: Fetch HubSpot data
         env:
           HUBSPOT_ACCESS_TOKEN: ${{ secrets.HUBSPOT_ACCESS_TOKEN }}
-        run: node scripts/fetch.js
-
+        run: node fetch.js
       - name: Commit & push data.json
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data.json
-          # Só commita se houve mudança
-          git diff --staged --quiet || git commit -m "🔄 Atualiza data.json — $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git diff --staged --quiet || git commit -m "🔄 $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push

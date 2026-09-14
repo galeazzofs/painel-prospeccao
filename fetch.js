@@ -19,7 +19,7 @@ if (!HUBSPOT_TOKEN) { console.error('❌ HUBSPOT_ACCESS_TOKEN não definido'); p
 const API = 'https://api.hubapi.com';
 
 // Pipeline de prospecção
-const PIPELINE_ID = '24595557';  // ← ajuste pro seu pipeline
+const PIPELINES = ['8582978', 'default'];  // ← ajuste pro seu pipeline
 
 // Stage IDs (mesmos do Cortex — confirme no seu HubSpot)
 const STAGES = {
@@ -50,11 +50,12 @@ const DEAL_PROPS = [
 
 // Filtro de quais deals puxar (ajuste conforme necessário)
 // Ex: todos os deals do pipeline de prospecção criados no mês corrente
+
 function buildSearchFilter(monthStart, monthEnd) {
   return {
     filterGroups: [{
       filters: [
-        { propertyName: 'pipeline', operator: 'EQ', value: PIPELINE_ID },
+        { propertyName: 'pipeline', operator: 'IN', values: PIPELINES },
         { propertyName: 'createdate', operator: 'GTE', value: new Date(monthStart).getTime() },
         { propertyName: 'createdate', operator: 'LTE', value: new Date(monthEnd + 'T23:59:59Z').getTime() },
       ]

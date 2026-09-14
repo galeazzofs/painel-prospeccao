@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-09-14T18:26:26.472Z",
+    "updatedAt": "2026-09-14T18:32:03.579Z",
     "monthLabel": "Setembro 2026",
     "monthStart": "2026-09-01",
     "monthEnd": "2026-09-30",
@@ -52,7 +52,10 @@
       "setor": "— sem categoria",
       "cn": "Barbara Costa Borges",
       "ev": "Barbara Costa Borges",
-      "stages": {},
+      "stages": {
+        "24595559": "2026-09-14T17:34:35.107Z",
+        "72557853": "2026-09-14T17:34:31.991Z"
+      },
       "amount": 0,
       "isLost": false,
       "lostStage": null,
@@ -66,7 +69,10 @@
       "setor": "— sem categoria",
       "cn": "Barbara Costa Borges",
       "ev": "Barbara Costa Borges",
-      "stages": {},
+      "stages": {
+        "24595559": "2026-09-14T17:34:50.799Z",
+        "72557853": "2026-09-14T17:34:46.589Z"
+      },
       "amount": 0,
       "isLost": false,
       "lostStage": null,
@@ -80,7 +86,10 @@
       "setor": "— sem categoria",
       "cn": "Barbara Costa Borges",
       "ev": "Barbara Costa Borges",
-      "stages": {},
+      "stages": {
+        "24595559": "2026-09-14T17:54:35.329Z",
+        "72557853": "2026-09-14T17:54:32.161Z"
+      },
       "amount": 0,
       "isLost": false,
       "lostStage": null,
@@ -94,7 +103,10 @@
       "setor": "— sem categoria",
       "cn": "Barbara Costa Borges",
       "ev": "Barbara Costa Borges",
-      "stages": {},
+      "stages": {
+        "24595559": "2026-09-14T17:55:04.368Z",
+        "72557853": "2026-09-14T17:55:00.138Z"
+      },
       "amount": 0,
       "isLost": false,
       "lostStage": null,

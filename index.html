@@ -182,7 +182,8 @@ const TARGET_STAGES=[
 ];
 
 let gData=null;
-const F={porte:'all',month:'all',campaign:'all',cn:'all',ev:'all',setor:'all'};
+const CURRENT_MONTH=new Date().toISOString().slice(0,7);
+const F={porte:'all',month:CURRENT_MONTH,campaign:'all',cn:'all',ev:'all',setor:'all'};
 
 const DASH='—';
 const isNil=v=>v===null||v===undefined||(typeof v==='number'&&!isFinite(v));

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // =============================================================================
 // fetch.js — Puxa deals do HubSpot e gera data.json para o Painel Prospecção
-// Roda via GitHub Actions (cron diário) ou local: node scripts/fetch.js
+// Roda via GitHub Actions (cron diário) ou local: node fetch.js
 // =============================================================================
 
 import { readFileSync, writeFileSync } from 'fs';
@@ -9,7 +9,7 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
+const ROOT = __dirname;  // fetch.js está na raiz do repo
 
 // ─── CONFIG ─────────────────────────────────────────────────────────────────
 const HUBSPOT_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN;
@@ -18,7 +18,7 @@ if (!HUBSPOT_TOKEN) { console.error('❌ HUBSPOT_ACCESS_TOKEN não definido'); p
 const API = 'https://api.hubapi.com';
 
 // Pipeline e stages (idênticos ao Cortex)
-const PIPELINE_ID = '8582978';
+const PIPELINE_ID = '24595557';
 
 const STAGES_SDR = [
   { id: '72557853',  name: 'Mapeamento' },
@@ -50,7 +50,7 @@ const ALL_STAGE_IDS = [
   ])
 ];
 
-// Propriedades a buscar (inclui hs_date_entered_* para cada stage)
+// Propriedades a buscar
 const DEAL_PROPS = [
   'dealname', 'dealstage', 'pipeline', 'amount', 'createdate',
   'hubspot_owner_id', 'closed_lost_reason',
@@ -141,7 +141,6 @@ function countBusinessDays(from, to) {
 function transformDeal(raw, owners) {
   const p = raw.properties || {};
 
-  // Build stages object: { stageId: isoTimestamp }
   const stages = {};
   for (const id of ALL_STAGE_IDS) {
     const val = p[`hs_date_entered_${id}`];
@@ -153,7 +152,6 @@ function transformDeal(raw, owners) {
   const isOPPLost = currentStage === STAGE_OPP_LOST || !!stages[STAGE_OPP_LOST];
   const isLost = isSDRLost || isOPPLost;
 
-  // Which stage lost from (last active stage before lost)
   let lostStage = null;
   let lostFunnel = null;
   if (isLost) {
@@ -194,7 +192,6 @@ function transformDeal(raw, owners) {
 async function main() {
   console.log('🔄 Painel Prospecção — sync HubSpot\n');
 
-  // Load targets
   const targetsFile = JSON.parse(readFileSync(resolve(ROOT, 'targets.json'), 'utf-8'));
   const { month, monthLabel, businessDays, targets } = targetsFile;
   const monthStart = `${month}-01`;
@@ -204,25 +201,20 @@ async function main() {
   console.log(`📅 ${monthLabel} (${monthStart} → ${monthEnd})`);
   console.log(`🎯 ${targets.map(t => `${t.name}=${t.target}`).join(', ')}\n`);
 
-  // Owners
   console.log('👥 Buscando owners…');
   const owners = await fetchOwners();
   console.log(`   ${Object.keys(owners).length} owners\n`);
 
-  // Deals: filtro = pipeline + origem=Prospecção + origem_micro_=Motor sinais
   console.log('📊 Buscando deals (origem=Prospecção, origem_micro_=Motor sinais)…');
   const rawDeals = await fetchAllDeals(buildSearchBody());
   console.log(`   ${rawDeals.length} deals encontrados\n`);
 
-  // Transform
   const deals = rawDeals.map(d => transformDeal(d, owners));
 
-  // Meta
   const today = new Date().toISOString().slice(0, 10);
   const effectiveToday = today > monthEnd ? monthEnd : today;
   const bizElapsed = countBusinessDays(monthStart, effectiveToday);
 
-  // Porte counts
   const porteCounts = { all: deals.length };
   const porteSet = new Set();
   deals.forEach(d => {
@@ -232,12 +224,10 @@ async function main() {
     }
   });
 
-  // Filters
   const setores = [...new Set(deals.map(d => d.setor).filter(Boolean))].sort();
   const cns     = [...new Set(deals.map(d => d.cn).filter(Boolean))].sort();
   const evs     = [...new Set(deals.map(d => d.ev).filter(Boolean))].sort();
 
-  // Build output
   const data = {
     meta: {
       updatedAt: new Date().toISOString(),

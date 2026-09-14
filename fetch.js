@@ -59,7 +59,7 @@ const DEAL_PROPS = [
   'origem',
   'origem_micro_',
   'ev_responsavel',
-  ...ALL_STAGE_IDS.map(id => `hs_date_entered_${id}`),
+  ...ALL_STAGE_IDS.map(id => `hs_v2_date_entered_${id}`),
 ];
 
 // ─── FILTROS: origem = Prospecção AND origem_micro_ = Motor sinais ──────────
@@ -143,7 +143,7 @@ function transformDeal(raw, owners) {
 
   const stages = {};
   for (const id of ALL_STAGE_IDS) {
-    const val = p[`hs_date_entered_${id}`];
+    const val = p[`hs_v2_date_entered_${id}`];
     if (val) stages[id] = val;
   }
 

@@ -1,66 +1,58 @@
 {
   "meta": {
-    "updatedAt": "2026-09-14T11:00:00.000Z",
+    "updatedAt": "2026-09-14T18:23:13.222Z",
     "monthLabel": "Setembro 2026",
     "monthStart": "2026-09-01",
     "monthEnd": "2026-09-30",
     "businessDays": 20,
     "businessDaysElapsed": 10,
-    "companiesTotal": 16,
-    "availablePortes": ["P", "M", "G+"],
-    "porteCounts": { "all": 210, "P": 85, "M": 115, "G+": 10 }
+    "companiesTotal": 0,
+    "availablePortes": [],
+    "porteCounts": {
+      "all": 0
+    }
   },
   "targets": [
-    { "id": "72557853",  "name": "Mapeamento",       "target": 426 },
-    { "id": "24595559",  "name": "Em cadência",      "target": 364 },
-    { "id": "24595562",  "name": "Lead conectado",   "target": 59 },
-    { "id": "24595560",  "name": "Qual. agendada",   "target": 18 },
-    { "id": "24595561",  "name": "SQL",              "target": 13 },
-    { "id": "9102669",   "name": "SAO",              "target": 9 }
-  ],
-  "deals": [
     {
-      "id": "demo-001",
-      "company": "Empresa Demo 1",
-      "porte": "M",
-      "setor": "Tecnologia",
-      "cn": "Larissa Martins da Cruz",
-      "ev": "Breno Haus",
-      "stages": {
-        "72557853": "2026-09-01T10:00:00Z",
-        "24595559": "2026-09-03T14:00:00Z",
-        "24595562": "2026-09-08T09:00:00Z"
-      },
-      "amount": 0,
-      "isLost": false,
-      "lostStage": null,
-      "lostReason": null
+      "id": "72557853",
+      "name": "Mapeamento",
+      "target": 426
     },
     {
-      "id": "demo-002",
-      "company": "Empresa Demo 2",
-      "porte": "P",
-      "setor": "Saúde",
-      "cn": "Breno Haus",
-      "ev": "Breno Haus",
-      "stages": {
-        "72557853": "2026-09-02T10:00:00Z",
-        "24595559": "2026-09-04T14:00:00Z",
-        "24595564": "2026-09-10T09:00:00Z"
-      },
-      "amount": 0,
-      "isLost": true,
-      "lostStage": "Em cadência",
-      "lostReason": "Falta de Contato"
+      "id": "24595559",
+      "name": "Em cadência",
+      "target": 364
+    },
+    {
+      "id": "24595562",
+      "name": "Lead conectado",
+      "target": 59
+    },
+    {
+      "id": "24595560",
+      "name": "Qual. agendada",
+      "target": 18
+    },
+    {
+      "id": "24595561",
+      "name": "SQL",
+      "target": 13
+    },
+    {
+      "id": "9102669",
+      "name": "SAO",
+      "target": 9
     }
   ],
+  "deals": [],
   "filters": {
-    "setores": ["Tecnologia", "Saúde", "Indústria"],
-    "cns": ["Larissa Martins da Cruz", "Breno Haus", "Barbara Costa Borges"],
-    "evs": ["Breno Haus"]
+    "setores": [],
+    "cns": [],
+    "evs": []
   },
   "debug": {
-    "totalDeals": 210,
-    "dealsWithoutPorte": 0
+    "totalDeals": 0,
+    "dealsWithoutPorte": 0,
+    "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

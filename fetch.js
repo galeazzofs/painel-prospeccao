@@ -11,54 +11,65 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 
-// ─── CONFIGURAÇÃO ───────────────────────────────────────────────────────────
-// Preencha com os valores do seu HubSpot. O token vem do env (GitHub Secret).
+// ─── CONFIG ─────────────────────────────────────────────────────────────────
 const HUBSPOT_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN;
 if (!HUBSPOT_TOKEN) { console.error('❌ HUBSPOT_ACCESS_TOKEN não definido'); process.exit(1); }
 
 const API = 'https://api.hubapi.com';
 
-// Pipeline de prospecção
-const PIPELINES = ['8582978', 'default'];  // ← ajuste pro seu pipeline
+// Pipeline e stages (idênticos ao Cortex)
+const PIPELINE_ID = '24595557';
 
-// Stage IDs (mesmos do Cortex — confirme no seu HubSpot)
-const STAGES = {
-  mapeamento:     '72557853',
-  abordar:        '24595558',
-  em_cadencia:    '24595559',
-  lead_conectado: '24595562',
-  qual_agendada:  '24595560',
-  sql:            '24595561',   // "Qual. Realizada" no HubSpot
-  sao:            '9102669',
-  sdr_lost:       '24595564',
-  opp_lost:       'closedlost',
-};
-const ALL_STAGE_IDS = Object.values(STAGES);
+const STAGES_SDR = [
+  { id: '72557853',  name: 'Mapeamento' },
+  { id: '24595558',  name: 'Abordar' },
+  { id: '24595559',  name: 'Em cadência' },
+  { id: '24595562',  name: 'Lead Conectado' },
+  { id: '24595560',  name: 'Qual. Agendada' },
+  { id: '24595561',  name: 'Qual. Realizada' },
+  { id: '9102669',   name: 'SAO' },
+];
 
-// Propriedades do deal a buscar
-// hs_date_entered_{stageId} são auto-geradas pelo HubSpot para cada stage
+const STAGES_OPP = [
+  { id: '9102669',               name: 'SAO' },
+  { id: 'presentationscheduled', name: 'Elab. Proposta' },
+  { id: '11505970',              name: 'Proposta Enviada' },
+  { id: 'decisionmakerboughtin', name: 'Em negociação' },
+  { id: '26183057',              name: 'Proposta Aceita' },
+];
+
+const STAGE_SDR_LOST = '24595564';
+const STAGE_OPP_LOST = 'closedlost';
+
+const ALL_STAGE_IDS = [
+  ...new Set([
+    ...STAGES_SDR.map(s => s.id),
+    ...STAGES_OPP.map(s => s.id),
+    STAGE_SDR_LOST,
+    STAGE_OPP_LOST,
+  ])
+];
+
+// Propriedades a buscar (inclui hs_date_entered_* para cada stage)
 const DEAL_PROPS = [
-  'dealname', 'dealstage', 'pipeline', 'amount',
-  'hubspot_owner_id', 'closed_lost_reason', 'closedate',
-  // ── CUSTOM: ajuste os nomes abaixo pro seu CRM ──
-  'porte',              // ou 'porte_da_empresa', etc.
-  'setor',              // ou 'industry', etc.
-  'ev_responsavel',     // owner do EV, se for prop separada
-  // Stage timestamps (gerados automaticamente pelo HubSpot)
+  'dealname', 'dealstage', 'pipeline', 'amount', 'createdate',
+  'hubspot_owner_id', 'closed_lost_reason',
+  'porte',
+  'setor',
+  'origem',
+  'origem_micro_',
+  'ev_responsavel',
   ...ALL_STAGE_IDS.map(id => `hs_date_entered_${id}`),
 ];
 
-// Filtro de quais deals puxar (ajuste conforme necessário)
-// Ex: todos os deals do pipeline de prospecção criados no mês corrente
-
-function buildSearchFilter(monthStart, monthEnd) {
+// ─── FILTROS: origem = Prospecção AND origem_micro_ = Motor sinais ──────────
+function buildSearchBody() {
   return {
     filterGroups: [{
       filters: [
-        // Trocamos o filtro de pipeline pelo filtro de origem
-        { propertyName: 'origem', operator: 'EQ', value: 'Prospecção' },
-        { propertyName: 'createdate', operator: 'GTE', value: new Date(monthStart).getTime() },
-        { propertyName: 'createdate', operator: 'LTE', value: new Date(monthEnd + 'T23:59:59Z').getTime() },
+        { propertyName: 'pipeline',      operator: 'EQ', value: PIPELINE_ID },
+        { propertyName: 'origem',        operator: 'EQ', value: 'Prospecção' },
+        { propertyName: 'origem_micro_', operator: 'EQ', value: 'Motor sinais' },
       ]
     }],
     properties: DEAL_PROPS,
@@ -73,42 +84,37 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-async function hubspotGet(path) {
-  const res = await fetch(`${API}${path}`, { headers });
-  if (!res.ok) throw new Error(`HubSpot GET ${path}: ${res.status} ${await res.text()}`);
-  return res.json();
+async function hubGet(path) {
+  const r = await fetch(`${API}${path}`, { headers });
+  if (!r.ok) throw new Error(`GET ${path}: ${r.status} ${await r.text()}`);
+  return r.json();
 }
 
-async function hubspotPost(path, body) {
-  const res = await fetch(`${API}${path}`, { method: 'POST', headers, body: JSON.stringify(body) });
-  if (!res.ok) throw new Error(`HubSpot POST ${path}: ${res.status} ${await res.text()}`);
-  return res.json();
+async function hubPost(path, body) {
+  const r = await fetch(`${API}${path}`, { method: 'POST', headers, body: JSON.stringify(body) });
+  if (!r.ok) throw new Error(`POST ${path}: ${r.status} ${await r.text()}`);
+  return r.json();
 }
 
-// Busca todos os deals com paginação
-async function fetchAllDeals(searchBody) {
+async function fetchAllDeals(body) {
   const deals = [];
   let after = 0;
   while (true) {
-    const body = { ...searchBody, after };
-    const data = await hubspotPost('/crm/v3/objects/deals/search', body);
+    const data = await hubPost('/crm/v3/objects/deals/search', { ...body, after });
     deals.push(...(data.results || []));
-    console.log(`  … ${deals.length} deals carregados`);
+    console.log(`  … ${deals.length} deals`);
     if (!data.paging?.next?.after) break;
     after = data.paging.next.after;
   }
   return deals;
 }
 
-// Busca owners para mapear IDs → nomes
 async function fetchOwners() {
   const map = {};
   let after;
   while (true) {
-    const url = after
-      ? `/crm/v3/owners?limit=100&after=${after}`
-      : '/crm/v3/owners?limit=100';
-    const data = await hubspotGet(url);
+    const url = after ? `/crm/v3/owners?limit=100&after=${after}` : '/crm/v3/owners?limit=100';
+    const data = await hubGet(url);
     for (const o of data.results || []) {
       map[o.id] = `${o.firstName || ''} ${o.lastName || ''}`.trim() || o.email;
     }
@@ -119,10 +125,10 @@ async function fetchOwners() {
 }
 
 // ─── BUSINESS DAYS ──────────────────────────────────────────────────────────
-function businessDaysElapsed(monthStart, today) {
+function countBusinessDays(from, to) {
   let count = 0;
-  const d = new Date(monthStart);
-  const end = new Date(today);
+  const d = new Date(from);
+  const end = new Date(to);
   while (d <= end) {
     const dow = d.getDay();
     if (dow !== 0 && dow !== 6) count++;
@@ -131,27 +137,11 @@ function businessDaysElapsed(monthStart, today) {
   return count;
 }
 
-// ─── STAGE NAME LOOKUP ──────────────────────────────────────────────────────
-const STAGE_NAMES = {};
-for (const [key, id] of Object.entries(STAGES)) {
-  STAGE_NAMES[id] = key;
-}
-
-function lostStageName(stageId) {
-  const key = STAGE_NAMES[stageId];
-  const names = {
-    mapeamento: 'Mapeamento', abordar: 'Abordar', em_cadencia: 'Em cadência',
-    lead_conectado: 'Lead conectado', qual_agendada: 'Qual. agendada',
-    sql: 'SQL', sao: 'SAO', sdr_lost: 'Perdido SDR', opp_lost: 'Perdido OPP',
-  };
-  return names[key] || stageId;
-}
-
 // ─── TRANSFORM DEAL ─────────────────────────────────────────────────────────
 function transformDeal(raw, owners) {
   const p = raw.properties || {};
 
-  // Build stages map from hs_date_entered_* properties
+  // Build stages object: { stageId: isoTimestamp }
   const stages = {};
   for (const id of ALL_STAGE_IDS) {
     const val = p[`hs_date_entered_${id}`];
@@ -159,20 +149,30 @@ function transformDeal(raw, owners) {
   }
 
   const currentStage = p.dealstage;
-  const isLost = currentStage === STAGES.sdr_lost || currentStage === STAGES.opp_lost;
+  const isSDRLost = !!stages[STAGE_SDR_LOST];
+  const isOPPLost = currentStage === STAGE_OPP_LOST || !!stages[STAGE_OPP_LOST];
+  const isLost = isSDRLost || isOPPLost;
 
-  // Determine which stage the deal was lost from
+  // Which stage lost from (last active stage before lost)
   let lostStage = null;
+  let lostFunnel = null;
   if (isLost) {
-    // Find the last active stage before lost (most recent timestamp)
-    const activeStages = Object.entries(stages)
-      .filter(([id]) => id !== STAGES.sdr_lost && id !== STAGES.opp_lost)
+    const activeEntries = Object.entries(stages)
+      .filter(([id]) => id !== STAGE_SDR_LOST && id !== STAGE_OPP_LOST)
       .sort((a, b) => new Date(b[1]) - new Date(a[1]));
-    if (activeStages.length > 0) lostStage = lostStageName(activeStages[0][0]);
+    if (activeEntries.length > 0) {
+      const lostId = activeEntries[0][0];
+      const allStages = [...STAGES_SDR, ...STAGES_OPP];
+      const found = allStages.find(s => s.id === lostId);
+      lostStage = found?.name || lostId;
+    }
+    lostFunnel = isOPPLost ? 'OPP' : 'SDR';
   }
 
   const ownerId = p.hubspot_owner_id;
-  const ownerName = owners[ownerId] || `Owner ${ownerId || 'N/A'}`;
+  const ownerName = owners[ownerId] || (ownerId ? `Owner ${ownerId}` : null);
+  const evId = p.ev_responsavel;
+  const evName = evId ? (owners[evId] || evId) : ownerName;
 
   return {
     id: raw.id,
@@ -180,11 +180,12 @@ function transformDeal(raw, owners) {
     porte: p.porte || null,
     setor: p.setor || '— sem categoria',
     cn: ownerName,
-    ev: p.ev_responsavel ? owners[p.ev_responsavel] || p.ev_responsavel : ownerName,
+    ev: evName,
     stages,
     amount: Number(p.amount) || 0,
     isLost,
     lostStage,
+    lostFunnel,
     lostReason: isLost ? (p.closed_lost_reason || null) : null,
   };
 }
@@ -200,38 +201,43 @@ async function main() {
   const lastDay = new Date(Number(month.split('-')[0]), Number(month.split('-')[1]), 0).getDate();
   const monthEnd = `${month}-${String(lastDay).padStart(2, '0')}`;
 
-  console.log(`📅 Mês: ${monthLabel} (${monthStart} → ${monthEnd})`);
-  console.log(`🎯 Metas: ${targets.map(t => `${t.name}=${t.target}`).join(', ')}\n`);
+  console.log(`📅 ${monthLabel} (${monthStart} → ${monthEnd})`);
+  console.log(`🎯 ${targets.map(t => `${t.name}=${t.target}`).join(', ')}\n`);
 
-  // Fetch owners
+  // Owners
   console.log('👥 Buscando owners…');
   const owners = await fetchOwners();
-  console.log(`   ${Object.keys(owners).length} owners encontrados\n`);
+  console.log(`   ${Object.keys(owners).length} owners\n`);
 
-  // Fetch deals
-  console.log('📊 Buscando deals…');
-  const searchBody = buildSearchFilter(monthStart, monthEnd);
-  const rawDeals = await fetchAllDeals(searchBody);
-  console.log(`   ${rawDeals.length} deals no período\n`);
+  // Deals: filtro = pipeline + origem=Prospecção + origem_micro_=Motor sinais
+  console.log('📊 Buscando deals (origem=Prospecção, origem_micro_=Motor sinais)…');
+  const rawDeals = await fetchAllDeals(buildSearchBody());
+  console.log(`   ${rawDeals.length} deals encontrados\n`);
 
   // Transform
   const deals = rawDeals.map(d => transformDeal(d, owners));
 
-  // Compute meta
+  // Meta
   const today = new Date().toISOString().slice(0, 10);
-  const bizElapsed = businessDaysElapsed(monthStart, today > monthEnd ? monthEnd : today);
+  const effectiveToday = today > monthEnd ? monthEnd : today;
+  const bizElapsed = countBusinessDays(monthStart, effectiveToday);
 
   // Porte counts
   const porteCounts = { all: deals.length };
   const porteSet = new Set();
-  deals.forEach(d => { if (d.porte) { porteSet.add(d.porte); porteCounts[d.porte] = (porteCounts[d.porte] || 0) + 1; } });
+  deals.forEach(d => {
+    if (d.porte) {
+      porteSet.add(d.porte);
+      porteCounts[d.porte] = (porteCounts[d.porte] || 0) + 1;
+    }
+  });
 
   // Filters
   const setores = [...new Set(deals.map(d => d.setor).filter(Boolean))].sort();
-  const cns = [...new Set(deals.map(d => d.cn).filter(Boolean))].sort();
-  const evs = [...new Set(deals.map(d => d.ev).filter(Boolean))].sort();
+  const cns     = [...new Set(deals.map(d => d.cn).filter(Boolean))].sort();
+  const evs     = [...new Set(deals.map(d => d.ev).filter(Boolean))].sort();
 
-  // Build data.json
+  // Build output
   const data = {
     meta: {
       updatedAt: new Date().toISOString(),
@@ -250,13 +256,13 @@ async function main() {
     debug: {
       totalDeals: deals.length,
       dealsWithoutPorte: deals.filter(d => !d.porte).length,
+      query: 'origem=Prospecção AND origem_micro_=Motor sinais',
     },
   };
 
-  // Write
   const outPath = resolve(ROOT, 'data.json');
   writeFileSync(outPath, JSON.stringify(data, null, 2));
-  console.log(`✅ data.json gerado: ${deals.length} deals → ${outPath}`);
+  console.log(`✅ data.json: ${deals.length} deals → ${outPath}`);
 }
 
-main().catch(err => { console.error('💥 Erro:', err.message); process.exit(1); });
+main().catch(err => { console.error('💥', err.message); process.exit(1); });

@@ -18,7 +18,7 @@ if (!HUBSPOT_TOKEN) { console.error('❌ HUBSPOT_ACCESS_TOKEN não definido'); p
 const API = 'https://api.hubapi.com';
 
 // Pipeline e stages (idênticos ao Cortex)
-const PIPELINE_ID = '24595557';
+const PIPELINE_ID = '8582978';
 
 const STAGES_SDR = [
   { id: '72557853',  name: 'Mapeamento' },

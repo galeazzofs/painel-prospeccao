@@ -148,6 +148,20 @@ table.perf tr:hover td{background:var(--surface-2)}
 .cad-bar-lbl{font-size:9px;color:var(--text-4);margin-top:6px;text-align:center;line-height:1.2}
 
 .footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--text-4)}
+
+.pace-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.pace-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:8px;transition:border-color .15s}
+.pace-card:hover{border-color:var(--border-strong)}
+.pace-card.done{border-left:3px solid var(--positive)}
+.pace-card.critical{border-left:3px solid var(--negative)}
+.pace-card.ok{border-left:3px solid var(--accent)}
+.pace-card-name{font-size:12px;color:var(--text-3);font-weight:500}
+.pace-card-rate{font-size:28px;letter-spacing:-.03em;line-height:1}
+.pace-card-rate small{font-size:13px;color:var(--text-3);font-weight:400;margin-left:2px}
+.pace-card-meta{font-size:11px;color:var(--text-4);display:flex;flex-direction:column;gap:3px}
+.pace-card-meta b{color:var(--text-2);font-weight:500}
+.pace-card-bar{height:3px;background:var(--surface-2);border-radius:2px;overflow:hidden;margin-top:2px}
+.pace-card-bar-fill{height:100%;border-radius:2px;transition:width .6s}
 .fade-in{animation:fadeUp .35s cubic-bezier(.4,0,.2,1) backwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:1100px){.app{padding:24px 20px 60px}.kpi-grid{grid-template-columns:repeat(2,1fr)}.dual-grid,.loss-grid{grid-template-columns:1fr}.sao-hero{grid-template-columns:1fr;text-align:center}.tracker-row{font-size:12px}.cad-stats{grid-template-columns:repeat(2,1fr)}}
@@ -322,6 +336,31 @@ function renderTracker(m){
     return`<div class="tracker-row${isSao?' sao-row':''} fade-in" style="animation-delay:${i*50}ms"><div class="tracker-name">${t.name}</div><div class="tracker-bar-wrap"><div class="tracker-bar-fill ${cls}" style="width:${bp}%"></div><div class="pace-marker" style="left:${pp}%"></div></div><div style="text-align:right;font-weight:600">${fmt(t.actual,'int')}</div><div style="text-align:right;color:var(--text-3)">/${fmt(t.target,'int')}</div><div style="text-align:right" class="mono">${fmt(t.pctDone,'pct0')}</div><div style="text-align:right"><span class="pace-tag ${t.status}">${t.status==='ahead'?`+${t.gap} ↑`:t.status==='behind'?`${t.gap} ↓`:'= →'}</span></div></div>`}).join('');
   return`<div class="section-header"><div class="section-title">Funil vs Meta</div><div class="section-sub">Barra = realizado · Marcador = pace</div></div><div class="tracker-card fade-in"><div class="tracker-row header"><div>Etapa</div><div>Progresso</div><div style="text-align:right">Real</div><div style="text-align:right">Meta</div><div style="text-align:right">%</div><div style="text-align:right">vs Pace</div></div>${rows}</div>`}
 
+function renderDailyPace(m){
+  if(!m.mm)return'';
+  const daysLeft=m.mm.businessDays-m.mm.businessDaysElapsed;
+  if(daysLeft<=0)return'';
+  const cards=m.tracker.map((t,i)=>{
+    const remaining=Math.max(0,t.target-t.actual);
+    const rateNeeded=remaining>0?remaining/daysLeft:0;
+    const rateCurrent=m.mm.businessDaysElapsed>0?t.actual/m.mm.businessDaysElapsed:0;
+    const isDone=t.actual>=t.target;
+    const isCritical=!isDone&&rateNeeded>rateCurrent*1.5&&rateCurrent>0;
+    const cls=isDone?'done':isCritical?'critical':'ok';
+    const barColor=isDone?'var(--positive)':isCritical?'var(--negative)':'var(--accent)';
+    const barPct=Math.min(100,t.target>0?(t.actual/t.target)*100:0);
+    return`<div class="pace-card ${cls} fade-in" style="animation-delay:${i*40}ms">
+      <div class="pace-card-name">${t.name}</div>
+      <div class="pace-card-rate serif">${isDone?'✓':rateNeeded.toFixed(1).replace('.',',')}<small>${isDone?'meta batida':'/dia útil'}</small></div>
+      <div class="pace-card-bar"><div class="pace-card-bar-fill" style="width:${barPct}%;background:${barColor}"></div></div>
+      <div class="pace-card-meta">
+        <span>Faltam <b>${remaining}</b> de ${t.target} · ${daysLeft} dias úteis</span>
+        <span>Ritmo atual: <b>${rateCurrent.toFixed(1).replace('.',',')}${rateCurrent>0?'/dia':''}</b>${!isDone&&rateCurrent>0?(rateNeeded>rateCurrent?` · precisa ${((rateNeeded/rateCurrent-1)*100).toFixed(0)}% mais rápido`:' · no ritmo'):''}
+        </span>
+      </div>
+    </div>`}).join('');
+  return`<div class="section-header"><div class="section-title">Ritmo diário para a meta</div><div class="section-sub">Quantos deals por dia útil restante para bater cada etapa · ${daysLeft} dias úteis restam</div></div><div class="pace-grid">${cards}</div>`}
+
 function renderKPIs(m){
   const sao=m.tracker.find(t=>t.name==='SAO'),sql=m.tracker.find(t=>t.name==='SQL'),con=m.tracker.find(t=>t.name==='Lead conectado'),cad=m.tracker.find(t=>t.name==='Em cadência');
   return`<div class="kpi-grid" style="margin-top:20px"><div class="kpi fade-in"><div class="kpi-label">Deals ativos</div><div class="kpi-value serif">${fmt(m.total,'int')}</div><div class="kpi-sub">${fmt(m.total-m.losses.total,'int')} ativos · ${fmt(m.losses.total,'int')} perdidos</div></div><div class="kpi fade-in"><div class="kpi-label">Taxa de conexão</div><div class="kpi-value serif">${con&&cad?fmt(cad.actual>0?con.actual/cad.actual:0,'pct'):DASH}</div><div class="kpi-sub">${con?fmt(con.actual,'int'):0} de ${cad?fmt(cad.actual,'int'):0} em cadência</div></div><div class="kpi fade-in"><div class="kpi-label">Taxa de qualificação</div><div class="kpi-value serif">${sql&&con?fmt(con.actual>0?sql.actual/con.actual:0,'pct'):DASH}</div><div class="kpi-sub">${sql?fmt(sql.actual,'int'):0} SQLs de ${con?fmt(con.actual,'int'):0}</div></div><div class="kpi fade-in"><div class="kpi-label">Conversão → SAO</div><div class="kpi-value serif">${sao?fmt(m.total>0?sao.actual/m.total:0,'pct'):DASH}</div><div class="kpi-sub">${sao?fmt(sao.actual,'int'):0} de ${fmt(m.total,'int')}</div></div></div>`}
@@ -333,6 +372,8 @@ function renderLosses(m){
 
 function renderVelocity(m){
   const vs=m.velocity.stages;if(!vs.length)return'';
+  const hasData=vs.some(s=>s.days!==null);
+  if(!hasData)return`<div class="section-header"><div class="section-title">Velocidade do funil</div><div class="section-sub">Dias médios entre stages · menor é melhor</div></div><div class="card fade-in" style="padding:32px;text-align:center;color:var(--text-4);font-size:13px">Sem dados de transição entre etapas ainda — aparece quando deals avançarem no funil</div>`;
   const maxD=Math.max(...vs.map(s=>s.days||0),1);
   const cols=vs.map(s=>{
     const h=s.days?Math.max(10,(s.days/maxD)*130):0;
@@ -340,7 +381,7 @@ function renderVelocity(m){
   return`<div class="section-header"><div class="section-title">Velocidade do funil</div><div class="section-sub">Dias médios entre stages · menor é melhor</div></div><div class="card fade-in"><div class="vel-grid">${cols}</div></div>`}
 
 function renderCadences(m){
-  const w=m.cadences.weekly;if(!w.length)return'';
+  const w=m.cadences.weekly;if(!w.length)return`<div class="section-header"><div class="section-title">Ritmo de cadências</div><div class="section-sub">Deals entrando em "Em cadência" por semana</div></div><div class="card fade-in" style="padding:32px;text-align:center;color:var(--text-4);font-size:13px">Nenhuma entrada em cadência registrada neste recorte</div>`;
   const total=w.reduce((s,x)=>s+x.count,0);
   const max=Math.max(...w.map(x=>x.count),1);
   const peak=w.reduce((a,x)=>x.count>a.count?x:a,w[0]);
@@ -375,6 +416,7 @@ function render(){
     ${renderFilters(gData)}
     ${m.mm?renderSaoHero(m):''}
     ${m.mm?renderTracker(m):''}
+    ${renderDailyPace(m)}
     ${renderKPIs(m)}
     ${renderLosses(m)}
     ${renderVelocity(m)}

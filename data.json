@@ -1,53 +1,99 @@
 {
   "meta": {
-    "updatedAt": "2026-09-14T18:32:03.579Z",
-    "monthLabel": "Setembro 2026",
-    "monthStart": "2026-09-01",
-    "monthEnd": "2026-09-30",
-    "businessDays": 20,
-    "businessDaysElapsed": 10,
-    "companiesTotal": 4,
+    "updatedAt": "2026-09-14T18:57:46.453Z",
     "availablePortes": [],
     "porteCounts": {
       "all": 4
+    },
+    "availableMonths": [
+      "2026-09"
+    ],
+    "monthMeta": {
+      "2026-09": {
+        "label": "Setembro 2026",
+        "start": "2026-09-01",
+        "end": "2026-09-30",
+        "businessDays": 20,
+        "businessDaysElapsed": 10,
+        "targets": [
+          {
+            "id": "72557853",
+            "name": "Mapeamento",
+            "target": 426
+          },
+          {
+            "id": "24595559",
+            "name": "Em cadência",
+            "target": 364
+          },
+          {
+            "id": "24595562",
+            "name": "Lead conectado",
+            "target": 59
+          },
+          {
+            "id": "24595560",
+            "name": "Qual. agendada",
+            "target": 18
+          },
+          {
+            "id": "24595561",
+            "name": "SQL",
+            "target": 13
+          },
+          {
+            "id": "9102669",
+            "name": "SAO",
+            "target": 9
+          }
+        ]
+      },
+      "2026-10": {
+        "label": "Outubro 2026",
+        "start": "2026-10-01",
+        "end": "2026-10-31",
+        "businessDays": 22,
+        "businessDaysElapsed": 1,
+        "targets": [
+          {
+            "id": "72557853",
+            "name": "Mapeamento",
+            "target": 450
+          },
+          {
+            "id": "24595559",
+            "name": "Em cadência",
+            "target": 380
+          },
+          {
+            "id": "24595562",
+            "name": "Lead conectado",
+            "target": 62
+          },
+          {
+            "id": "24595560",
+            "name": "Qual. agendada",
+            "target": 20
+          },
+          {
+            "id": "24595561",
+            "name": "SQL",
+            "target": 14
+          },
+          {
+            "id": "9102669",
+            "name": "SAO",
+            "target": 10
+          }
+        ]
+      }
     }
   },
-  "targets": [
-    {
-      "id": "72557853",
-      "name": "Mapeamento",
-      "target": 426
-    },
-    {
-      "id": "24595559",
-      "name": "Em cadência",
-      "target": 364
-    },
-    {
-      "id": "24595562",
-      "name": "Lead conectado",
-      "target": 59
-    },
-    {
-      "id": "24595560",
-      "name": "Qual. agendada",
-      "target": 18
-    },
-    {
-      "id": "24595561",
-      "name": "SQL",
-      "target": 13
-    },
-    {
-      "id": "9102669",
-      "name": "SAO",
-      "target": 9
-    }
-  ],
   "deals": [
     {
       "id": "65043466511",
       "company": "MRM Brasil — Prospecção | Maturidade Estratégica",
+      "campaign": "— sem campanha",
       "porte": null,
       "setor": "— sem categoria",
       "cn": "Barbara Costa Borges",
@@ -60,11 +106,14 @@
       "isLost": false,
       "lostStage": null,
       "lostFunnel": null,
-      "lostReason": null
+      "lostReason": null,
+      "createdate": "2026-09-14T17:34:31.991Z",
+      "createMonth": "2026-09"
     },
     {
       "id": "65035357998",
       "company": "RD Saúde — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
       "porte": null,
       "setor": "— sem categoria",
       "cn": "Barbara Costa Borges",
@@ -77,11 +126,14 @@
       "isLost": false,
       "lostStage": null,
       "lostFunnel": null,
-      "lostReason": null
+      "lostReason": null,
+      "createdate": "2026-09-14T17:34:46.589Z",
+      "createMonth": "2026-09"
     },
     {
       "id": "65035568526",
       "company": "Pessoa & Pessoa Advogados — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
       "porte": null,
       "setor": "— sem categoria",
       "cn": "Barbara Costa Borges",
@@ -94,11 +146,14 @@
       "isLost": false,
       "lostStage": null,
       "lostFunnel": null,
-      "lostReason": null
+      "lostReason": null,
+      "createdate": "2026-09-14T17:54:32.161Z",
+      "createMonth": "2026-09"
     },
     {
       "id": "65043494474",
       "company": "Westwing Brasil — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
       "porte": null,
       "setor": "— sem categoria",
       "cn": "Barbara Costa Borges",
@@ -111,23 +166,27 @@
       "isLost": false,
       "lostStage": null,
       "lostFunnel": null,
-      "lostReason": null
+      "lostReason": null,
+      "createdate": "2026-09-14T17:55:00.138Z",
+      "createMonth": "2026-09"
     }
   ],
   "filters": {
-    "setores": [
-      "— sem categoria"
+    "campaigns": [
+      "— sem campanha"
     ],
     "cns": [
       "Barbara Costa Borges"
     ],
     "evs": [
       "Barbara Costa Borges"
+    ],
+    "setores": [
+      "— sem categoria"
     ]
   },
   "debug": {
     "totalDeals": 4,
-    "dealsWithoutPorte": 4,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

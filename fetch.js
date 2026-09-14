@@ -55,7 +55,8 @@ function buildSearchFilter(monthStart, monthEnd) {
   return {
     filterGroups: [{
       filters: [
-        { propertyName: 'pipeline', operator: 'IN', values: PIPELINES },
+        // Trocamos o filtro de pipeline pelo filtro de origem
+        { propertyName: 'origem', operator: 'EQ', value: 'Prospecção' },
         { propertyName: 'createdate', operator: 'GTE', value: new Date(monthStart).getTime() },
         { propertyName: 'createdate', operator: 'LTE', value: new Date(monthEnd + 'T23:59:59Z').getTime() },
       ]

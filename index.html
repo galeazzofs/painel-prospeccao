@@ -169,6 +169,10 @@ table.perf tr:hover td{background:var(--surface-2)}
 .gator-select{font-family:inherit;font-size:12px;padding:5px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text-2);cursor:pointer}
 .gator-legend{display:flex;gap:20px;font-size:11px;color:var(--text-3);margin-top:12px}
 .gator-legend-dot{display:inline-block;width:12px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.gator-pill{font-family:'Geist',sans-serif;font-size:12px;padding:6px 14px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text-3);cursor:pointer;transition:all .15s}
+.gator-pill:hover{border-color:var(--accent);color:var(--text-2)}
+.gator-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
 .gator-today{font-size:10px;fill:var(--text-3);font-family:'Geist',sans-serif}
 .fade-in{animation:fadeUp .35s cubic-bezier(.4,0,.2,1) backwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
@@ -367,164 +371,143 @@ function renderDailyPace(m){
         </span>
       </div>
     </div>`}).join('');
-  return`<div class="section-header"><div class="section-title">Ritmo diário para a meta</div><div class="section-sub">Quantos deals por dia útil restante para bater cada etapa · ${daysLeft} dias úteis restam</div></div><div class="pace-grid">${cards}</div>${renderPaceChart(m,daysLeft)}`}
-
-function renderPaceChart(m,daysLeft){
-  if(!m.mm||!m.tracker.length)return'';
-  const data=m.tracker.map(t=>{
-    const remaining=Math.max(0,t.target-t.actual);
-    const needed=remaining>0?remaining/daysLeft:0;
-    const current=m.mm.businessDaysElapsed>0?t.actual/m.mm.businessDaysElapsed:0;
-    const isDone=t.actual>=t.target;
-    return{name:t.name,needed,current,isDone};
-  });
-  const maxVal=Math.max(...data.map(d=>Math.max(d.needed,d.current)),1);
-  const W=900,H=260,pad={t:40,r:30,b:60,l:50};
-  const plotW=W-pad.l-pad.r,plotH=H-pad.t-pad.b;
-  const n=data.length,groupW=plotW/n,barW=groupW*.3,gap=groupW*.08;
-
-  const bars=data.map((d,i)=>{
-    const x=pad.l+i*groupW+groupW/2;
-    const hN=d.isDone?0:(d.needed/maxVal)*plotH;
-    const hC=(d.current/maxVal)*plotH;
-    const yN=pad.t+plotH-hN;
-    const yC=pad.t+plotH-hC;
-    const colorC=d.isDone?'#15803D':d.current>=d.needed?'#15803D':'#1F5F3F';
-    const colorN=d.isDone?'#E7E5E4':'#D6D3D1';
-    const needBar=d.isDone?'':`<rect x="${x-barW-gap/2}" y="${yN}" width="${barW}" height="${hN}" rx="4" fill="${colorN}"/>
-      <text x="${x-barW/2-gap/2}" y="${yN-6}" text-anchor="middle" fill="#78716C" font-size="10" font-family="Geist Mono,monospace">${d.needed.toFixed(1)}</text>`;
-    const currBar=hC>0?`<rect x="${x+gap/2}" y="${yC}" width="${barW}" height="${hC}" rx="4" fill="${colorC}"/>
-      <text x="${x+barW/2+gap/2}" y="${yC-6}" text-anchor="middle" fill="${colorC}" font-size="10" font-weight="500" font-family="Geist Mono,monospace">${d.current.toFixed(1)}</text>`:'';
-    const label=`<text x="${x}" y="${H-pad.b+18}" text-anchor="middle" fill="#78716C" font-size="11" font-family="Geist,sans-serif">${d.name}</text>`;
-    const doneCheck=d.isDone?`<text x="${x}" y="${pad.t+plotH-10}" text-anchor="middle" fill="#15803D" font-size="16">✓</text>`:'';
-    return`${needBar}${currBar}${label}${doneCheck}`;
-  }).join('');
-
-  // Grid lines
-  const gridLines=[0,.25,.5,.75,1].map(p=>{
-    const y=pad.t+plotH*(1-p);
-    const val=(maxVal*p).toFixed(1);
-    return`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="#E7E5E4" stroke-dasharray="${p===0?'0':'3,3'}"/>
-      <text x="${pad.l-8}" y="${y+4}" text-anchor="end" fill="#A8A29E" font-size="9" font-family="Geist Mono,monospace">${val}</text>`;
-  }).join('');
-
-  // Legend
-  const legend=`<rect x="${pad.l}" y="8" width="10" height="10" rx="2" fill="#D6D3D1"/><text x="${pad.l+14}" y="17" fill="#78716C" font-size="11" font-family="Geist,sans-serif">Necessário/dia</text>
-    <rect x="${pad.l+110}" y="8" width="10" height="10" rx="2" fill="#1F5F3F"/><text x="${pad.l+124}" y="17" fill="#78716C" font-size="11" font-family="Geist,sans-serif">Atual/dia</text>`;
-
-  return`<div class="card fade-in" style="margin-top:16px;padding:20px 24px;overflow-x:auto">
-    <svg viewBox="0 0 ${W} ${H}" width="100%" style="max-height:280px">
-      ${gridLines}
-      <line x1="${pad.l}" y1="${pad.t+plotH}" x2="${W-pad.r}" y2="${pad.t+plotH}" stroke="#D6D3D1"/>
-      ${bars}
-      ${legend}
-    </svg>
-  </div>`}
+  return`<div class="section-header"><div class="section-title">Ritmo diário para a meta</div><div class="section-sub">Quantos deals por dia útil restante para bater cada etapa · ${daysLeft} dias úteis restam</div></div><div class="pace-grid">${cards}</div>`}
 
 function renderAlligator(m,deals){
   if(!m.mm)return'';
-  const mm=m.mm,bd=mm.businessDays,bde=mm.businessDaysElapsed;
+  const mm=m.mm,bd=mm.businessDays;
   if(bd<=0)return'';
 
-  // Build list of business days in the month
   const bizDays=[];
-  const d=new Date(mm.start);const endD=new Date(mm.end);
-  while(d<=endD){if(d.getDay()!==0&&d.getDay()!==6)bizDays.push(d.toISOString().slice(0,10));d.setDate(d.getDate()+1)}
+  const dt=new Date(mm.start);const endD=new Date(mm.end);
+  while(dt<=endD){if(dt.getDay()!==0&&dt.getDay()!==6)bizDays.push(dt.toISOString().slice(0,10));dt.setDate(dt.getDate()+1)}
 
-  // Default to SAO, will switch via DOM event
   const stageId=window.__gatorStage||'9102669';
   const stageDef=m.tracker.find(t=>t.id===stageId)||m.tracker[m.tracker.length-1];
   if(!stageDef)return'';
   const target=stageDef.target;
 
-  // Compute cumulative actuals per business day
   const cumul=bizDays.map((day,i)=>{
     const count=deals.filter(dl=>dl.stages[stageId]&&dl.stages[stageId].slice(0,10)<=day).length;
-    return{day,dayNum:i+1,actual:count,pace:target>0?Math.round(((i+1)/bd)*target*10)/10:0};
+    return{day,dayNum:i+1,actual:count,pace:target>0?((i+1)/bd)*target:0};
   });
 
-  // Only show up to today
   const today=new Date().toISOString().slice(0,10);
   const todayIdx=bizDays.findIndex(d=>d>=today);
   const showUpTo=todayIdx>=0?todayIdx:bizDays.length-1;
+  const lastA=cumul[showUpTo]?.actual||0,lastP=cumul[showUpTo]?.pace||0;
+  const isAhead=lastA>=lastP;
+  const gap=lastA-Math.round(lastP);
+  const uid='g'+Math.random().toString(36).slice(2,8);
 
-  // SVG dimensions
-  const W=900,H=300,pad={t:30,r:40,b:50,l:55};
-  const plotW=W-pad.l-pad.r,plotH=H-pad.t-pad.b;
-  const maxY=Math.max(target,cumul[showUpTo]?.actual||0,1)*1.1;
+  const W=900,H=340,pad={t:50,r:50,b:55,l:55};
+  const pW=W-pad.l-pad.r,pH=H-pad.t-pad.b;
+  const maxY=Math.max(target,cumul[showUpTo]?.actual||0,1)*1.15;
+  const xp=i=>pad.l+(i/(bd-1))*pW;
+  const yp=v=>pad.t+pH-(v/maxY)*pH;
 
-  const x=i=>pad.l+(i/(bd-1))*plotW;
-  const y=v=>pad.t+plotH-(v/maxY)*plotH;
-
-  // Ideal pace line (full month)
-  const paceLine=`M${x(0)},${y(0)} L${x(bd-1)},${y(target)}`;
-
-  // Actual line (up to today)
-  const actualPts=cumul.slice(0,showUpTo+1).map((p,i)=>`${i===0?'M':'L'}${x(i)},${y(p.actual)}`).join(' ');
-
-  // Fill area between pace and actual (up to today)
-  const fillPts=cumul.slice(0,showUpTo+1);
-  let fillPath='';
-  if(fillPts.length>1){
-    const fwd=fillPts.map((p,i)=>`${i===0?'M':'L'}${x(i)},${y(p.actual)}`).join(' ');
-    const bwd=fillPts.slice().reverse().map((p,i)=>{const idx=showUpTo-i;return`L${x(idx)},${y(p.pace)}`}).join(' ');
-    fillPath=`${fwd} ${bwd} Z`;
+  function smoothLine(pts){
+    if(pts.length<2)return pts.map((p,i)=>`${i?'L':'M'}${p[0]},${p[1]}`).join(' ');
+    let d=`M${pts[0][0]},${pts[0][1]}`;
+    for(let i=1;i<pts.length;i++){const p0=pts[i-1],p1=pts[i],cpx=(p0[0]+p1[0])/2;d+=` C${cpx},${p0[1]} ${cpx},${p1[1]} ${p1[0]},${p1[1]}`}
+    return d;
   }
 
-  // Determine fill color: if last actual > last pace → green, else red
-  const lastActual=fillPts[fillPts.length-1]?.actual||0;
-  const lastPace=fillPts[fillPts.length-1]?.pace||0;
-  const aheadColor='rgba(21,128,61,0.12)',behindColor='rgba(153,27,27,0.12)';
-  const fillColor=lastActual>=lastPace?aheadColor:behindColor;
+  const pacePts=Array.from({length:bd},(_,i)=>[xp(i),yp(((i+1)/bd)*target)]);
+  const paceD=smoothLine(pacePts);
+  const actualPts=cumul.slice(0,showUpTo+1).map((p,i)=>[xp(i),yp(p.actual)]);
+  const actualD=smoothLine(actualPts);
 
-  // Grid
+  let fillSvg='';
+  if(actualPts.length>1){
+    const fwd=actualPts.map((p,i)=>`${i?'L':'M'}${p[0]},${p[1]}`).join(' ');
+    const bwd=[...actualPts].reverse().map((_,i)=>{const idx=showUpTo-i;return`L${pacePts[idx]?.[0]||0},${pacePts[idx]?.[1]||0}`}).join(' ');
+    fillSvg=`<path d="${fwd} ${bwd} Z" fill="url(#${uid}_grad)"/>`;
+  }
+
+  const gc=isAhead?['rgba(21,128,61,0.2)','rgba(21,128,61,0.02)']:['rgba(153,27,27,0.2)','rgba(153,27,27,0.02)'];
+
   const yTicks=5;
-  const gridLines=Array.from({length:yTicks+1},(_,i)=>{
-    const val=maxY*(i/yTicks);
-    const yy=y(val);
-    return`<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="#E7E5E4" stroke-dasharray="3,3"/>
-      <text x="${pad.l-8}" y="${yy+4}" text-anchor="end" fill="#A8A29E" font-size="9" font-family="Geist Mono,monospace">${Math.round(val)}</text>`;
-  }).join('');
+  const grid=Array.from({length:yTicks+1},(_,i)=>{const v=maxY*(i/yTicks),yy=yp(v);
+    return`<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="#F0EFEE"/><text x="${pad.l-10}" y="${yy+4}" text-anchor="end" fill="#C4C0BB" font-size="9" font-family="Geist Mono,monospace">${Math.round(v)}</text>`}).join('');
 
-  // X labels (every 5 days)
-  const xLabels=bizDays.map((day,i)=>(i%5===0||i===bd-1)?`<text x="${x(i)}" y="${H-pad.b+18}" text-anchor="middle" fill="#A8A29E" font-size="9" font-family="Geist Mono,monospace">D${i+1}</text>`:'').join('');
+  const xLabels=bizDays.map((day,i)=>{const show=bd<=12||i%Math.ceil(bd/12)===0||i===bd-1;
+    return show?`<text x="${xp(i)}" y="${H-pad.b+20}" text-anchor="middle" fill="#C4C0BB" font-size="9" font-family="Geist Mono,monospace">${day.slice(8,10)}/${day.slice(5,7)}</text>`:''}).join('');
 
-  // Today marker
-  const todayMarker=showUpTo>=0?`
-    <line x1="${x(showUpTo)}" y1="${pad.t}" x2="${x(showUpTo)}" y2="${pad.t+plotH}" stroke="var(--text-4)" stroke-dasharray="4,4" opacity="0.5"/>
-    <text x="${x(showUpTo)}" y="${pad.t-8}" text-anchor="middle" class="gator-today">hoje (D${showUpTo+1})</text>
-    <circle cx="${x(showUpTo)}" cy="${y(lastActual)}" r="4" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/>
-  `:'';
+  const hoverZones=cumul.slice(0,showUpTo+1).map((p,i)=>{const w=pW/bd;
+    return`<rect x="${xp(i)-w/2}" y="${pad.t}" width="${w}" height="${pH}" fill="transparent" class="${uid}_hz" data-day="D${p.dayNum} · ${p.day.slice(8,10)}/${p.day.slice(5,7)}" data-a="${p.actual}" data-p="${Math.round(p.pace)}" data-g="${p.actual-Math.round(p.pace)}" data-cx="${xp(i)}" data-ya="${yp(p.actual)}" data-yp="${yp(p.pace)}"/>`}).join('');
 
-  // End target dot
-  const targetDot=`<circle cx="${x(bd-1)}" cy="${y(target)}" r="4" fill="#A8A29E" stroke="var(--surface)" stroke-width="2"/>
-    <text x="${x(bd-1)+8}" y="${y(target)+4}" fill="#78716C" font-size="10" font-family="Geist Mono,monospace">${target}</text>`;
+  const todayPulse=showUpTo>=0?`
+    <circle cx="${xp(showUpTo)}" cy="${yp(lastA)}" r="6" fill="${isAhead?'#15803D':'#991B1B'}" opacity="0.15"><animate attributeName="r" values="6;14;6" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.2;0;0.2" dur="2.5s" repeatCount="indefinite"/></circle>
+    <circle cx="${xp(showUpTo)}" cy="${yp(lastA)}" r="5" fill="#fff" stroke="${isAhead?'#15803D':'#991B1B'}" stroke-width="2.5"/>
+    <text x="${xp(showUpTo)}" y="${yp(lastA)-14}" text-anchor="middle" fill="${isAhead?'#15803D':'#991B1B'}" font-size="12" font-weight="600" font-family="Geist Mono,monospace">${lastA}</text>`:'';
 
-  // Stage options for selector
-  const opts=m.tracker.map(t=>`<option value="${t.id}" ${t.id===stageId?'selected':''}>${t.name} (meta: ${t.target})</option>`).join('');
+  const targetEnd=`<circle cx="${xp(bd-1)}" cy="${yp(target)}" r="4" fill="#D6D3D1" stroke="#fff" stroke-width="2"/>
+    <text x="${xp(bd-1)+10}" y="${yp(target)+4}" fill="#A8A29E" font-size="11" font-weight="500" font-family="Geist Mono,monospace">Meta ${target}</text>`;
 
-  return`<div class="section-header"><div class="section-title">Pace vs Real — Boca de Jacaré</div><div class="section-sub">Acumulado diário vs ritmo linear pra meta</div></div>
+  const pills=m.tracker.map(t=>`<button class="gator-pill${t.id===stageId?' active':''}" data-stage="${t.id}">${t.name}</button>`).join('');
+
+  const statusLbl=isAhead?`<span style="color:#15803D;font-weight:600">+${gap} à frente</span>`:`<span style="color:#991B1B;font-weight:600">${gap} atrás</span>`;
+
+  return`<div class="section-header"><div class="section-title">Pace vs Real</div><div class="section-sub">Acumulado diário · passe o mouse para detalhes</div></div>
   <div class="gator-card fade-in">
     <div class="gator-header">
-      <div class="gator-title">${stageDef.name}: <b>${lastActual}</b> de ${target} (pace esperado: ${Math.round(lastPace)})</div>
-      <select class="gator-select" id="gator-stage-select">${opts}</select>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="font-size:15px;font-weight:500">${stageDef.name}</div>
+        <div style="font-size:13px;color:var(--text-3)">Realizado <b>${lastA}</b> · Pace esperado <b>${Math.round(lastP)}</b> · ${statusLbl}</div>
+      </div>
     </div>
-    <svg viewBox="0 0 ${W} ${H}" width="100%" style="max-height:320px">
-      ${gridLines}
-      <line x1="${pad.l}" y1="${pad.t+plotH}" x2="${W-pad.r}" y2="${pad.t+plotH}" stroke="#D6D3D1"/>
-      ${xLabels}
-      ${fillPath?`<path d="${fillPath}" fill="${fillColor}"/>`:''}
-      <path d="${paceLine}" fill="none" stroke="#A8A29E" stroke-width="2" stroke-dasharray="6,4"/>
-      ${actualPts?`<path d="${actualPts}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`:''}
-      ${todayMarker}
-      ${targetDot}
-    </svg>
-    <div class="gator-legend">
-      <span><span class="gator-legend-dot" style="background:var(--accent)"></span>Realizado acumulado</span>
-      <span><span class="gator-legend-dot" style="background:#A8A29E;border-style:dashed"></span>Pace ideal (linear)</span>
-      <span style="margin-left:auto;color:var(--text-4)">Área verde = à frente · vermelha = atrás</span>
+    <div class="gator-pills" style="margin:12px 0 16px;display:flex;gap:6px;flex-wrap:wrap">${pills}</div>
+    <div style="position:relative" id="${uid}_wrap">
+      <svg id="${uid}" viewBox="0 0 ${W} ${H}" width="100%" style="max-height:360px;display:block">
+        <defs><linearGradient id="${uid}_grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${gc[0]}"/><stop offset="100%" stop-color="${gc[1]}"/></linearGradient></defs>
+        ${grid}
+        <line x1="${pad.l}" y1="${pad.t+pH}" x2="${W-pad.r}" y2="${pad.t+pH}" stroke="#E7E5E4"/>
+        ${xLabels}
+        ${fillSvg}
+        <path d="${paceD}" fill="none" stroke="#C4C0BB" stroke-width="2" stroke-dasharray="8,5" opacity="0.7"/>
+        <path d="${actualD}" fill="none" stroke="${isAhead?'#15803D':'#1F5F3F'}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 1px 3px rgba(0,0,0,.1))"/>
+        ${todayPulse}${targetEnd}
+        <line id="${uid}_xh" x1="0" y1="${pad.t}" x2="0" y2="${pad.t+pH}" stroke="#78716C" stroke-width="1" stroke-dasharray="3,3" opacity="0" style="pointer-events:none"/>
+        <circle id="${uid}_da" r="4" fill="#1F5F3F" stroke="#fff" stroke-width="2" opacity="0" style="pointer-events:none"/>
+        <circle id="${uid}_dp" r="3.5" fill="#C4C0BB" stroke="#fff" stroke-width="2" opacity="0" style="pointer-events:none"/>
+        ${hoverZones}
+      </svg>
+      <div id="${uid}_tt" style="position:absolute;top:0;left:0;pointer-events:none;opacity:0;transition:opacity .12s;background:#fff;border:1px solid #E7E5E4;border-radius:10px;padding:12px 16px;box-shadow:0 8px 24px rgba(0,0,0,.1);font-size:12px;min-width:175px;z-index:10">
+        <div id="${uid}_td" style="font-weight:600;margin-bottom:8px;font-size:13px"></div>
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center">
+          <span style="width:8px;height:8px;border-radius:50%;background:#1F5F3F;display:inline-block"></span><span>Real: <b id="${uid}_ta"></b></span>
+          <span style="width:8px;height:3px;background:#C4C0BB;display:inline-block;border-radius:2px"></span><span style="color:#78716C">Pace: <b id="${uid}_tp"></b></span>
+        </div>
+        <div id="${uid}_tg" style="margin-top:8px;padding-top:8px;border-top:1px solid #F0EFEE;font-weight:500"></div>
+      </div>
     </div>
-  </div>`}
+    <div class="gator-legend" style="margin-top:10px">
+      <span><span class="gator-legend-dot" style="background:${isAhead?'#15803D':'#1F5F3F'}"></span>Realizado</span>
+      <span><span class="gator-legend-dot" style="background:#C4C0BB"></span>Pace ideal</span>
+    </div>
+  </div>
+  <script>(function(){
+    var svg=document.getElementById('${uid}');if(!svg)return;
+    var xh=document.getElementById('${uid}_xh'),da=document.getElementById('${uid}_da'),dp=document.getElementById('${uid}_dp');
+    var tt=document.getElementById('${uid}_tt'),td=document.getElementById('${uid}_td'),ta=document.getElementById('${uid}_ta'),tp=document.getElementById('${uid}_tp'),tg=document.getElementById('${uid}_tg');
+    var wrap=document.getElementById('${uid}_wrap');
+    svg.querySelectorAll('.${uid}_hz').forEach(function(z){
+      z.addEventListener('mouseenter',function(){
+        var cx=+z.dataset.cx,ya=+z.dataset.ya,ypp=+z.dataset.yp,g=+z.dataset.g;
+        xh.setAttribute('x1',cx);xh.setAttribute('x2',cx);xh.style.opacity=1;
+        da.setAttribute('cx',cx);da.setAttribute('cy',ya);da.style.opacity=1;
+        dp.setAttribute('cx',cx);dp.setAttribute('cy',ypp);dp.style.opacity=1;
+        td.textContent=z.dataset.day;ta.textContent=z.dataset.a;tp.textContent=z.dataset.p;
+        tg.innerHTML=g>=0?'<span style="color:#15803D">+'+g+' à frente ↑</span>':'<span style="color:#991B1B">'+g+' atrás ↓</span>';
+        var r=wrap.getBoundingClientRect(),sr=svg.getBoundingClientRect(),sx=sr.width/900,sy=sr.height/340;
+        var tx=cx*sx+16,ty=Math.min(ya,ypp)*sy-10;
+        if(tx+190>sr.width)tx=cx*sx-195;
+        tt.style.transform='translate('+tx+'px,'+ty+'px)';tt.style.opacity=1;
+      });
+      z.addEventListener('mouseleave',function(){xh.style.opacity=0;da.style.opacity=0;dp.style.opacity=0;tt.style.opacity=0});
+    });
+  })();</script>`}
 
 function renderKPIs(m){
   const sao=m.tracker.find(t=>t.name==='SAO'),sql=m.tracker.find(t=>t.name==='SQL'),con=m.tracker.find(t=>t.name==='Lead conectado'),cad=m.tracker.find(t=>t.name==='Em cadência');
@@ -593,8 +576,7 @@ function render(){
   </div>`;
   document.querySelectorAll('.porte-tab').forEach(b=>b.addEventListener('click',()=>{F.porte=b.dataset.porte;render()}));
   document.querySelectorAll('.dim-select').forEach(s=>s.addEventListener('change',()=>{F[s.dataset.filter]=s.value;render()}));
-  const gatorSel=document.getElementById('gator-stage-select');
-  if(gatorSel)gatorSel.addEventListener('change',()=>{window.__gatorStage=gatorSel.value;render()});
+  document.querySelectorAll('.gator-pill').forEach(b=>b.addEventListener('click',()=>{window.__gatorStage=b.dataset.stage;render()}));
 }
 
 function renderError(msg){document.getElementById('root').innerHTML=`<div class="state-screen"><div><div class="title serif">Erro ao carregar</div><div class="sub">${msg}</div><button class="retry-btn" onclick="loadData()">Tentar novamente</button></div></div>`}

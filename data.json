@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-14T18:57:46.453Z",
+    "updatedAt": "2026-09-15T15:19:50.199Z",
     "availablePortes": [],
     "porteCounts": {
-      "all": 4
+      "all": 18
     },
     "availableMonths": [
       "2026-09"
@@ -14,7 +14,7 @@
         "start": "2026-09-01",
         "end": "2026-09-30",
         "businessDays": 20,
-        "businessDaysElapsed": 10,
+        "businessDaysElapsed": 11,
         "targets": [
           {
             "id": "72557853",
@@ -169,6 +169,286 @@
       "lostReason": null,
       "createdate": "2026-09-14T17:55:00.138Z",
       "createMonth": "2026-09"
+    },
+    {
+      "id": "65036263575",
+      "company": "Jobcenter do Brasil Ltda. — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-14T20:28:34.648Z",
+        "72557853": "2026-09-14T20:28:31.871Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-14T20:28:31.871Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65049461837",
+      "company": "Villemor Amaral Advogados — Prospecção | Maturidade Estratégica",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T12:24:36.322Z",
+        "72557853": "2026-09-15T12:24:33.825Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T12:24:33.825Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65046768421",
+      "company": "Stellantis — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T12:26:34.855Z",
+        "72557853": "2026-09-15T12:26:32.692Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T12:26:32.692Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65052664933",
+      "company": "Fundação Ulbra — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T12:30:35.598Z",
+        "72557853": "2026-09-15T12:30:33.051Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T12:30:33.051Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65049628199",
+      "company": "Afterverse — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T12:30:42.596Z",
+        "72557853": "2026-09-15T12:30:39.882Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T12:30:39.882Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65049657923",
+      "company": "Vix Logistica — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T12:46:35.868Z",
+        "72557853": "2026-09-15T12:46:33.167Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T12:46:33.167Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65049741872",
+      "company": "ULBRA — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T12:50:36.949Z",
+        "72557853": "2026-09-15T12:50:34.670Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T12:50:34.670Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65054387713",
+      "company": "Minasligas — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T13:06:36.350Z",
+        "72557853": "2026-09-15T13:06:33.382Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T13:06:33.382Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65054625812",
+      "company": "Grupo AG Capital — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T13:24:35.070Z",
+        "72557853": "2026-09-15T13:24:32.482Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T13:24:32.482Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65039798888",
+      "company": "Grupo Matos — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T13:44:35.605Z",
+        "72557853": "2026-09-15T13:44:32.983Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T13:44:32.983Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65054749248",
+      "company": "Integral Trust Serviços — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T13:44:42.348Z",
+        "72557853": "2026-09-15T13:44:39.823Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T13:44:39.823Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65053862184",
+      "company": "Doctoralia Brasil — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T14:04:52.122Z",
+        "72557853": "2026-09-15T14:04:48.235Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T14:04:48.235Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65055176213",
+      "company": "CLM Controller — Prospecção | Maturidade Estratégica",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T14:22:43Z",
+        "72557853": "2026-09-15T14:22:39.818Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T14:22:39.818Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65057184818",
+      "company": "Racional Engenharia Ltda — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-15T14:42:36.582Z",
+        "72557853": "2026-09-15T14:42:33.708Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-15T14:42:33.708Z",
+      "createMonth": "2026-09"
     }
   ],
   "filters": {
@@ -186,7 +466,7 @@
     ]
   },
   "debug": {
-    "totalDeals": 4,
+    "totalDeals": 18,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

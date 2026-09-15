@@ -359,7 +359,59 @@ function renderDailyPace(m){
         </span>
       </div>
     </div>`}).join('');
-  return`<div class="section-header"><div class="section-title">Ritmo diário para a meta</div><div class="section-sub">Quantos deals por dia útil restante para bater cada etapa · ${daysLeft} dias úteis restam</div></div><div class="pace-grid">${cards}</div>`}
+  return`<div class="section-header"><div class="section-title">Ritmo diário para a meta</div><div class="section-sub">Quantos deals por dia útil restante para bater cada etapa · ${daysLeft} dias úteis restam</div></div><div class="pace-grid">${cards}</div>${renderPaceChart(m,daysLeft)}`}
+
+function renderPaceChart(m,daysLeft){
+  if(!m.mm||!m.tracker.length)return'';
+  const data=m.tracker.map(t=>{
+    const remaining=Math.max(0,t.target-t.actual);
+    const needed=remaining>0?remaining/daysLeft:0;
+    const current=m.mm.businessDaysElapsed>0?t.actual/m.mm.businessDaysElapsed:0;
+    const isDone=t.actual>=t.target;
+    return{name:t.name,needed,current,isDone};
+  });
+  const maxVal=Math.max(...data.map(d=>Math.max(d.needed,d.current)),1);
+  const W=900,H=260,pad={t:40,r:30,b:60,l:50};
+  const plotW=W-pad.l-pad.r,plotH=H-pad.t-pad.b;
+  const n=data.length,groupW=plotW/n,barW=groupW*.3,gap=groupW*.08;
+
+  const bars=data.map((d,i)=>{
+    const x=pad.l+i*groupW+groupW/2;
+    const hN=d.isDone?0:(d.needed/maxVal)*plotH;
+    const hC=(d.current/maxVal)*plotH;
+    const yN=pad.t+plotH-hN;
+    const yC=pad.t+plotH-hC;
+    const colorC=d.isDone?'#15803D':d.current>=d.needed?'#15803D':'#1F5F3F';
+    const colorN=d.isDone?'#E7E5E4':'#D6D3D1';
+    const needBar=d.isDone?'':`<rect x="${x-barW-gap/2}" y="${yN}" width="${barW}" height="${hN}" rx="4" fill="${colorN}"/>
+      <text x="${x-barW/2-gap/2}" y="${yN-6}" text-anchor="middle" fill="#78716C" font-size="10" font-family="Geist Mono,monospace">${d.needed.toFixed(1)}</text>`;
+    const currBar=hC>0?`<rect x="${x+gap/2}" y="${yC}" width="${barW}" height="${hC}" rx="4" fill="${colorC}"/>
+      <text x="${x+barW/2+gap/2}" y="${yC-6}" text-anchor="middle" fill="${colorC}" font-size="10" font-weight="500" font-family="Geist Mono,monospace">${d.current.toFixed(1)}</text>`:'';
+    const label=`<text x="${x}" y="${H-pad.b+18}" text-anchor="middle" fill="#78716C" font-size="11" font-family="Geist,sans-serif">${d.name}</text>`;
+    const doneCheck=d.isDone?`<text x="${x}" y="${pad.t+plotH-10}" text-anchor="middle" fill="#15803D" font-size="16">✓</text>`:'';
+    return`${needBar}${currBar}${label}${doneCheck}`;
+  }).join('');
+
+  // Grid lines
+  const gridLines=[0,.25,.5,.75,1].map(p=>{
+    const y=pad.t+plotH*(1-p);
+    const val=(maxVal*p).toFixed(1);
+    return`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="#E7E5E4" stroke-dasharray="${p===0?'0':'3,3'}"/>
+      <text x="${pad.l-8}" y="${y+4}" text-anchor="end" fill="#A8A29E" font-size="9" font-family="Geist Mono,monospace">${val}</text>`;
+  }).join('');
+
+  // Legend
+  const legend=`<rect x="${pad.l}" y="8" width="10" height="10" rx="2" fill="#D6D3D1"/><text x="${pad.l+14}" y="17" fill="#78716C" font-size="11" font-family="Geist,sans-serif">Necessário/dia</text>
+    <rect x="${pad.l+110}" y="8" width="10" height="10" rx="2" fill="#1F5F3F"/><text x="${pad.l+124}" y="17" fill="#78716C" font-size="11" font-family="Geist,sans-serif">Atual/dia</text>`;
+
+  return`<div class="card fade-in" style="margin-top:16px;padding:20px 24px;overflow-x:auto">
+    <svg viewBox="0 0 ${W} ${H}" width="100%" style="max-height:280px">
+      ${gridLines}
+      <line x1="${pad.l}" y1="${pad.t+plotH}" x2="${W-pad.r}" y2="${pad.t+plotH}" stroke="#D6D3D1"/>
+      ${bars}
+      ${legend}
+    </svg>
+  </div>`}
 
 function renderKPIs(m){
   const sao=m.tracker.find(t=>t.name==='SAO'),sql=m.tracker.find(t=>t.name==='SQL'),con=m.tracker.find(t=>t.name==='Lead conectado'),cad=m.tracker.find(t=>t.name==='Em cadência');

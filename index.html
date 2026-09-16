@@ -487,27 +487,7 @@ function renderAlligator(m,deals){
       <span><span class="gator-legend-dot" style="background:#C4C0BB"></span>Pace ideal</span>
     </div>
   </div>
-  <script>(function(){
-    var svg=document.getElementById('${uid}');if(!svg)return;
-    var xh=document.getElementById('${uid}_xh'),da=document.getElementById('${uid}_da'),dp=document.getElementById('${uid}_dp');
-    var tt=document.getElementById('${uid}_tt'),td=document.getElementById('${uid}_td'),ta=document.getElementById('${uid}_ta'),tp=document.getElementById('${uid}_tp'),tg=document.getElementById('${uid}_tg');
-    var wrap=document.getElementById('${uid}_wrap');
-    svg.querySelectorAll('.${uid}_hz').forEach(function(z){
-      z.addEventListener('mouseenter',function(){
-        var cx=+z.dataset.cx,ya=+z.dataset.ya,ypp=+z.dataset.yp,g=+z.dataset.g;
-        xh.setAttribute('x1',cx);xh.setAttribute('x2',cx);xh.style.opacity=1;
-        da.setAttribute('cx',cx);da.setAttribute('cy',ya);da.style.opacity=1;
-        dp.setAttribute('cx',cx);dp.setAttribute('cy',ypp);dp.style.opacity=1;
-        td.textContent=z.dataset.day;ta.textContent=z.dataset.a;tp.textContent=z.dataset.p;
-        tg.innerHTML=g>=0?'<span style="color:#15803D">+'+g+' à frente ↑</span>':'<span style="color:#991B1B">'+g+' atrás ↓</span>';
-        var r=wrap.getBoundingClientRect(),sr=svg.getBoundingClientRect(),sx=sr.width/900,sy=sr.height/340;
-        var tx=cx*sx+16,ty=Math.min(ya,ypp)*sy-10;
-        if(tx+190>sr.width)tx=cx*sx-195;
-        tt.style.transform='translate('+tx+'px,'+ty+'px)';tt.style.opacity=1;
-      });
-      z.addEventListener('mouseleave',function(){xh.style.opacity=0;da.style.opacity=0;dp.style.opacity=0;tt.style.opacity=0});
-    });
-  })();</script>`}
+`}
 
 function renderKPIs(m){
   const sao=m.tracker.find(t=>t.name==='SAO'),sql=m.tracker.find(t=>t.name==='SQL'),con=m.tracker.find(t=>t.name==='Lead conectado'),cad=m.tracker.find(t=>t.name==='Em cadência');
@@ -577,6 +557,30 @@ function render(){
   document.querySelectorAll('.porte-tab').forEach(b=>b.addEventListener('click',()=>{F.porte=b.dataset.porte;render()}));
   document.querySelectorAll('.dim-select').forEach(s=>s.addEventListener('change',()=>{F[s.dataset.filter]=s.value;render()}));
   document.querySelectorAll('.gator-pill').forEach(b=>b.addEventListener('click',()=>{window.__gatorStage=b.dataset.stage;render()}));
+  setupGatorHover();
+}
+
+function setupGatorHover(){
+  const wrap=document.querySelector('[id$="_wrap"]');if(!wrap)return;
+  const uid=wrap.id.replace('_wrap','');
+  const svg=document.getElementById(uid);if(!svg)return;
+  const xh=document.getElementById(uid+'_xh'),da=document.getElementById(uid+'_da'),dp=document.getElementById(uid+'_dp');
+  const tt=document.getElementById(uid+'_tt'),td=document.getElementById(uid+'_td'),ta=document.getElementById(uid+'_ta'),tp=document.getElementById(uid+'_tp'),tg=document.getElementById(uid+'_tg');
+  svg.querySelectorAll('[class$="_hz"]').forEach(function(z){
+    z.addEventListener('mouseenter',function(){
+      var cx=+z.dataset.cx,ya=+z.dataset.ya,ypp=+z.dataset.yp,g=+z.dataset.g;
+      xh.setAttribute('x1',cx);xh.setAttribute('x2',cx);xh.style.opacity=1;
+      da.setAttribute('cx',cx);da.setAttribute('cy',ya);da.style.opacity=1;
+      dp.setAttribute('cx',cx);dp.setAttribute('cy',ypp);dp.style.opacity=1;
+      td.textContent=z.dataset.day;ta.textContent=z.dataset.a;tp.textContent=z.dataset.p;
+      tg.innerHTML=g>=0?'<span style="color:#15803D">+'+g+' \u00e0 frente \u2191</span>':'<span style="color:#991B1B">'+g+' atr\u00e1s \u2193</span>';
+      var sr=svg.getBoundingClientRect(),sx=sr.width/900,sy=sr.height/340;
+      var tx=cx*sx+16,ty=Math.min(ya,ypp)*sy-10;
+      if(tx+190>sr.width)tx=cx*sx-195;
+      tt.style.transform='translate('+tx+'px,'+ty+'px)';tt.style.opacity=1;
+    });
+    z.addEventListener('mouseleave',function(){xh.style.opacity=0;da.style.opacity=0;dp.style.opacity=0;tt.style.opacity=0});
+  });
 }
 
 function renderError(msg){document.getElementById('root').innerHTML=`<div class="state-screen"><div><div class="title serif">Erro ao carregar</div><div class="sub">${msg}</div><button class="retry-btn" onclick="loadData()">Tentar novamente</button></div></div>`}

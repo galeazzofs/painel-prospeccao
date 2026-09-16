@@ -2,7 +2,7 @@ name: Sync HubSpot
 
 on:
   schedule:
-    - cron: '0 11 * * *'
+    - cron: '0 */2 * * *'
   workflow_dispatch:
 
 jobs:

@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-17T20:12:11.720Z",
+    "updatedAt": "2026-09-17T20:36:22.284Z",
     "availablePortes": [],
     "porteCounts": {
-      "all": 79
+      "all": 82
     },
     "availableMonths": [
       "2026-09"
@@ -1698,6 +1698,69 @@
       "lostReason": null,
       "createdate": "2026-09-17T20:11:28.653Z",
       "createMonth": "2026-09"
+    },
+    {
+      "id": "65104797747",
+      "company": "Finch Soluções — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T20:17:29.650Z",
+        "24595559": "2026-09-17T20:17:32.164Z",
+        "72557853": "2026-09-17T20:17:23.716Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T20:17:23.716Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65091101082",
+      "company": "Apsa Administracao Predial e Negocios Imobiliarios SA — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T20:19:21.606Z",
+        "24595559": "2026-09-17T20:19:23.438Z",
+        "72557853": "2026-09-17T20:19:16.501Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T20:19:16.501Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65114385593",
+      "company": "Star Center — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T20:21:19.698Z",
+        "24595559": "2026-09-17T20:21:21.383Z",
+        "72557853": "2026-09-17T20:21:14.501Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T20:21:14.501Z",
+      "createMonth": "2026-09"
     }
   ],
   "filters": {
@@ -1720,7 +1783,7 @@
     ]
   },
   "debug": {
-    "totalDeals": 79,
+    "totalDeals": 82,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

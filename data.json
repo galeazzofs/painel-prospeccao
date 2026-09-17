@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-17T14:13:59.269Z",
+    "updatedAt": "2026-09-17T14:39:07.624Z",
     "availablePortes": [],
     "porteCounts": {
-      "all": 45
+      "all": 44
     },
     "availableMonths": [
       "2026-09"
@@ -682,6 +682,7 @@
       "stages": {
         "24595558": "2026-09-16T20:01:25.866Z",
         "24595559": "2026-09-16T20:01:29.136Z",
+        "24595560": "2026-09-17T14:27:19.659Z",
         "24595562": "2026-09-16T20:01:34.012Z",
         "72557853": "2026-09-16T20:01:19.258Z"
       },
@@ -894,26 +895,6 @@
       "createMonth": "2026-09"
     },
     {
-      "id": "65076127011",
-      "company": "Stellantis South America — Prospecção | Dores Operacionais",
-      "campaign": "— sem campanha",
-      "porte": null,
-      "setor": "— sem categoria",
-      "cn": "Barbara Costa Borges",
-      "ev": "Barbara Costa Borges",
-      "stages": {
-        "24595559": "2026-09-17T13:50:31.547Z",
-        "72557853": "2026-09-17T13:50:24.867Z"
-      },
-      "amount": 0,
-      "isLost": false,
-      "lostStage": null,
-      "lostFunnel": null,
-      "lostReason": null,
-      "createdate": "2026-09-17T13:50:24.867Z",
-      "createMonth": "2026-09"
-    },
-    {
       "id": "65089868665",
       "company": "Schwan Cosmetics do Brasil — Prospecção | Renovação Próxima",
       "campaign": "— sem campanha",
@@ -1013,7 +994,7 @@
     ]
   },
   "debug": {
-    "totalDeals": 45,
+    "totalDeals": 44,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

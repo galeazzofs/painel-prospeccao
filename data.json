@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-17T17:46:27.448Z",
+    "updatedAt": "2026-09-17T20:12:11.720Z",
     "availablePortes": [],
     "porteCounts": {
-      "all": 50
+      "all": 79
     },
     "availableMonths": [
       "2026-09"
@@ -1094,12 +1094,617 @@
       "lostReason": null,
       "createdate": "2026-09-17T17:20:43.890Z",
       "createMonth": "2026-09"
+    },
+    {
+      "id": "65077565881",
+      "company": "Global Cargo — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-17T18:30:40.038Z",
+        "72557853": "2026-09-17T18:30:31.929Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T18:30:31.929Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65084103605",
+      "company": "ArcelorMittal — Prospecção | Maturidade Estratégica",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-17T18:31:12.974Z",
+        "72557853": "2026-09-17T18:30:55.005Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T18:30:55.005Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65103086685",
+      "company": "Grupo Matos — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-17T18:52:32.492Z",
+        "72557853": "2026-09-17T18:31:44.246Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T18:31:44.246Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65113527189",
+      "company": "GOVERNANÇABRASIL - GOVBR — Prospecção | Renovação Próxima",
+      "campaign": "GOVBR — Prospecção | Renovação Próxima",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-17T18:52:52.652Z",
+        "72557853": "2026-09-17T18:52:47.221Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T18:52:47.221Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65091096417",
+      "company": "Pearson — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-17T18:54:53.975Z",
+        "72557853": "2026-09-17T18:54:48.896Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T18:54:48.896Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65113829033",
+      "company": "i4Pro — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:07:35.318Z",
+        "24595559": "2026-09-17T19:07:48.303Z",
+        "72557853": "2026-09-17T19:06:18.809Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:06:18.809Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65107114106",
+      "company": "Warren Investimentos — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:07:35.604Z",
+        "24595559": "2026-09-17T19:07:48.488Z",
+        "72557853": "2026-09-17T19:06:46.984Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:06:46.984Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65094049588",
+      "company": "Vórtx — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:07:35.840Z",
+        "24595559": "2026-09-17T19:07:48.728Z",
+        "72557853": "2026-09-17T19:06:52.021Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:06:52.021Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65094519655",
+      "company": "Darede — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:07:36.021Z",
+        "24595559": "2026-09-17T19:07:48.913Z",
+        "72557853": "2026-09-17T19:06:57.398Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:06:57.398Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65114228038",
+      "company": "Hedgepoint Global Markets — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:07:36.247Z",
+        "24595559": "2026-09-17T19:07:49.107Z",
+        "72557853": "2026-09-17T19:07:03.339Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:07:03.339Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65104953954",
+      "company": "Ageo Terminais — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:18:54.027Z",
+        "24595559": "2026-09-17T19:19:32.538Z",
+        "72557853": "2026-09-17T19:18:14.457Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:18:14.457Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65097510729",
+      "company": "Steck — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:18:54.269Z",
+        "24595559": "2026-09-17T19:19:32.820Z",
+        "72557853": "2026-09-17T19:18:19.752Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:18:19.752Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65108046747",
+      "company": "Hotelaria Brasil — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:18:54.492Z",
+        "24595559": "2026-09-17T19:19:32.994Z",
+        "72557853": "2026-09-17T19:18:25.597Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:18:25.597Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65103866991",
+      "company": "Nexa Resources — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:18:54.694Z",
+        "24595559": "2026-09-17T19:19:33.192Z",
+        "72557853": "2026-09-17T19:18:30.915Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:18:30.915Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65093891166",
+      "company": "Supermercado Nordestão — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:47:22.292Z",
+        "24595559": "2026-09-17T19:47:24.128Z",
+        "72557853": "2026-09-17T19:47:17.230Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:47:17.230Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65101251925",
+      "company": "Union IT All Services — Prospecção | Maturidade Estratégica",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:49:12.700Z",
+        "24595559": "2026-09-17T19:49:14.118Z",
+        "72557853": "2026-09-17T19:49:08.648Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:49:08.648Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65115919774",
+      "company": "Uppertools — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:49:32.901Z",
+        "24595559": "2026-09-17T19:49:35.137Z",
+        "72557853": "2026-09-17T19:49:26.873Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:49:26.873Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65119511218",
+      "company": "Cas Tecnologia SA — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:51:20.422Z",
+        "24595559": "2026-09-17T19:51:22.076Z",
+        "72557853": "2026-09-17T19:51:15.129Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:51:15.129Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65099865409",
+      "company": "Sotran (Tmov) — Prospecção | Maturidade Estratégica",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:53:13.612Z",
+        "24595559": "2026-09-17T19:53:15.101Z",
+        "72557853": "2026-09-17T19:53:09.145Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:53:09.145Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65086176531",
+      "company": "Appmax — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:53:34.366Z",
+        "24595559": "2026-09-17T19:53:37.025Z",
+        "72557853": "2026-09-17T19:53:27.479Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:53:27.479Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65096900370",
+      "company": "RaiaDrogasil — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:55:16.270Z",
+        "24595559": "2026-09-17T19:55:18.225Z",
+        "72557853": "2026-09-17T19:55:11.989Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:55:11.989Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65091727477",
+      "company": "Matera — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:55:32.809Z",
+        "24595559": "2026-09-17T19:55:35.433Z",
+        "72557853": "2026-09-17T19:55:26.470Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:55:26.470Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65111981376",
+      "company": "Lza Engenharia  — Prospecção | Maturidade Estratégica",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:57:14.079Z",
+        "24595559": "2026-09-17T19:57:15.508Z",
+        "72557853": "2026-09-17T19:57:09.976Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:57:09.976Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65104650349",
+      "company": "Beyond Solucoes — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T19:57:34.529Z",
+        "24595559": "2026-09-17T19:57:37.029Z",
+        "72557853": "2026-09-17T19:57:28.331Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T19:57:28.331Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65111217516",
+      "company": "Uliving — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T20:01:28.149Z",
+        "24595559": "2026-09-17T20:01:30.529Z",
+        "72557853": "2026-09-17T20:01:21.883Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T20:01:21.883Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65115920662",
+      "company": "Zurich Airport Latin America LTDA. — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T20:03:25.919Z",
+        "24595559": "2026-09-17T20:03:27.758Z",
+        "72557853": "2026-09-17T20:03:20.559Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T20:03:20.559Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65102776391",
+      "company": "Swile Brasil — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T20:05:25.017Z",
+        "24595559": "2026-09-17T20:05:27.158Z",
+        "72557853": "2026-09-17T20:05:19.636Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T20:05:19.636Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65114230412",
+      "company": "Grupo WePink — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T20:11:18.835Z",
+        "24595559": "2026-09-17T20:11:20.477Z",
+        "72557853": "2026-09-17T20:11:14.052Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T20:11:14.052Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65103552271",
+      "company": "Casa Flora — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-17T20:11:36.264Z",
+        "24595559": "2026-09-17T20:11:39.010Z",
+        "72557853": "2026-09-17T20:11:28.653Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T20:11:28.653Z",
+      "createMonth": "2026-09"
     }
   ],
   "filters": {
     "campaigns": [
       "Administradora de Benefícios — Prospecção | Renovação Próxima",
       "Aelbra — Prospecção | Renovação Próxima",
+      "GOVBR — Prospecção | Renovação Próxima",
       "Mercadomóveis — Prospecção | Dores Operacionais",
       "Prospecção | Renovação Próxima",
       "— sem campanha"
@@ -1115,7 +1720,7 @@
     ]
   },
   "debug": {
-    "totalDeals": 50,
+    "totalDeals": 79,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

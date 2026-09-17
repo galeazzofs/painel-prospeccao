@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-17T14:39:07.624Z",
+    "updatedAt": "2026-09-17T17:46:27.448Z",
     "availablePortes": [],
     "porteCounts": {
-      "all": 44
+      "all": 50
     },
     "availableMonths": [
       "2026-09"
@@ -281,6 +281,7 @@
       "ev": "Barbara Costa Borges",
       "stages": {
         "24595559": "2026-09-15T12:46:35.868Z",
+        "24595562": "2026-09-17T17:10:46.020Z",
         "72557853": "2026-09-15T12:46:33.167Z"
       },
       "amount": 0,
@@ -973,6 +974,126 @@
       "lostReason": null,
       "createdate": "2026-09-17T13:56:49.703Z",
       "createMonth": "2026-09"
+    },
+    {
+      "id": "65080035135",
+      "company": "Grupo PRIMO — Prospecção | Maturidade Estratégica",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-17T16:57:06.250Z",
+        "72557853": "2026-09-17T16:56:57.920Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T16:56:57.920Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65094196396",
+      "company": "Grupo Centroflora — Prospecção | Dores Operacionais",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-17T16:58:54.032Z",
+        "72557853": "2026-09-17T16:58:48.040Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T16:58:48.040Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65106182660",
+      "company": "Verum Partners — Prospecção | Maturidade Estratégica",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-17T17:01:07.326Z",
+        "72557853": "2026-09-17T17:01:00.157Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T17:01:00.157Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65091243871",
+      "company": "Verity Group — Prospecção | Maturidade Estratégica",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-17T17:07:02.893Z",
+        "72557853": "2026-09-17T17:06:57.092Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T17:06:57.092Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65100317821",
+      "company": "Automatech  — Prospecção | Maturidade Estratégica",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-17T17:07:22.557Z",
+        "72557853": "2026-09-17T17:07:15.020Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T17:07:15.020Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65096734847",
+      "company": "Agência FG — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595559": "2026-09-17T17:20:48.325Z",
+        "72557853": "2026-09-17T17:20:43.890Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-17T17:20:43.890Z",
+      "createMonth": "2026-09"
     }
   ],
   "filters": {
@@ -994,7 +1115,7 @@
     ]
   },
   "debug": {
-    "totalDeals": 44,
+    "totalDeals": 50,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

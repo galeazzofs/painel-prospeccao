@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-18T17:36:40.796Z",
+    "updatedAt": "2026-09-18T20:02:05.753Z",
     "availablePortes": [],
     "porteCounts": {
-      "all": 106
+      "all": 108
     },
     "availableMonths": [
       "2026-09"
@@ -2266,12 +2266,55 @@
       "lostReason": null,
       "createdate": "2026-09-18T15:04:25.743Z",
       "createMonth": "2026-09"
+    },
+    {
+      "id": "65122168157",
+      "company": "Associacao Multimarcas de Farmacias e Drogarias - Farmarcas — Prospecção | Renovação Próxima",
+      "campaign": "Farmarcas — Prospecção | Renovação Próxima",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-18T19:24:23.010Z",
+        "24595559": "2026-09-18T19:24:24.501Z",
+        "72557853": "2026-09-18T19:24:18.610Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-18T19:24:18.610Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65122261661",
+      "company": "Reale Empresarial — Prospecção | Renovação Próxima",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-18T19:56:24.083Z",
+        "24595559": "2026-09-18T19:56:25.538Z",
+        "72557853": "2026-09-18T19:56:19.761Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-18T19:56:19.761Z",
+      "createMonth": "2026-09"
     }
   ],
   "filters": {
     "campaigns": [
       "Administradora de Benefícios — Prospecção | Renovação Próxima",
       "Aelbra — Prospecção | Renovação Próxima",
+      "Farmarcas — Prospecção | Renovação Próxima",
       "GOVBR — Prospecção | Renovação Próxima",
       "Mercadomóveis — Prospecção | Dores Operacionais",
       "Plano de Saúde — Prospecção | Dores Operacionais",
@@ -2289,7 +2332,7 @@
     ]
   },
   "debug": {
-    "totalDeals": 106,
+    "totalDeals": 108,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

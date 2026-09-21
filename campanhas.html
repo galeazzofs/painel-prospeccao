@@ -146,7 +146,12 @@ const BENCH={
   }
 };
 
-let gData=null, gConfig=null;
+// HubSpot stages relevantes
+const HS_QUAL_AGENDADA='24595560';
+const HS_SQL='24595561';
+const HS_SAO='9102669';
+
+let gData=null, gConfig=null, gHubspot=null;
 let F={campaign:'all'};
 
 function isNil(v){return v===null||v===undefined}
@@ -175,6 +180,34 @@ function filtered(){
   const all=gData.campaigns||[];
   if(F.campaign==='all')return all;
   return all.filter(c=>c.id===F.campaign);
+}
+
+// Extrai nome da campanha do deal HubSpot: "Empresa — Prospecção | Campanha" → "Campanha"
+function extractCampaignFromDeal(deal){
+  const c=deal.company||'';
+  const pipe=c.lastIndexOf('|');
+  if(pipe===-1)return null;
+  return c.slice(pipe+1).trim();
+}
+
+// Conta deals do HubSpot que atingiram um stage, opcionalmente filtrado por campanha label
+function countHubspotStage(stageId, campaignLabel){
+  if(!gHubspot||!gHubspot.deals)return 0;
+  return gHubspot.deals.filter(d=>{
+    if(!d.stages[stageId])return false;
+    if(campaignLabel&&campaignLabel!=='all'){
+      const dc=extractCampaignFromDeal(d);
+      if(!dc||dc!==campaignLabel)return false;
+    }
+    return true;
+  }).length;
+}
+
+// Pega a label da campanha selecionada no filtro
+function selectedCampaignLabel(){
+  if(F.campaign==='all')return'all';
+  const c=(gData.campaigns||[]).find(x=>x.id===F.campaign);
+  return c?c.label:'all';
 }
 
 function verdictFor(yours, bench){
@@ -226,7 +259,13 @@ function renderKpis(t){
     ${kpi('Taxa de resposta',fmt(rr,'pct'),`${fmt(t.replied,'int')} respostas`,rr*100,'var(--positive)',BENCH.email.replyRate,rr)}
     ${kpi('Aceite LinkedIn',fmt(ar,'pct'),`${fmt(t.invitesAccepted,'int')} de ${fmt(t.invitesSent,'int')} convites`,ar*100,'#D97706',BENCH.linkedin.acceptanceRate,ar)}
     ${kpi('Resposta pós-conexão',fmt(lr,'pct'),`${fmt(t.liReplied,'int')} de ${fmt(t.liSent,'int')} msgs`,t.liSent>0?lr*100:0,'#D97706',BENCH.linkedin.replyRate,lr)}
-    ${kpi('Reuniões agendadas',fmt(t.meetings,'int'),'via Lemlist',null,null,null,null)}
+    ${(()=>{
+      const cl=selectedCampaignLabel();
+      const qualCount=countHubspotStage(HS_QUAL_AGENDADA,cl);
+      const sqlCount=countHubspotStage(HS_SQL,cl);
+      const saoCount=countHubspotStage(HS_SAO,cl);
+      return kpi('Qual. agendadas',fmt(qualCount,'int'),`${fmt(sqlCount,'int')} SQLs · ${fmt(saoCount,'int')} SAOs — via HubSpot`,null,null,null,null);
+    })()}
   </div>`;
 }
 
@@ -238,7 +277,7 @@ function renderFunnel(t){
     {name:'Abertos',count:t.opened,color:'#2563EB'},
     {name:'Clicados',count:t.clicked,color:'#7C3AED'},
     {name:'Respondidos',count:t.replied,color:'var(--positive)'},
-    {name:'Reunião',count:t.meetings,color:'#D97706'},
+    {name:'Qual. agendada',count:countHubspotStage(HS_QUAL_AGENDADA,selectedCampaignLabel()),color:'#D97706'},
   ];
   const max=steps[0].count||1;
   let rows='';
@@ -411,11 +450,12 @@ function render(){
 
 async function main(){
   try{
-    const [data,config]=await Promise.all([
+    const [data,config,hubspot]=await Promise.all([
       fetch(`lemlist-data.json?t=${Date.now()}`).then(r=>r.json()),
       fetch('lemlist-campaigns.json').then(r=>r.json()),
+      fetch(`data.json?t=${Date.now()}`).then(r=>r.json()).catch(()=>null),
     ]);
-    gData=data;gConfig=config;render();
+    gData=data;gConfig=config;gHubspot=hubspot;render();
   }catch(err){
     document.getElementById('root').innerHTML=`<div class="app"><div class="state-screen"><div class="title serif">Não foi possível carregar</div><div class="sub">${err.message}</div><button class="retry-btn" onclick="location.reload()">Tentar de novo</button></div></div>`;
   }

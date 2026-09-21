@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Prospecção · Painel Executivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#FAFAF9;--surface:#FFF;--surface-2:#F5F5F4;--border:#E7E5E4;--border-strong:#D6D3D1;--text-1:#0C0A09;--text-2:#44403C;--text-3:#78716C;--text-4:#A8A29E;--accent:#1F5F3F;--accent-dark:#0F3D28;--accent-soft:#E8F2EC;--positive:#15803D;--positive-soft:#F0FDF4;--negative:#991B1B;--negative-soft:#FEF2F2;--warning:#92400E;--warning-soft:#FEF3C7;--shadow-sm:0 1px 2px rgba(12,10,9,.04)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text-1);font-family:'Geist',-apple-system,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.serif{font-family:'Fraunces',Georgia,serif;font-weight:400;letter-spacing:-.02em}
+.mono{font-family:'Geist Mono',monospace}
+.app{max-width:1320px;margin:0 auto;padding:32px 40px 80px}
+
+.state-screen{min-height:60vh;display:grid;place-items:center;text-align:center}
+.state-screen .title{font-family:'Fraunces',serif;font-size:28px;color:var(--text-2);margin-bottom:8px}
+.state-screen .sub{color:var(--text-3);font-size:14px}
+.spinner{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;margin:0 auto 20px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.retry-btn{margin-top:16px;background:var(--text-1);color:#fff;border:none;padding:10px 18px;border-radius:6px;font-family:inherit;font-size:13px;cursor:pointer}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding-bottom:28px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.brand{display:flex;align-items:baseline;gap:14px}
+.brand-mark{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));display:inline-grid;place-items:center;color:#fff;font-weight:600;font-size:13px;transform:translateY(4px)}
+.brand-title{font-size:15px;font-weight:500;letter-spacing:-.01em}
+.brand-sub{font-size:13px;color:var(--text-3)}
+.topbar-right{display:flex;align-items:center;gap:20px;font-size:12px;color:var(--text-3)}
+.live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--positive);margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.month-bar{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 22px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;margin-bottom:16px;box-shadow:var(--shadow-sm)}
+.month-label{font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;font-weight:500;margin-bottom:6px}
+.month-text{font-size:14px}.month-text .hl{padding:2px 8px;border-radius:4px;font-weight:500;font-size:12px;margin-right:8px}
+.month-text .hl.ok{background:var(--accent-soft);color:var(--accent)}.month-text .hl.warn{background:var(--warning-soft);color:var(--warning)}
+.prog-wrap{width:280px}.prog-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);margin-bottom:6px}
+.prog-bar{height:4px;background:var(--surface-2);border-radius:2px;overflow:hidden}.prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .8s}
+
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;margin-top:40px}
+.section-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);font-weight:500}
+.section-sub{font-size:12px;color:var(--text-4)}
+
+.filter-area{margin-bottom:20px;display:flex;flex-direction:column;gap:8px}
+.filter-row{display:flex;align-items:center;gap:16px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-sm);flex-wrap:wrap}
+.filter-label{font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;font-weight:500;white-space:nowrap}
+.porte-tabs{display:flex;gap:4px;flex:1}
+.porte-tab{padding:7px 14px;font-size:13px;font-family:inherit;color:var(--text-3);background:transparent;border:none;border-radius:7px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:8px}
+.porte-tab:hover{background:var(--surface-2);color:var(--text-2)}
+.porte-tab.active{background:var(--text-1);color:#fff}
+.porte-tab.active .porte-count{color:rgba(255,255,255,.6)}
+.porte-count{font-size:11px;color:var(--text-4)}
+.dim-select{font-family:inherit;font-size:12px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text-2);cursor:pointer}
+.dim-select:focus{outline:2px solid var(--accent);outline-offset:1px}
+
+.sao-hero{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;box-shadow:var(--shadow-sm);display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center;margin-bottom:20px}
+.sao-ring{position:relative;width:100px;height:100px}
+.sao-ring svg{transform:rotate(-90deg)}
+.sao-ring-label{position:absolute;inset:0;display:grid;place-items:center;font-family:'Fraunces',serif;font-size:28px;letter-spacing:-.03em;line-height:1}
+.sao-ring-label small{font-size:16px;color:var(--text-3);font-family:'Geist',sans-serif}
+.sao-detail{display:flex;flex-direction:column;gap:4px}
+.sao-detail-title{font-size:13px;font-weight:500}
+.sao-detail-sub{font-size:12px;color:var(--text-3)}
+.sao-stats{display:flex;flex-direction:column;gap:10px;text-align:right}
+.sao-stat{font-size:12px;color:var(--text-3)}.sao-stat b{font-weight:500;color:var(--text-1)}
+.pace-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500}
+.pace-tag.ahead{background:var(--positive-soft);color:var(--positive)}
+.pace-tag.behind{background:var(--negative-soft);color:var(--negative)}
+.pace-tag.on{background:var(--accent-soft);color:var(--accent)}
+
+.tracker-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 26px;box-shadow:var(--shadow-sm)}
+.tracker-row{display:grid;grid-template-columns:140px 1fr 70px 70px 80px 100px;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);font-size:13px}
+.tracker-row:last-child{border-bottom:none}
+.tracker-row.header{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-4);font-weight:500;padding:6px 0 10px;border-bottom:1px solid var(--border-strong)}
+.tracker-row.sao-row{background:var(--accent-soft);margin:0 -26px;padding:14px 26px;border-radius:0 0 10px 10px;border-bottom:none}
+.tracker-name{font-weight:500;color:var(--text-2)}
+.tracker-bar-wrap{position:relative;height:14px;background:var(--surface-2);border-radius:4px;overflow:visible}
+.tracker-bar-fill{height:100%;border-radius:4px;transition:width .8s}
+.tracker-bar-fill.ok{background:var(--accent)}.tracker-bar-fill.warn{background:var(--warning)}.tracker-bar-fill.bad{background:var(--negative);opacity:.7}.tracker-bar-fill.over{background:var(--positive)}
+.pace-marker{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--text-1);border-radius:1px;opacity:.5;z-index:2}
+.pace-marker::after{content:'';position:absolute;top:-4px;left:-3px;width:8px;height:8px;border-radius:50%;background:var(--text-1);opacity:.4}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 22px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:6px}
+.kpi:hover{border-color:var(--border-strong)}
+.kpi-label{font-size:12px;color:var(--text-3)}
+.kpi-value{font-size:32px;letter-spacing:-.03em;line-height:1}
+.kpi-value small{font-size:16px;color:var(--text-3);margin-left:2px}
+.kpi-sub{font-size:12px;color:var(--text-3)}
+
+.dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 26px;box-shadow:var(--shadow-sm)}
+.card-title{font-size:13px;font-weight:500;margin-bottom:4px}
+.card-sub{font-size:12px;color:var(--text-3);margin-bottom:20px}
+table.perf{width:100%;border-collapse:collapse;font-size:13px;margin-top:14px}
+table.perf th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-4);font-weight:500;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.perf th:last-child,table.perf td:last-child{text-align:right}
+table.perf td{padding:12px;border-bottom:1px solid var(--border);color:var(--text-2)}
+table.perf tr:last-child td{border-bottom:none}
+table.perf tr:hover td{background:var(--surface-2)}
+.person{display:flex;align-items:center;gap:10px}
+.avatar{width:26px;height:26px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;font-size:10px;color:var(--text-2);font-weight:500}
+.perf-mini-bar{display:inline-block;width:60px;height:4px;background:var(--surface-2);border-radius:2px;overflow:hidden;vertical-align:middle;margin-right:8px}
+.perf-mini-bar-fill{height:100%;background:var(--accent);border-radius:2px}
+.empty-row td{color:var(--text-4);text-align:center;padding:24px;font-size:12px}
+
+.loss-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.loss-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 26px;box-shadow:var(--shadow-sm)}
+.loss-total{font-family:'Fraunces',serif;font-size:42px;letter-spacing:-.03em;line-height:1}
+.loss-sub{font-size:12px;color:var(--text-3);margin-top:4px}
+.loss-bar-list{display:flex;flex-direction:column;gap:12px}
+.loss-bar-row{display:grid;grid-template-columns:140px 1fr 40px;gap:10px;align-items:center;font-size:12px}
+.loss-bar-label{color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.loss-bar-outer{height:8px;background:var(--surface-2);border-radius:4px;overflow:hidden}
+.loss-bar-fill{height:100%;border-radius:4px;opacity:.6;transition:width .7s}
+.loss-bar-fill.stage{background:var(--negative)}.loss-bar-fill.reason{background:var(--warning)}
+.loss-count{text-align:right;color:var(--text-3);font-size:11px}
+
+.vel-grid{display:flex;gap:4px;align-items:flex-end;min-height:180px;padding-top:30px}
+.vel-col{display:flex;flex-direction:column;align-items:center;flex:1;gap:4px}
+.vel-bar{width:100%;max-width:48px;border-radius:6px 6px 0 0;transition:height .6s}
+.vel-bar.primary{background:var(--accent)}.vel-bar.empty{background:var(--surface-2)}
+.vel-val{font-size:11px;font-weight:500;color:var(--text-2);white-space:nowrap}
+.vel-val.muted{color:var(--text-4)}
+.vel-name{font-size:10px;color:var(--text-3);text-align:center;margin-top:6px;line-height:1.2}
+
+.seg-bar-row{display:grid;grid-template-columns:120px 1fr 40px;gap:10px;align-items:center;font-size:13px;padding:6px 0}
+.seg-bar-outer{height:10px;background:var(--surface-2);border-radius:5px;overflow:hidden}
+.seg-bar-fill{height:100%;border-radius:5px;background:var(--accent);transition:width .6s}
+.seg-count{text-align:right;color:var(--text-3);font-size:12px}
+.state-row{display:grid;grid-template-columns:120px 1fr 40px 40px;gap:8px;align-items:center;font-size:13px;padding:6px 0}
+.state-bar{height:8px;background:var(--surface-2);border-radius:4px;overflow:hidden}
+.state-bar-fill{height:100%;border-radius:4px;transition:width .6s}
+.state-bar-fill.active{background:var(--accent)}.state-bar-fill.lost{background:var(--negative);opacity:.6}
+.state-pct{font-size:11px;color:var(--text-4);text-align:right}
+
+.cad-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 26px;box-shadow:var(--shadow-sm)}
+.cad-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.cad-stat-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-4);margin-bottom:4px}
+.cad-stat-val{font-size:24px;letter-spacing:-.02em}
+.cad-stat-meta{font-size:11px;color:var(--text-3);margin-left:4px;font-family:'Geist',sans-serif;font-weight:400}
+.cad-bars{display:flex;gap:2px;align-items:flex-end;height:160px}
+.cad-col{display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end;height:100%}
+.cad-bar{width:100%;max-width:56px;border-radius:4px 4px 0 0;background:var(--accent);transition:height .5s;min-height:2px}
+.cad-bar.peak{background:var(--accent-dark)}
+.cad-bar-val{font-size:10px;color:var(--text-2);font-weight:500;margin-bottom:2px}
+.cad-bar-lbl{font-size:9px;color:var(--text-4);margin-top:6px;text-align:center;line-height:1.2}
+
+.footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--text-4)}
+
+.pace-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.pace-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:8px;transition:border-color .15s}
+.pace-card:hover{border-color:var(--border-strong)}
+.pace-card.done{border-left:3px solid var(--positive)}
+.pace-card.critical{border-left:3px solid var(--negative)}
+.pace-card.ok{border-left:3px solid var(--accent)}
+.pace-card-name{font-size:12px;color:var(--text-3);font-weight:500}
+.pace-card-rate{font-size:28px;letter-spacing:-.03em;line-height:1}
+.pace-card-rate small{font-size:13px;color:var(--text-3);font-weight:400;margin-left:2px}
+.pace-card-meta{font-size:11px;color:var(--text-4);display:flex;flex-direction:column;gap:3px}
+.pace-card-meta b{color:var(--text-2);font-weight:500}
+.pace-card-bar{height:3px;background:var(--surface-2);border-radius:2px;overflow:hidden;margin-top:2px}
+.pace-card-bar-fill{height:100%;border-radius:2px;transition:width .6s}
+
+.gator-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 26px;box-shadow:var(--shadow-sm)}
+.gator-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.gator-title{font-size:13px;font-weight:500}
+.gator-select{font-family:inherit;font-size:12px;padding:5px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text-2);cursor:pointer}
+.gator-legend{display:flex;gap:20px;font-size:11px;color:var(--text-3);margin-top:12px}
+.gator-legend-dot{display:inline-block;width:12px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.gator-pill{font-family:'Geist',sans-serif;font-size:12px;padding:6px 14px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text-3);cursor:pointer;transition:all .15s}
+.gator-pill:hover{border-color:var(--accent);color:var(--text-2)}
+.gator-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.gator-today{font-size:10px;fill:var(--text-3);font-family:'Geist',sans-serif}
+.fade-in{animation:fadeUp .35s cubic-bezier(.4,0,.2,1) backwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1100px){.app{padding:24px 20px 60px}.kpi-grid{grid-template-columns:repeat(2,1fr)}.dual-grid,.loss-grid{grid-template-columns:1fr}.sao-hero{grid-template-columns:1fr;text-align:center}.tracker-row{font-size:12px}.cad-stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="state-screen"><div><div class="spinner"></div><div class="title serif">Carregando painel…</div><div class="sub">Buscando dados de prospecção</div></div></div>
+</div>
+<script>
+// ============================================================================
+// PAINEL PROSPECÇÃO v2 — filtros + pace + velocity + cadências + segmentos
+// ============================================================================
+const DATA_URL='./data.json';
+
+const STAGES_SDR=[
+  {id:'72557853',name:'Mapeamento'},{id:'24595558',name:'Abordar'},
+  {id:'24595559',name:'Em cadência'},{id:'24595562',name:'Lead Conectado'},
+  {id:'24595560',name:'Qual. Agendada'},{id:'24595561',name:'SQL'},
+  {id:'9102669',name:'SAO'},
+];
+const STAGES_OPP=[
+  {id:'9102669',name:'SAO'},{id:'presentationscheduled',name:'Elab. Proposta'},
+  {id:'11505970',name:'Proposta Enviada'},{id:'decisionmakerboughtin',name:'Em negociação'},
+  {id:'26183057',name:'Proposta Aceita'},
+];
+const STAGE_SDR_LOST='24595564',STAGE_OPP_LOST='closedlost';
+const TARGET_STAGES=[
+  {id:'72557853',name:'Mapeamento'},{id:'24595559',name:'Em cadência'},
+  {id:'24595562',name:'Lead conectado'},{id:'24595560',name:'Qual. agendada'},
+  {id:'24595561',name:'SQL'},{id:'9102669',name:'SAO'},
+];
+
+let gData=null;
+const CURRENT_MONTH=new Date().toISOString().slice(0,7);
+const F={porte:'all',month:CURRENT_MONTH,campaign:'all',cn:'all',ev:'all',setor:'all'};
+
+const DASH='—';
+const isNil=v=>v===null||v===undefined||(typeof v==='number'&&!isFinite(v));
+function fmt(v,t='auto'){if(isNil(v))return DASH;switch(t){case'int':return Number(v).toLocaleString('pt-BR');case'pct':return`${(v*100).toFixed(1).replace('.',',')}%`;case'pct0':return`${(v*100).toFixed(0)}%`;case'days':return`${v.toFixed(1).replace('.',',')}d`;default:return String(v)}}
+function fmtDate(iso){if(!iso)return DASH;const d=new Date(iso),m=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];return`${String(d.getDate()).padStart(2,'0')} ${m[d.getMonth()]} ${d.getFullYear()} · ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`}
+function timeAgo(iso){if(!iso)return DASH;const m=Math.floor((Date.now()-new Date(iso).getTime())/60000);if(m<1)return'agora';if(m<60)return`há ${m} min`;const h=Math.floor(m/60);if(h<24)return`há ${h} h`;return`há ${Math.floor(h/24)} d`}
+function initialsOf(n){if(!n)return'?';const p=n.split(' ').filter(Boolean);return((p[0]?.[0]||'')+(p[p.length-1]?.[0]||'')).toUpperCase().slice(0,2)||'?'}
+function groupBy(deals,fn){const a={};deals.forEach(d=>{const k=fn(d);a[k]=(a[k]||0)+1});return Object.entries(a).map(([name,count])=>({name,count})).sort((a,b)=>b.count-a.count)}
+function toISOWeek(ds){const d=new Date(ds),t=new Date(d);t.setDate(d.getDate()-((d.getDay()+6)%7)+3);const y=t.getFullYear(),j=new Date(y,0,4),w=1+Math.round((t-j)/604800000);return`S${String(w).padStart(2,'0')}`}
+function countBizDays(from,to){let c=0;const d=new Date(from),e=new Date(to);while(d<=e){if(d.getDay()!==0&&d.getDay()!==6)c++;d.setDate(d.getDate()+1)}return c}
+
+function applyFilters(deals){
+  return deals.filter(d=>{
+    if(F.porte!=='all'&&d.porte!==F.porte)return false;
+    if(F.month!=='all'&&d.createMonth!==F.month)return false;
+    if(F.campaign!=='all'&&d.campaign!==F.campaign)return false;
+    if(F.cn!=='all'&&d.cn!==F.cn)return false;
+    if(F.ev!=='all'&&d.ev!==F.ev)return false;
+    if(F.setor!=='all'&&d.setor!==F.setor)return false;
+    return true;
+  });
+}
+
+function computeMetrics(deals,meta){
+  const total=deals.length;
+  // Month-aware targets & pace
+  const mm=meta.monthMeta?.[F.month]||null;
+  const targets=mm?mm.targets:TARGET_STAGES.map(s=>({...s,target:0}));
+  const pctTime=mm&&mm.businessDays>0?mm.businessDaysElapsed/mm.businessDays:0;
+
+  const tracker=targets.map(t=>{
+    const actual=deals.filter(d=>d.stages[t.id]).length;
+    const pace=Math.round(t.target*pctTime);
+    const pctDone=t.target>0?actual/t.target:0;
+    const gap=actual-pace;
+    let status='on';
+    if(gap<-Math.max(1,t.target*.05))status='behind';
+    else if(gap>Math.max(1,t.target*.05))status='ahead';
+    return{...t,actual,pace,pctDone,gap,status};
+  });
+
+  // Losses
+  const lostDeals=deals.filter(d=>d.isLost);
+  const byStage={},byReason={};
+  lostDeals.forEach(d=>{const s=d.lostStage||'— desconhecido',r=d.lostReason||'— sem motivo';byStage[s]=(byStage[s]||0)+1;byReason[r]=(byReason[r]||0)+1});
+
+  // Velocity
+  const ALL_VEL=[...STAGES_SDR,...STAGES_OPP.slice(1)];
+  const velStages=ALL_VEL.map((s,i)=>{
+    if(i===0)return{name:s.name,days:null};
+    const prevId=ALL_VEL[i-1].id;
+    const diffs=deals.filter(d=>d.stages[prevId]&&d.stages[s.id]).map(d=>(new Date(d.stages[s.id])-new Date(d.stages[prevId]))/86400000).filter(x=>x>=0&&x<365);
+    return{name:s.name,days:diffs.length?diffs.reduce((a,b)=>a+b,0)/diffs.length:null};
+  });
+
+  // Cadences (by ISO week)
+  const cadWeeks={};
+  deals.forEach(d=>{const dt=d.stages['24595559'];if(dt){const w=toISOWeek(dt);cadWeeks[w]=(cadWeeks[w]||0)+1}});
+  const weekly=Object.entries(cadWeeks).sort(([a],[b])=>a.localeCompare(b)).map(([week,count])=>({week,count}));
+
+  // Segments
+  const byPorte=groupBy(deals,d=>d.porte||'— sem porte');
+  const bySetor=groupBy(deals,d=>d.setor||'— sem categoria').slice(0,8);
+
+  // Current state
+  const stateMap={};
+  const stageOrder=[...STAGES_SDR,{id:STAGE_SDR_LOST,name:'Perdido'}];
+  deals.forEach(d=>{
+    let current='Mapeamento';
+    for(const s of stageOrder){if(d.stages[s.id])current=s.name}
+    if(d.isLost)current='Perdido';
+    stateMap[current]=(stateMap[current]||0)+1;
+  });
+
+  // Team
+  const cnMap={};
+  deals.forEach(d=>{if(!d.cn)return;if(!cnMap[d.cn])cnMap[d.cn]={name:d.cn,leads:0,connected:0};cnMap[d.cn].leads++;if(d.stages['24595562'])cnMap[d.cn].connected++});
+  const cns=Object.values(cnMap).map(c=>({...c,rate:c.leads>0?c.connected/c.leads:0})).sort((a,b)=>b.leads-a.leads);
+  const evMap={};
+  deals.filter(d=>d.stages['9102669']&&d.ev).forEach(d=>{if(!evMap[d.ev])evMap[d.ev]={name:d.ev,opps:0,pipe:0};if(!d.stages[STAGE_OPP_LOST]){evMap[d.ev].opps++;evMap[d.ev].pipe+=(d.amount||0)}});
+  const evs=Object.values(evMap).sort((a,b)=>b.pipe-a.pipe);
+
+  return{total,pctTime,mm,tracker,
+    losses:{total:lostDeals.length,rate:total>0?lostDeals.length/total:0,
+      byStage:Object.entries(byStage).map(([stage,count])=>({stage,count})).sort((a,b)=>b.count-a.count),
+      byReason:Object.entries(byReason).map(([reason,count])=>({reason,count})).sort((a,b)=>b.count-a.count)},
+    velocity:{stages:velStages},cadences:{weekly},
+    segments:{byPorte,bySetor,state:stateMap,stateTotal:total},
+    team:{cns,evs}};
+}
+
+// ---- RENDERERS -----------------------------------------------------------
+function renderTopbar(d){
+  return`<div class="topbar fade-in"><div class="brand"><div class="brand-mark">P</div><div><div class="brand-title">Prospecção</div><div class="brand-sub">Painel executivo · Pipo Saúde</div></div></div><div class="topbar-right"><span><span class="live-dot"></span>Atualizado ${timeAgo(d.meta.updatedAt)}</span><span class="mono">${fmtDate(d.meta.updatedAt)}</span></div></div>`}
+
+function renderMonth(mm){
+  if(!mm)return'<div class="month-bar fade-in"><div><div class="month-label">Todos os meses</div><div class="month-text">Selecione um mês nos filtros para ver pace vs meta</div></div></div>';
+  const pct=mm.businessDays>0?(mm.businessDaysElapsed/mm.businessDays*100):0;
+  const rem=mm.businessDays-mm.businessDaysElapsed;
+  return`<div class="month-bar fade-in"><div><div class="month-label">${mm.label}</div><div class="month-text"><span class="hl ${pct>70?'warn':'ok'}">Dia útil ${mm.businessDaysElapsed} de ${mm.businessDays}</span>${rem>0?`Restam <b>${rem} dias úteis</b> para bater a meta.`:'Último dia útil.'}</div></div><div class="prog-wrap"><div class="prog-meta"><span>${mm.start?.slice(8,10)}/${mm.start?.slice(5,7)}</span><span class="mono">${pct.toFixed(0)}%</span><span>${mm.end?.slice(8,10)}/${mm.end?.slice(5,7)}</span></div><div class="prog-bar"><div class="prog-fill" style="width:${Math.min(100,pct)}%"></div></div></div></div>`}
+
+function renderFilters(d){
+  const meta=d.meta,f=d.filters||{};
+  const months=meta.availableMonths||[];
+  const pCounts=meta.porteCounts||{};
+  const portes=meta.availablePortes||[];
+  const tabs=[{id:'all',label:'Todos',count:pCounts.all??0},...portes.map(p=>({id:p,label:p,count:pCounts[p]??0}))];
+  const mkOpts=(arr,label,key)=>arr.length?`<select class="dim-select" data-filter="${key}"><option value="all">${label}</option>${arr.map(v=>`<option value="${v}" ${F[key]===v?'selected':''}>${v}</option>`).join('')}</select>`:'';
+  return`<div class="filter-area fade-in">
+    <div class="filter-row">
+      <span class="filter-label">Porte</span>
+      <div class="porte-tabs">${tabs.map(t=>`<button class="porte-tab ${F.porte===t.id?'active':''}" data-porte="${t.id}">${t.label} <span class="porte-count">${fmt(t.count,'int')}</span></button>`).join('')}</div>
+    </div>
+    <div class="filter-row">
+      <select class="dim-select" data-filter="month"><option value="all">Todos os meses</option>${months.map(m=>`<option value="${m}" ${F.month===m?'selected':''}>${m}</option>`).join('')}</select>
+      ${mkOpts(f.campaigns||[],'Todas campanhas','campaign')}
+      ${mkOpts(f.cns||[],'Todos CNs','cn')}
+      ${mkOpts(f.evs||[],'Todos EVs','ev')}
+      ${mkOpts(f.setores||[],'Todos setores','setor')}
+    </div>
+  </div>`}
+
+function renderSaoHero(m){
+  const sao=m.tracker.find(t=>t.name==='SAO')||m.tracker[m.tracker.length-1];
+  if(!sao||!m.mm)return'';
+  const pct=sao.pctDone,r=40,circ=2*Math.PI*r,off=circ-(Math.min(1,pct)*circ);
+  const color=sao.status==='ahead'?'var(--positive)':sao.status==='behind'?'var(--negative)':'var(--accent)';
+  return`<div class="sao-hero fade-in"><div class="sao-ring"><svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--surface-2)" stroke-width="7"/><circle cx="50" cy="50" r="${r}" fill="none" stroke="${color}" stroke-width="7" stroke-dasharray="${circ}" stroke-dashoffset="${off}" stroke-linecap="round" style="transition:stroke-dashoffset 1s"/></svg><div class="sao-ring-label serif">${sao.actual}<small>/${sao.target}</small></div></div><div class="sao-detail"><div class="sao-detail-title">SAOs no mês</div><div class="sao-detail-sub">${sao.actual<sao.target?`Faltam <b>${sao.target-sao.actual}</b> SAOs`:`<span style="color:var(--positive)">Meta batida!</span>`}</div><div style="margin-top:6px"><span class="pace-tag ${sao.status}">${sao.status==='ahead'?'↑ À frente':sao.status==='behind'?'↓ Atrás':'→ No pace'}</span></div></div><div class="sao-stats"><div class="sao-stat">Pace: <b>${sao.pace}</b></div><div class="sao-stat">Real: <b>${sao.actual}</b></div><div class="sao-stat">Gap: <b style="color:${sao.gap>=0?'var(--positive)':'var(--negative)'}">${sao.gap>=0?'+':''}${sao.gap}</b></div></div></div>`}
+
+function renderTracker(m){
+  if(!m.mm)return'';
+  const rows=m.tracker.map((t,i)=>{
+    const bp=Math.min(100,t.pctDone*100),pp=t.target>0?Math.min(100,(t.pace/t.target)*100):0;
+    const cls=t.pctDone>=1?'over':t.status==='behind'?(t.pctDone<m.pctTime*.7?'bad':'warn'):'ok';
+    const isSao=t.name==='SAO';
+    return`<div class="tracker-row${isSao?' sao-row':''} fade-in" style="animation-delay:${i*50}ms"><div class="tracker-name">${t.name}</div><div class="tracker-bar-wrap"><div class="tracker-bar-fill ${cls}" style="width:${bp}%"></div><div class="pace-marker" style="left:${pp}%"></div></div><div style="text-align:right;font-weight:600">${fmt(t.actual,'int')}</div><div style="text-align:right;color:var(--text-3)">/${fmt(t.target,'int')}</div><div style="text-align:right" class="mono">${fmt(t.pctDone,'pct0')}</div><div style="text-align:right"><span class="pace-tag ${t.status}">${t.status==='ahead'?`+${t.gap} ↑`:t.status==='behind'?`${t.gap} ↓`:'= →'}</span></div></div>`}).join('');
+  return`<div class="section-header"><div class="section-title">Funil vs Meta</div><div class="section-sub">Barra = realizado · Marcador = pace</div></div><div class="tracker-card fade-in"><div class="tracker-row header"><div>Etapa</div><div>Progresso</div><div style="text-align:right">Real</div><div style="text-align:right">Meta</div><div style="text-align:right">%</div><div style="text-align:right">vs Pace</div></div>${rows}</div>`}
+
+function renderDailyPace(m){
+  if(!m.mm)return'';
+  const daysLeft=m.mm.businessDays-m.mm.businessDaysElapsed;
+  if(daysLeft<=0)return'';
+  const cards=m.tracker.map((t,i)=>{
+    const remaining=Math.max(0,t.target-t.actual);
+    const rateNeeded=remaining>0?remaining/daysLeft:0;
+    const rateCurrent=m.mm.businessDaysElapsed>0?t.actual/m.mm.businessDaysElapsed:0;
+    const isDone=t.actual>=t.target;
+    const isCritical=!isDone&&rateNeeded>rateCurrent*1.5&&rateCurrent>0;
+    const cls=isDone?'done':isCritical?'critical':'ok';
+    const barColor=isDone?'var(--positive)':isCritical?'var(--negative)':'var(--accent)';
+    const barPct=Math.min(100,t.target>0?(t.actual/t.target)*100:0);
+    return`<div class="pace-card ${cls} fade-in" style="animation-delay:${i*40}ms">
+      <div class="pace-card-name">${t.name}</div>
+      <div class="pace-card-rate serif">${isDone?'✓':rateNeeded.toFixed(1).replace('.',',')}<small>${isDone?'meta batida':'/dia útil'}</small></div>
+      <div class="pace-card-bar"><div class="pace-card-bar-fill" style="width:${barPct}%;background:${barColor}"></div></div>
+      <div class="pace-card-meta">
+        <span>Faltam <b>${remaining}</b> de ${t.target} · ${daysLeft} dias úteis</span>
+        <span>Ritmo atual: <b>${rateCurrent.toFixed(1).replace('.',',')}${rateCurrent>0?'/dia':''}</b>${!isDone&&rateCurrent>0?(rateNeeded>rateCurrent?` · precisa ${((rateNeeded/rateCurrent-1)*100).toFixed(0)}% mais rápido`:' · no ritmo'):''}
+        </span>
+      </div>
+    </div>`}).join('');
+  return`<div class="section-header"><div class="section-title">Ritmo diário para a meta</div><div class="section-sub">Quantos deals por dia útil restante para bater cada etapa · ${daysLeft} dias úteis restam</div></div><div class="pace-grid">${cards}</div>`}
+
+function renderAlligator(m,deals){
+  if(!m.mm)return'';
+  const mm=m.mm,bd=mm.businessDays;
+  if(bd<=0)return'';
+
+  const bizDays=[];
+  const dt=new Date(mm.start);const endD=new Date(mm.end);
+  while(dt<=endD){if(dt.getDay()!==0&&dt.getDay()!==6)bizDays.push(dt.toISOString().slice(0,10));dt.setDate(dt.getDate()+1)}
+
+  const stageId=window.__gatorStage||'9102669';
+  const stageDef=m.tracker.find(t=>t.id===stageId)||m.tracker[m.tracker.length-1];
+  if(!stageDef)return'';
+  const target=stageDef.target;
+
+  const cumul=bizDays.map((day,i)=>{
+    const count=deals.filter(dl=>dl.stages[stageId]&&dl.stages[stageId].slice(0,10)<=day).length;
+    return{day,dayNum:i+1,actual:count,pace:target>0?((i+1)/bd)*target:0};
+  });
+
+  const today=new Date().toISOString().slice(0,10);
+  const todayIdx=bizDays.findIndex(d=>d>=today);
+  const showUpTo=todayIdx>=0?todayIdx:bizDays.length-1;
+  const lastA=cumul[showUpTo]?.actual||0,lastP=cumul[showUpTo]?.pace||0;
+  const isAhead=lastA>=lastP;
+  const gap=lastA-Math.round(lastP);
+  const uid='g'+Math.random().toString(36).slice(2,8);
+
+  const W=900,H=340,pad={t:50,r:50,b:55,l:55};
+  const pW=W-pad.l-pad.r,pH=H-pad.t-pad.b;
+  const maxY=Math.max(target,cumul[showUpTo]?.actual||0,1)*1.15;
+  const xp=i=>pad.l+(i/(bd-1))*pW;
+  const yp=v=>pad.t+pH-(v/maxY)*pH;
+
+  function smoothLine(pts){
+    if(pts.length<2)return pts.map((p,i)=>`${i?'L':'M'}${p[0]},${p[1]}`).join(' ');
+    let d=`M${pts[0][0]},${pts[0][1]}`;
+    for(let i=1;i<pts.length;i++){const p0=pts[i-1],p1=pts[i],cpx=(p0[0]+p1[0])/2;d+=` C${cpx},${p0[1]} ${cpx},${p1[1]} ${p1[0]},${p1[1]}`}
+    return d;
+  }
+
+  const pacePts=Array.from({length:bd},(_,i)=>[xp(i),yp(((i+1)/bd)*target)]);
+  const paceD=smoothLine(pacePts);
+  const actualPts=cumul.slice(0,showUpTo+1).map((p,i)=>[xp(i),yp(p.actual)]);
+  const actualD=smoothLine(actualPts);
+
+  let fillSvg='';
+  if(actualPts.length>1){
+    const fwd=actualPts.map((p,i)=>`${i?'L':'M'}${p[0]},${p[1]}`).join(' ');
+    const bwd=[...actualPts].reverse().map((_,i)=>{const idx=showUpTo-i;return`L${pacePts[idx]?.[0]||0},${pacePts[idx]?.[1]||0}`}).join(' ');
+    fillSvg=`<path d="${fwd} ${bwd} Z" fill="url(#${uid}_grad)"/>`;
+  }
+
+  const gc=isAhead?['rgba(21,128,61,0.2)','rgba(21,128,61,0.02)']:['rgba(153,27,27,0.2)','rgba(153,27,27,0.02)'];
+
+  const yTicks=5;
+  const grid=Array.from({length:yTicks+1},(_,i)=>{const v=maxY*(i/yTicks),yy=yp(v);
+    return`<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="#F0EFEE"/><text x="${pad.l-10}" y="${yy+4}" text-anchor="end" fill="#C4C0BB" font-size="9" font-family="Geist Mono,monospace">${Math.round(v)}</text>`}).join('');
+
+  const xLabels=bizDays.map((day,i)=>{const show=bd<=12||i%Math.ceil(bd/12)===0||i===bd-1;
+    return show?`<text x="${xp(i)}" y="${H-pad.b+20}" text-anchor="middle" fill="#C4C0BB" font-size="9" font-family="Geist Mono,monospace">${day.slice(8,10)}/${day.slice(5,7)}</text>`:''}).join('');
+
+  const hoverZones=cumul.slice(0,showUpTo+1).map((p,i)=>{const w=pW/bd,rp=Math.round(p.pace),pct=rp>0?Math.round((p.actual/rp)*100):(p.actual>0?100:0);
+    return`<rect x="${xp(i)-w/2}" y="${pad.t}" width="${w}" height="${pH}" fill="transparent" class="${uid}_hz" data-day="D${p.dayNum} · ${p.day.slice(8,10)}/${p.day.slice(5,7)}" data-a="${p.actual}" data-p="${rp}" data-pct="${pct}" data-g="${p.actual-rp}" data-cx="${xp(i)}" data-ya="${yp(p.actual)}" data-yp="${yp(p.pace)}"/>`}).join('');
+
+  const todayPulse=showUpTo>=0?`
+    <circle cx="${xp(showUpTo)}" cy="${yp(lastA)}" r="6" fill="${isAhead?'#15803D':'#991B1B'}" opacity="0.15"><animate attributeName="r" values="6;14;6" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.2;0;0.2" dur="2.5s" repeatCount="indefinite"/></circle>
+    <circle cx="${xp(showUpTo)}" cy="${yp(lastA)}" r="5" fill="#fff" stroke="${isAhead?'#15803D':'#991B1B'}" stroke-width="2.5"/>
+    <text x="${xp(showUpTo)}" y="${yp(lastA)-14}" text-anchor="middle" fill="${isAhead?'#15803D':'#991B1B'}" font-size="12" font-weight="600" font-family="Geist Mono,monospace">${lastA}</text>`:'';
+
+  const targetEnd=`<circle cx="${xp(bd-1)}" cy="${yp(target)}" r="4" fill="#D6D3D1" stroke="#fff" stroke-width="2"/>
+    <text x="${xp(bd-1)+10}" y="${yp(target)+4}" fill="#A8A29E" font-size="11" font-weight="500" font-family="Geist Mono,monospace">Meta ${target}</text>`;
+
+  const pills=m.tracker.map(t=>`<button class="gator-pill${t.id===stageId?' active':''}" data-stage="${t.id}">${t.name}</button>`).join('');
+
+  const statusLbl=isAhead?`<span style="color:#15803D;font-weight:600">+${gap} à frente</span>`:`<span style="color:#991B1B;font-weight:600">${gap} atrás</span>`;
+
+  return`<div class="section-header"><div class="section-title">Pace vs Real</div><div class="section-sub">Acumulado diário · passe o mouse para detalhes</div></div>
+  <div class="gator-card fade-in">
+    <div class="gator-header">
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="font-size:15px;font-weight:500">${stageDef.name}</div>
+        <div style="font-size:13px;color:var(--text-3)">Realizado <b>${lastA}</b> · Pace esperado <b>${Math.round(lastP)}</b> · ${statusLbl}</div>
+      </div>
+    </div>
+    <div class="gator-pills" style="margin:12px 0 16px;display:flex;gap:6px;flex-wrap:wrap">${pills}</div>
+    <div style="position:relative" id="${uid}_wrap">
+      <svg id="${uid}" viewBox="0 0 ${W} ${H}" width="100%" style="max-height:360px;display:block">
+        <defs><linearGradient id="${uid}_grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${gc[0]}"/><stop offset="100%" stop-color="${gc[1]}"/></linearGradient></defs>
+        ${grid}
+        <line x1="${pad.l}" y1="${pad.t+pH}" x2="${W-pad.r}" y2="${pad.t+pH}" stroke="#E7E5E4"/>
+        ${xLabels}
+        ${fillSvg}
+        <path d="${paceD}" fill="none" stroke="#C4C0BB" stroke-width="2" stroke-dasharray="8,5" opacity="0.7"/>
+        <path d="${actualD}" fill="none" stroke="${isAhead?'#15803D':'#1F5F3F'}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 1px 3px rgba(0,0,0,.1))"/>
+        ${todayPulse}${targetEnd}
+        <line id="${uid}_xh" x1="0" y1="${pad.t}" x2="0" y2="${pad.t+pH}" stroke="#78716C" stroke-width="1" stroke-dasharray="3,3" opacity="0" style="pointer-events:none"/>
+        <circle id="${uid}_da" r="4" fill="#1F5F3F" stroke="#fff" stroke-width="2" opacity="0" style="pointer-events:none"/>
+        <circle id="${uid}_dp" r="3.5" fill="#C4C0BB" stroke="#fff" stroke-width="2" opacity="0" style="pointer-events:none"/>
+        ${hoverZones}
+      </svg>
+      <div id="${uid}_tt" style="position:absolute;top:0;left:0;pointer-events:none;opacity:0;transition:opacity .12s;background:#fff;border:1px solid #E7E5E4;border-radius:10px;padding:12px 16px;box-shadow:0 8px 24px rgba(0,0,0,.1);font-size:12px;min-width:175px;z-index:10">
+        <div id="${uid}_td" style="font-weight:600;margin-bottom:8px;font-size:13px"></div>
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center">
+          <span style="width:8px;height:8px;border-radius:50%;background:#1F5F3F;display:inline-block"></span><span>Real: <b id="${uid}_ta"></b></span>
+          <span style="width:8px;height:3px;background:#C4C0BB;display:inline-block;border-radius:2px"></span><span style="color:#78716C">Pace: <b id="${uid}_tp"></b></span>
+          <span></span><span style="color:#78716C">% do pace: <b id="${uid}_tpc"></b></span>
+        </div>
+        <div id="${uid}_tg" style="margin-top:8px;padding-top:8px;border-top:1px solid #F0EFEE;font-weight:500"></div>
+      </div>
+    </div>
+    <div class="gator-legend" style="margin-top:10px">
+      <span><span class="gator-legend-dot" style="background:${isAhead?'#15803D':'#1F5F3F'}"></span>Realizado</span>
+      <span><span class="gator-legend-dot" style="background:#C4C0BB"></span>Pace ideal</span>
+    </div>
+  </div>
+`}
+
+function renderKPIs(m){
+  const sao=m.tracker.find(t=>t.name==='SAO'),sql=m.tracker.find(t=>t.name==='SQL'),con=m.tracker.find(t=>t.name==='Lead conectado'),cad=m.tracker.find(t=>t.name==='Em cadência');
+  return`<div class="kpi-grid" style="margin-top:20px"><div class="kpi fade-in"><div class="kpi-label">Deals ativos</div><div class="kpi-value serif">${fmt(m.total,'int')}</div><div class="kpi-sub">${fmt(m.total-m.losses.total,'int')} ativos · ${fmt(m.losses.total,'int')} perdidos</div></div><div class="kpi fade-in"><div class="kpi-label">Taxa de conexão</div><div class="kpi-value serif">${con&&cad?fmt(cad.actual>0?con.actual/cad.actual:0,'pct'):DASH}</div><div class="kpi-sub">${con?fmt(con.actual,'int'):0} de ${cad?fmt(cad.actual,'int'):0} em cadência</div></div><div class="kpi fade-in"><div class="kpi-label">Taxa de qualificação</div><div class="kpi-value serif">${sql&&con?fmt(con.actual>0?sql.actual/con.actual:0,'pct'):DASH}</div><div class="kpi-sub">${sql?fmt(sql.actual,'int'):0} SQLs de ${con?fmt(con.actual,'int'):0}</div></div><div class="kpi fade-in"><div class="kpi-label">Conversão → SAO</div><div class="kpi-value serif">${sao?fmt(m.total>0?sao.actual/m.total:0,'pct'):DASH}</div><div class="kpi-sub">${sao?fmt(sao.actual,'int'):0} de ${fmt(m.total,'int')}</div></div></div>`}
+
+function renderLosses(m){
+  const l=m.losses;if(l.total===0)return'';
+  const ms=l.byStage[0]?.count||1,mr=l.byReason[0]?.count||1;
+  return`<div class="section-header"><div class="section-title">Análise de perdas</div><div class="section-sub">${fmt(l.total,'int')} perdidos · ${fmt(l.rate,'pct')} do total</div></div><div class="loss-grid"><div class="loss-card fade-in"><div style="margin-bottom:16px"><div class="loss-total serif">${fmt(l.total,'int')}</div><div class="loss-sub">por etapa</div></div><div class="loss-bar-list">${l.byStage.map(r=>`<div class="loss-bar-row"><div class="loss-bar-label">${r.stage}</div><div class="loss-bar-outer"><div class="loss-bar-fill stage" style="width:${(r.count/ms)*100}%"></div></div><div class="loss-count">${r.count}</div></div>`).join('')}</div></div><div class="loss-card fade-in"><div style="margin-bottom:16px"><div style="font-size:13px;font-weight:500">Motivos de perda</div><div class="loss-sub">preenchidos no HubSpot</div></div><div class="loss-bar-list">${l.byReason.map(r=>`<div class="loss-bar-row"><div class="loss-bar-label">${r.reason}</div><div class="loss-bar-outer"><div class="loss-bar-fill reason" style="width:${(r.count/mr)*100}%"></div></div><div class="loss-count">${r.count}</div></div>`).join('')||'<div style="color:var(--text-4)">Sem motivos</div>'}</div></div></div>`}
+
+function renderVelocity(m){
+  const vs=m.velocity.stages;if(!vs.length)return'';
+  const hasData=vs.some(s=>s.days!==null);
+  if(!hasData)return`<div class="section-header"><div class="section-title">Velocidade do funil</div><div class="section-sub">Dias médios entre stages · menor é melhor</div></div><div class="card fade-in" style="padding:32px;text-align:center;color:var(--text-4);font-size:13px">Sem dados de transição entre etapas ainda — aparece quando deals avançarem no funil</div>`;
+  const maxD=Math.max(...vs.map(s=>s.days||0),1);
+  const cols=vs.map(s=>{
+    const h=s.days?Math.max(10,(s.days/maxD)*130):0;
+    return`<div class="vel-col"><div class="vel-val ${h===0?'muted':''}">${s.days?fmt(s.days,'days'):DASH}</div><div class="vel-bar ${h>0?'primary':'empty'}" style="height:${Math.max(4,h)}px"></div><div class="vel-name">${s.name}</div></div>`}).join('');
+  return`<div class="section-header"><div class="section-title">Velocidade do funil</div><div class="section-sub">Dias médios entre stages · menor é melhor</div></div><div class="card fade-in"><div class="vel-grid">${cols}</div></div>`}
+
+function renderCadences(m){
+  const w=m.cadences.weekly;if(!w.length)return`<div class="section-header"><div class="section-title">Ritmo de cadências</div><div class="section-sub">Deals entrando em "Em cadência" por semana</div></div><div class="card fade-in" style="padding:32px;text-align:center;color:var(--text-4);font-size:13px">Nenhuma entrada em cadência registrada neste recorte</div>`;
+  const total=w.reduce((s,x)=>s+x.count,0);
+  const max=Math.max(...w.map(x=>x.count),1);
+  const peak=w.reduce((a,x)=>x.count>a.count?x:a,w[0]);
+  const avg=w.filter(x=>x.count>0).length>0?total/w.filter(x=>x.count>0).length:0;
+  const bars=w.map(x=>{const h=Math.max(2,(x.count/max)*120);const isPeak=x.count===peak.count&&x.count>0;
+    return`<div class="cad-col"><div class="cad-bar-val">${x.count>0?x.count:''}</div><div class="cad-bar${isPeak?' peak':''}" style="height:${h}px"></div><div class="cad-bar-lbl">${x.week}</div></div>`}).join('');
+  return`<div class="section-header"><div class="section-title">Ritmo de cadências</div><div class="section-sub">Deals entrando em "Em cadência" por semana</div></div><div class="cad-card fade-in"><div class="cad-stats"><div><div class="cad-stat-label">Total</div><div class="cad-stat-val serif">${fmt(total,'int')}<span class="cad-stat-meta">deals</span></div></div><div><div class="cad-stat-label">Pico</div><div class="cad-stat-val serif">${peak.count}<span class="cad-stat-meta">${peak.week}</span></div></div><div><div class="cad-stat-label">Média semanal</div><div class="cad-stat-val serif">${avg.toFixed(1).replace('.',',')}<span class="cad-stat-meta">por semana ativa</span></div></div><div><div class="cad-stat-label">Semanas ativas</div><div class="cad-stat-val serif">${w.filter(x=>x.count>0).length}<span class="cad-stat-meta">de ${w.length}</span></div></div></div><div class="cad-bars">${bars}</div></div>`}
+
+function renderSegments(m){
+  const s=m.segments;if(m.total===0)return'';
+  const maxP=s.byPorte[0]?.count||1,maxS=s.bySetor[0]?.count||1;
+  const stateOrder=['Mapeamento','Abordar','Em cadência','Lead Conectado','Qual. Agendada','SQL','SAO','Perdido'];
+  const stateRows=stateOrder.filter(k=>s.state[k]).map(k=>{const c=s.state[k],pct=s.stateTotal>0?c/s.stateTotal:0;const cls=k==='Perdido'?'lost':'active';
+    return`<div class="state-row"><div style="color:${k==='Perdido'?'var(--negative)':'var(--text-2)'}">${k}</div><div class="state-bar"><div class="state-bar-fill ${cls}" style="width:${pct*100}%"></div></div><div class="seg-count">${c}</div><div class="state-pct">${fmt(pct,'pct0')}</div></div>`}).join('');
+  return`<div class="section-header"><div class="section-title">Qualidade e Perfil</div><div class="section-sub">${fmt(m.total,'int')} leads no recorte</div></div><div class="dual-grid"><div class="card fade-in"><div class="card-title">Perfil das empresas</div><div class="card-sub">Por porte</div>${s.byPorte.map(r=>`<div class="seg-bar-row"><div>${r.name}</div><div class="seg-bar-outer"><div class="seg-bar-fill" style="width:${(r.count/maxP)*100}%"></div></div><div class="seg-count">${r.count}</div></div>`).join('')}<div class="card-sub" style="margin-top:16px">Por setor</div>${s.bySetor.map(r=>`<div class="seg-bar-row"><div class="loss-bar-label">${r.name}</div><div class="seg-bar-outer"><div class="seg-bar-fill" style="width:${(r.count/maxS)*100}%"></div></div><div class="seg-count">${r.count}</div></div>`).join('')}</div><div class="card fade-in"><div class="card-title">Estado atual dos leads</div><div class="card-sub">Em qual etapa cada lead está agora</div>${stateRows}</div></div>`}
+
+function renderTeam(m){
+  const maxR=Math.max(...m.team.cns.map(c=>c.rate||0),.01);
+  const cnR=m.team.cns.length===0?'<tr class="empty-row"><td colspan="4">Nenhum CN</td></tr>':m.team.cns.map(c=>`<tr><td><div class="person"><div class="avatar">${initialsOf(c.name)}</div>${c.name}</div></td><td>${fmt(c.leads,'int')}</td><td>${fmt(c.connected,'int')}</td><td><span class="perf-mini-bar"><span class="perf-mini-bar-fill" style="width:${((c.rate||0)/maxR)*100}%"></span></span><span>${fmt(c.rate,'pct')}</span></td></tr>`).join('');
+  const evR=m.team.evs.length===0?'<tr class="empty-row"><td colspan="3">Nenhum EV</td></tr>':m.team.evs.map(e=>`<tr><td><div class="person"><div class="avatar">${initialsOf(e.name)}</div>${e.name}</div></td><td>${fmt(e.opps,'int')}</td><td>${e.pipe>0?`R$ ${fmt(e.pipe,'int')}`:DASH}</td></tr>`).join('');
+  return`<div class="section-header"><div class="section-title">Performance por pessoa</div></div><div class="dual-grid"><div class="card fade-in"><div class="card-title">Consultores de Negócio (CN)</div><div class="card-sub">Mapeamento → Lead conectado</div><table class="perf"><thead><tr><th>CN</th><th>Leads</th><th>Conect.</th><th>Taxa</th></tr></thead><tbody>${cnR}</tbody></table></div><div class="card fade-in"><div class="card-title">Executivos de Vendas (EV)</div><div class="card-sub">Oportunidades ativas</div><table class="perf"><thead><tr><th>EV</th><th>Oport.</th><th>Pipeline</th></tr></thead><tbody>${evR}</tbody></table></div></div>`}
+
+function renderFooter(d){return`<div class="footer"><div>Fonte: HubSpot · sync GitHub Actions</div><div>${fmt(d.debug?.totalDeals,'int')} deals · origem=Prospecção · Motor sinais</div></div>`}
+
+function render(){
+  if(!gData)return;
+  const deals=applyFilters(gData.deals||[]);
+  const m=computeMetrics(deals,gData.meta);
+  document.getElementById('root').innerHTML=`<div class="app">
+    ${renderTopbar(gData)}
+    ${renderMonth(m.mm)}
+    ${renderFilters(gData)}
+    ${m.mm?renderSaoHero(m):''}
+    ${m.mm?renderTracker(m):''}
+    ${renderDailyPace(m)}
+    ${renderAlligator(m,deals)}
+    ${renderKPIs(m)}
+    ${renderLosses(m)}
+    ${renderVelocity(m)}
+    ${renderCadences(m)}
+    ${renderSegments(m)}
+    ${renderTeam(m)}
+    ${renderFooter(gData)}
+  </div>`;
+  document.querySelectorAll('.porte-tab').forEach(b=>b.addEventListener('click',()=>{F.porte=b.dataset.porte;render()}));
+  document.querySelectorAll('.dim-select').forEach(s=>s.addEventListener('change',()=>{F[s.dataset.filter]=s.value;render()}));
+  document.querySelectorAll('.gator-pill').forEach(b=>b.addEventListener('click',()=>{window.__gatorStage=b.dataset.stage;render()}));
+  setupGatorHover();
+}
+
+function setupGatorHover(){
+  const wrap=document.querySelector('[id$="_wrap"]');if(!wrap)return;
+  const uid=wrap.id.replace('_wrap','');
+  const svg=document.getElementById(uid);if(!svg)return;
+  const xh=document.getElementById(uid+'_xh'),da=document.getElementById(uid+'_da'),dp=document.getElementById(uid+'_dp');
+  const tt=document.getElementById(uid+'_tt'),td=document.getElementById(uid+'_td'),ta=document.getElementById(uid+'_ta'),tp=document.getElementById(uid+'_tp'),tpc=document.getElementById(uid+'_tpc'),tg=document.getElementById(uid+'_tg');
+  svg.querySelectorAll('[class$="_hz"]').forEach(function(z){
+    z.addEventListener('mouseenter',function(){
+      var cx=+z.dataset.cx,ya=+z.dataset.ya,ypp=+z.dataset.yp,g=+z.dataset.g;
+      xh.setAttribute('x1',cx);xh.setAttribute('x2',cx);xh.style.opacity=1;
+      da.setAttribute('cx',cx);da.setAttribute('cy',ya);da.style.opacity=1;
+      dp.setAttribute('cx',cx);dp.setAttribute('cy',ypp);dp.style.opacity=1;
+      td.textContent=z.dataset.day;ta.textContent=z.dataset.a;tp.textContent=z.dataset.p;tpc.textContent=z.dataset.pct+'%';
+      tg.innerHTML=g>=0?'<span style="color:#15803D">+'+g+' \u00e0 frente \u2191</span>':'<span style="color:#991B1B">'+g+' atr\u00e1s \u2193</span>';
+      var sr=svg.getBoundingClientRect(),sx=sr.width/900,sy=sr.height/340;
+      var tx=cx*sx+16,ty=Math.min(ya,ypp)*sy-10;
+      if(tx+190>sr.width)tx=cx*sx-195;
+      tt.style.transform='translate('+tx+'px,'+ty+'px)';tt.style.opacity=1;
+    });
+    z.addEventListener('mouseleave',function(){xh.style.opacity=0;da.style.opacity=0;dp.style.opacity=0;tt.style.opacity=0});
+  });
+}
+
+function renderError(msg){document.getElementById('root').innerHTML=`<div class="state-screen"><div><div class="title serif">Erro ao carregar</div><div class="sub">${msg}</div><button class="retry-btn" onclick="loadData()">Tentar novamente</button></div></div>`}
+
+async function loadData(){
+  try{const r=await fetch(`${DATA_URL}?t=${Date.now()}`,{cache:'no-store'});if(!r.ok)throw new Error(`HTTP ${r.status}`);const d=await r.json();if(!d.meta||!d.deals)throw new Error('Estrutura inválida');gData=d;render()}catch(e){renderError(e.message)}
+}
+loadData();
+setInterval(loadData,15*60*1000);
+</script>
+</body>
+</html>

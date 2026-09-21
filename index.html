@@ -174,6 +174,15 @@ table.perf tr:hover td{background:var(--surface-2)}
 .gator-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 
 .gator-today{font-size:10px;fill:var(--text-3);font-family:'Geist',sans-serif}
+.gator-deals{margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.gator-deals-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.gator-deals-title{font-size:13px;font-weight:500}
+.gator-deals-title b{color:var(--accent)}
+.gator-deals-close{border:none;background:none;color:var(--text-3);font-size:16px;line-height:1;cursor:pointer;padding:3px 7px;border-radius:5px;font-family:inherit}
+.gator-deals-close:hover{background:var(--surface-2);color:var(--text-1)}
+.gator-deals-list{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
+.gator-deals-empty{font-size:12px;color:var(--text-4);padding:6px 0}
+.gator-deal-row{font-size:12px;color:var(--text-2);padding:8px 10px;background:var(--surface-2);border-radius:6px}
 .fade-in{animation:fadeUp .35s cubic-bezier(.4,0,.2,1) backwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:1100px){.app{padding:24px 20px 60px}.kpi-grid{grid-template-columns:repeat(2,1fr)}.dual-grid,.loss-grid{grid-template-columns:1fr}.sao-hero{grid-template-columns:1fr;text-align:center}.tracker-row{font-size:12px}.cad-stats{grid-template-columns:repeat(2,1fr)}}
@@ -206,6 +215,8 @@ const TARGET_STAGES=[
   {id:'24595562',name:'Lead conectado'},{id:'24595560',name:'Qual. agendada'},
   {id:'24595561',name:'SQL'},{id:'9102669',name:'SAO'},
 ];
+// Estágios a partir dos quais o clique no gráfico Pace vs Real revela os deals do dia
+const GATOR_DEAL_LIST_STAGES=['24595562','24595560','24595561','9102669'];
 
 let gData=null;
 const CURRENT_MONTH=new Date().toISOString().slice(0,7);
@@ -386,10 +397,12 @@ function renderAlligator(m,deals){
   const stageDef=m.tracker.find(t=>t.id===stageId)||m.tracker[m.tracker.length-1];
   if(!stageDef)return'';
   const target=stageDef.target;
+  const showDeals=GATOR_DEAL_LIST_STAGES.includes(stageId);
 
   const cumul=bizDays.map((day,i)=>{
-    const count=deals.filter(dl=>dl.stages[stageId]&&dl.stages[stageId].slice(0,10)<=day).length;
-    return{day,dayNum:i+1,actual:count,pace:target>0?((i+1)/bd)*target:0};
+    const matched=deals.filter(dl=>dl.stages[stageId]&&dl.stages[stageId].slice(0,10)<=day);
+    const names=showDeals?matched.map(dl=>dl.company||'— sem nome').sort((a,b)=>a.localeCompare(b,'pt-BR')):null;
+    return{day,dayNum:i+1,actual:matched.length,pace:target>0?((i+1)/bd)*target:0,names};
   });
 
   const today=new Date().toISOString().slice(0,10);
@@ -435,7 +448,10 @@ function renderAlligator(m,deals){
     return show?`<text x="${xp(i)}" y="${H-pad.b+20}" text-anchor="middle" fill="#C4C0BB" font-size="9" font-family="Geist Mono,monospace">${day.slice(8,10)}/${day.slice(5,7)}</text>`:''}).join('');
 
   const hoverZones=cumul.slice(0,showUpTo+1).map((p,i)=>{const w=pW/bd,rp=Math.round(p.pace),pct=rp>0?Math.round((p.actual/rp)*100):(p.actual>0?100:0);
-    return`<rect x="${xp(i)-w/2}" y="${pad.t}" width="${w}" height="${pH}" fill="transparent" class="${uid}_hz" data-day="D${p.dayNum} · ${p.day.slice(8,10)}/${p.day.slice(5,7)}" data-a="${p.actual}" data-p="${rp}" data-pct="${pct}" data-g="${p.actual-rp}" data-cx="${xp(i)}" data-ya="${yp(p.actual)}" data-yp="${yp(p.pace)}"/>`}).join('');
+    return`<rect x="${xp(i)-w/2}" y="${pad.t}" width="${w}" height="${pH}" fill="transparent" style="cursor:${showDeals?'pointer':'default'}" class="${uid}_hz" data-day="D${p.dayNum} · ${p.day.slice(8,10)}/${p.day.slice(5,7)}" data-a="${p.actual}" data-p="${rp}" data-pct="${pct}" data-g="${p.actual-rp}" data-idx="${i}" data-cx="${xp(i)}" data-ya="${yp(p.actual)}" data-yp="${yp(p.pace)}"/>`}).join('');
+
+  window.__gatorDealsAllowed=showDeals;
+  window.__gatorDealsByDay=showDeals?cumul.map(c=>c.names):null;
 
   const todayPulse=showUpTo>=0?`
     <circle cx="${xp(showUpTo)}" cy="${yp(lastA)}" r="6" fill="${isAhead?'#15803D':'#991B1B'}" opacity="0.15"><animate attributeName="r" values="6;14;6" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.2;0;0.2" dur="2.5s" repeatCount="indefinite"/></circle>
@@ -449,7 +465,7 @@ function renderAlligator(m,deals){
 
   const statusLbl=isAhead?`<span style="color:#15803D;font-weight:600">+${gap} à frente</span>`:`<span style="color:#991B1B;font-weight:600">${gap} atrás</span>`;
 
-  return`<div class="section-header"><div class="section-title">Pace vs Real</div><div class="section-sub">Acumulado diário · passe o mouse para detalhes</div></div>
+  return`<div class="section-header"><div class="section-title">Pace vs Real</div><div class="section-sub">Acumulado diário · passe o mouse para detalhes${showDeals?' · clique em um dia para ver os deals':''}</div></div>
   <div class="gator-card fade-in">
     <div class="gator-header">
       <div style="display:flex;flex-direction:column;gap:4px">
@@ -478,7 +494,7 @@ function renderAlligator(m,deals){
         <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center">
           <span style="width:8px;height:8px;border-radius:50%;background:#1F5F3F;display:inline-block"></span><span>Real: <b id="${uid}_ta"></b></span>
           <span style="width:8px;height:3px;background:#C4C0BB;display:inline-block;border-radius:2px"></span><span style="color:#78716C">Pace: <b id="${uid}_tp"></b></span>
-          <span></span><span style="color:#78716C">% do pace: <b id="${uid}_tpc"></b></span>
+          <span style="width:8px;height:8px;border-radius:50%;border:1.5px solid #C4C0BB;background:#fff;display:inline-block;box-sizing:border-box"></span><span style="color:#78716C">% do pace: <b id="${uid}_tpc"></b></span>
         </div>
         <div id="${uid}_tg" style="margin-top:8px;padding-top:8px;border-top:1px solid #F0EFEE;font-weight:500"></div>
       </div>
@@ -486,6 +502,13 @@ function renderAlligator(m,deals){
     <div class="gator-legend" style="margin-top:10px">
       <span><span class="gator-legend-dot" style="background:${isAhead?'#15803D':'#1F5F3F'}"></span>Realizado</span>
       <span><span class="gator-legend-dot" style="background:#C4C0BB"></span>Pace ideal</span>
+    </div>
+    <div id="${uid}_deals" class="gator-deals" style="display:none">
+      <div class="gator-deals-head">
+        <div class="gator-deals-title" id="${uid}_deals_title"></div>
+        <button type="button" class="gator-deals-close" id="${uid}_deals_close" aria-label="Fechar lista de deals">✕</button>
+      </div>
+      <div class="gator-deals-list" id="${uid}_deals_list"></div>
     </div>
   </div>
 `}
@@ -567,6 +590,9 @@ function setupGatorHover(){
   const svg=document.getElementById(uid);if(!svg)return;
   const xh=document.getElementById(uid+'_xh'),da=document.getElementById(uid+'_da'),dp=document.getElementById(uid+'_dp');
   const tt=document.getElementById(uid+'_tt'),td=document.getElementById(uid+'_td'),ta=document.getElementById(uid+'_ta'),tp=document.getElementById(uid+'_tp'),tpc=document.getElementById(uid+'_tpc'),tg=document.getElementById(uid+'_tg');
+  const dealsPanel=document.getElementById(uid+'_deals'),dealsTitle=document.getElementById(uid+'_deals_title'),dealsList=document.getElementById(uid+'_deals_list'),dealsClose=document.getElementById(uid+'_deals_close');
+  function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+  if(dealsClose)dealsClose.addEventListener('click',function(){dealsPanel.style.display='none'});
   svg.querySelectorAll('[class$="_hz"]').forEach(function(z){
     z.addEventListener('mouseenter',function(){
       var cx=+z.dataset.cx,ya=+z.dataset.ya,ypp=+z.dataset.yp,g=+z.dataset.g;
@@ -581,6 +607,14 @@ function setupGatorHover(){
       tt.style.transform='translate('+tx+'px,'+ty+'px)';tt.style.opacity=1;
     });
     z.addEventListener('mouseleave',function(){xh.style.opacity=0;da.style.opacity=0;dp.style.opacity=0;tt.style.opacity=0});
+    z.addEventListener('click',function(){
+      if(!window.__gatorDealsAllowed||!dealsPanel)return;
+      var idx=+z.dataset.idx;
+      var names=(window.__gatorDealsByDay&&window.__gatorDealsByDay[idx])||[];
+      dealsTitle.innerHTML=escHtml(z.dataset.day)+' &middot; <b>'+names.length+'</b> deal'+(names.length===1?'':'s')+' na etapa';
+      dealsList.innerHTML=names.length?names.map(function(n){return'<div class="gator-deal-row">'+escHtml(n)+'</div>'}).join(''):'<div class="gator-deals-empty">Nenhum deal chegou nessa etapa at\u00e9 esse dia.</div>';
+      dealsPanel.style.display='block';
+    });
   });
 }
 

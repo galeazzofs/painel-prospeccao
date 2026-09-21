@@ -1,8 +1,8 @@
-name: Sync HubSpot
+name: Sync HubSpot + Lemlist
 
 on:
   schedule:
-    - cron: '0 11,17 * * 1-5'   # 8h e 14h BRT, seg-sex
+    - cron: '0 */2 * * *'
   workflow_dispatch:
 
 jobs:
@@ -10,19 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+
       - name: Fetch HubSpot data
         env:
           HUBSPOT_ACCESS_TOKEN: ${{ secrets.HUBSPOT_ACCESS_TOKEN }}
         run: node fetch.js
-      - name: Commit & push data.json
+
+      - name: Fetch Lemlist data
+        env:
+          LEMLIST_API_KEY: ${{ secrets.LEMLIST_API_KEY }}
+        run: node fetch-lemlist.js
+
+      - name: Commit & push data.json + lemlist-data.json
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json
-          git diff --staged --quiet || git commit -m "🔄 $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git add data.json lemlist-data.json
+          git diff --staged --quiet || git commit -m "🔄 Atualiza dashboards — $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push

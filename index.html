@@ -30,6 +30,8 @@ html,body{background:var(--bg);color:var(--text-1);font-family:'Geist',-apple-sy
 .topbar-right{display:flex;align-items:center;gap:20px;font-size:12px;color:var(--text-3)}
 .live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--positive);margin-right:6px;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.nav-link{color:var(--text-3);text-decoration:none;font-size:12px;border:1px solid var(--border);padding:6px 10px;border-radius:6px;white-space:nowrap}
+.nav-link:hover{color:var(--text-1);border-color:var(--border-strong)}
 
 .month-bar{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 22px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;margin-bottom:16px;box-shadow:var(--shadow-sm)}
 .month-label{font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;font-weight:500;margin-bottom:6px}
@@ -314,7 +316,7 @@ function computeMetrics(deals,meta){
 
 // ---- RENDERERS -----------------------------------------------------------
 function renderTopbar(d){
-  return`<div class="topbar fade-in"><div class="brand"><div class="brand-mark">P</div><div><div class="brand-title">Prospecção</div><div class="brand-sub">Painel executivo · Pipo Saúde</div></div></div><div class="topbar-right"><span><span class="live-dot"></span>Atualizado ${timeAgo(d.meta.updatedAt)}</span><span class="mono">${fmtDate(d.meta.updatedAt)}</span></div></div>`}
+  return`<div class="topbar fade-in"><div class="brand"><div class="brand-mark">P</div><div><div class="brand-title">Prospecção</div><div class="brand-sub">Painel executivo · Pipo Saúde</div></div></div><div class="topbar-right"><a class="nav-link" href="campanhas.html">Campanhas Lemlist →</a><span><span class="live-dot"></span>Atualizado ${timeAgo(d.meta.updatedAt)}</span><span class="mono">${fmtDate(d.meta.updatedAt)}</span></div></div>`}
 
 function renderMonth(mm){
   if(!mm)return'<div class="month-bar fade-in"><div><div class="month-label">Todos os meses</div><div class="month-text">Selecione um mês nos filtros para ver pace vs meta</div></div></div>';

@@ -434,8 +434,8 @@ function renderAlligator(m,deals){
   const xLabels=bizDays.map((day,i)=>{const show=bd<=12||i%Math.ceil(bd/12)===0||i===bd-1;
     return show?`<text x="${xp(i)}" y="${H-pad.b+20}" text-anchor="middle" fill="#C4C0BB" font-size="9" font-family="Geist Mono,monospace">${day.slice(8,10)}/${day.slice(5,7)}</text>`:''}).join('');
 
-  const hoverZones=cumul.slice(0,showUpTo+1).map((p,i)=>{const w=pW/bd;
-    return`<rect x="${xp(i)-w/2}" y="${pad.t}" width="${w}" height="${pH}" fill="transparent" class="${uid}_hz" data-day="D${p.dayNum} · ${p.day.slice(8,10)}/${p.day.slice(5,7)}" data-a="${p.actual}" data-p="${Math.round(p.pace)}" data-g="${p.actual-Math.round(p.pace)}" data-cx="${xp(i)}" data-ya="${yp(p.actual)}" data-yp="${yp(p.pace)}"/>`}).join('');
+  const hoverZones=cumul.slice(0,showUpTo+1).map((p,i)=>{const w=pW/bd,rp=Math.round(p.pace),pct=rp>0?Math.round((p.actual/rp)*100):(p.actual>0?100:0);
+    return`<rect x="${xp(i)-w/2}" y="${pad.t}" width="${w}" height="${pH}" fill="transparent" class="${uid}_hz" data-day="D${p.dayNum} · ${p.day.slice(8,10)}/${p.day.slice(5,7)}" data-a="${p.actual}" data-p="${rp}" data-pct="${pct}" data-g="${p.actual-rp}" data-cx="${xp(i)}" data-ya="${yp(p.actual)}" data-yp="${yp(p.pace)}"/>`}).join('');
 
   const todayPulse=showUpTo>=0?`
     <circle cx="${xp(showUpTo)}" cy="${yp(lastA)}" r="6" fill="${isAhead?'#15803D':'#991B1B'}" opacity="0.15"><animate attributeName="r" values="6;14;6" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.2;0;0.2" dur="2.5s" repeatCount="indefinite"/></circle>
@@ -478,6 +478,7 @@ function renderAlligator(m,deals){
         <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center">
           <span style="width:8px;height:8px;border-radius:50%;background:#1F5F3F;display:inline-block"></span><span>Real: <b id="${uid}_ta"></b></span>
           <span style="width:8px;height:3px;background:#C4C0BB;display:inline-block;border-radius:2px"></span><span style="color:#78716C">Pace: <b id="${uid}_tp"></b></span>
+          <span></span><span style="color:#78716C">% do pace: <b id="${uid}_tpc"></b></span>
         </div>
         <div id="${uid}_tg" style="margin-top:8px;padding-top:8px;border-top:1px solid #F0EFEE;font-weight:500"></div>
       </div>
@@ -565,14 +566,14 @@ function setupGatorHover(){
   const uid=wrap.id.replace('_wrap','');
   const svg=document.getElementById(uid);if(!svg)return;
   const xh=document.getElementById(uid+'_xh'),da=document.getElementById(uid+'_da'),dp=document.getElementById(uid+'_dp');
-  const tt=document.getElementById(uid+'_tt'),td=document.getElementById(uid+'_td'),ta=document.getElementById(uid+'_ta'),tp=document.getElementById(uid+'_tp'),tg=document.getElementById(uid+'_tg');
+  const tt=document.getElementById(uid+'_tt'),td=document.getElementById(uid+'_td'),ta=document.getElementById(uid+'_ta'),tp=document.getElementById(uid+'_tp'),tpc=document.getElementById(uid+'_tpc'),tg=document.getElementById(uid+'_tg');
   svg.querySelectorAll('[class$="_hz"]').forEach(function(z){
     z.addEventListener('mouseenter',function(){
       var cx=+z.dataset.cx,ya=+z.dataset.ya,ypp=+z.dataset.yp,g=+z.dataset.g;
       xh.setAttribute('x1',cx);xh.setAttribute('x2',cx);xh.style.opacity=1;
       da.setAttribute('cx',cx);da.setAttribute('cy',ya);da.style.opacity=1;
       dp.setAttribute('cx',cx);dp.setAttribute('cy',ypp);dp.style.opacity=1;
-      td.textContent=z.dataset.day;ta.textContent=z.dataset.a;tp.textContent=z.dataset.p;
+      td.textContent=z.dataset.day;ta.textContent=z.dataset.a;tp.textContent=z.dataset.p;tpc.textContent=z.dataset.pct+'%';
       tg.innerHTML=g>=0?'<span style="color:#15803D">+'+g+' \u00e0 frente \u2191</span>':'<span style="color:#991B1B">'+g+' atr\u00e1s \u2193</span>';
       var sr=svg.getBoundingClientRect(),sx=sr.width/900,sy=sr.height/340;
       var tx=cx*sx+16,ty=Math.min(ya,ypp)*sy-10;

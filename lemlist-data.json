@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-22T13:16:40.922Z",
+    "updatedAt": "2026-09-22T17:57:50.726Z",
     "period": {
       "start": "2020-01-01T00:00:00.000Z",
-      "end": "2026-09-22T13:16:40.619Z"
+      "end": "2026-09-22T17:57:50.442Z"
     }
   },
   "campaigns": [
@@ -32,10 +32,10 @@
       },
       "linkedin": {
         "invitesSent": 15,
-        "invitesAccepted": 5,
-        "messagesSent": 4,
+        "invitesAccepted": 6,
+        "messagesSent": 5,
         "messagesReplied": 0,
-        "acceptanceRate": 0.333,
+        "acceptanceRate": 0.4,
         "replyRate": 0
       },
       "meetingBooked": 0
@@ -51,17 +51,17 @@
         "interrupted": 23
       },
       "email": {
-        "sent": 158,
-        "delivered": 135,
+        "sent": 162,
+        "delivered": 139,
         "bounced": 23,
-        "opened": 43,
+        "opened": 48,
         "clicked": 8,
         "replied": 2,
-        "deliveryRate": 0.854,
-        "bounceRate": 0.146,
-        "openRate": 0.319,
-        "clickRate": 0.059,
-        "replyRate": 0.015
+        "deliveryRate": 0.858,
+        "bounceRate": 0.142,
+        "openRate": 0.345,
+        "clickRate": 0.058,
+        "replyRate": 0.014
       },
       "linkedin": {
         "invitesSent": 30,

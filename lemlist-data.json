@@ -1,48 +1,108 @@
 {
   "meta": {
-    "updatedAt": "2026-09-21T00:00:00.000Z",
-    "period": { "start": "2020-01-01T00:00:00.000Z", "end": "2026-09-21T00:00:00.000Z" }
+    "updatedAt": "2026-09-22T13:16:40.922Z",
+    "period": {
+      "start": "2020-01-01T00:00:00.000Z",
+      "end": "2026-09-22T13:16:40.619Z"
+    }
   },
   "campaigns": [
     {
       "id": "cam_kZdQkMjG5dPFMeMuT",
       "label": "Maturidade Estratégica",
-      "leads": { "total": 48, "reached": 46, "answered": 0, "interested": 0, "interrupted": 15 },
+      "leads": {
+        "total": 48,
+        "reached": 46,
+        "answered": 0,
+        "interested": 0,
+        "interrupted": 15
+      },
       "email": {
-        "sent": 59, "delivered": 44, "bounced": 15, "opened": 4, "clicked": 0, "replied": 0,
-        "deliveryRate": 0.746, "bounceRate": 0.254, "openRate": 0.091, "clickRate": 0, "replyRate": 0
+        "sent": 60,
+        "delivered": 45,
+        "bounced": 15,
+        "opened": 5,
+        "clicked": 0,
+        "replied": 0,
+        "deliveryRate": 0.75,
+        "bounceRate": 0.25,
+        "openRate": 0.111,
+        "clickRate": 0,
+        "replyRate": 0
       },
       "linkedin": {
-        "invitesSent": 11, "invitesAccepted": 3, "messagesSent": 3, "messagesReplied": 0,
-        "acceptanceRate": 0.273, "replyRate": 0
+        "invitesSent": 15,
+        "invitesAccepted": 5,
+        "messagesSent": 4,
+        "messagesReplied": 0,
+        "acceptanceRate": 0.333,
+        "replyRate": 0
       },
       "meetingBooked": 0
     },
     {
       "id": "cam_efki5mPYHNt7TiGF5",
       "label": "Dores Operacionais",
-      "leads": { "total": 140, "reached": 132, "answered": 2, "interested": 0, "interrupted": 23 },
+      "leads": {
+        "total": 140,
+        "reached": 136,
+        "answered": 2,
+        "interested": 0,
+        "interrupted": 23
+      },
       "email": {
-        "sent": 144, "delivered": 121, "bounced": 23, "opened": 39, "clicked": 8, "replied": 2,
-        "deliveryRate": 0.840, "bounceRate": 0.160, "openRate": 0.322, "clickRate": 0.066, "replyRate": 0.017
+        "sent": 158,
+        "delivered": 135,
+        "bounced": 23,
+        "opened": 43,
+        "clicked": 8,
+        "replied": 2,
+        "deliveryRate": 0.854,
+        "bounceRate": 0.146,
+        "openRate": 0.319,
+        "clickRate": 0.059,
+        "replyRate": 0.015
       },
       "linkedin": {
-        "invitesSent": 26, "invitesAccepted": 7, "messagesSent": 7, "messagesReplied": 0,
-        "acceptanceRate": 0.269, "replyRate": 0
+        "invitesSent": 30,
+        "invitesAccepted": 9,
+        "messagesSent": 8,
+        "messagesReplied": 0,
+        "acceptanceRate": 0.3,
+        "replyRate": 0
       },
       "meetingBooked": 0
     },
     {
       "id": "cam_kmjHZ4EsxnDGaHHpo",
       "label": "Renovação Próxima",
-      "leads": { "total": 120, "reached": 108, "answered": 3, "interested": 0, "interrupted": 18 },
+      "leads": {
+        "total": 120,
+        "reached": 110,
+        "answered": 3,
+        "interested": 0,
+        "interrupted": 18
+      },
       "email": {
-        "sent": 137, "delivered": 119, "bounced": 18, "opened": 28, "clicked": 1, "replied": 2,
-        "deliveryRate": 0.869, "bounceRate": 0.131, "openRate": 0.235, "clickRate": 0.008, "replyRate": 0.017
+        "sent": 146,
+        "delivered": 128,
+        "bounced": 18,
+        "opened": 30,
+        "clicked": 1,
+        "replied": 2,
+        "deliveryRate": 0.877,
+        "bounceRate": 0.123,
+        "openRate": 0.234,
+        "clickRate": 0.008,
+        "replyRate": 0.016
       },
       "linkedin": {
-        "invitesSent": 14, "invitesAccepted": 4, "messagesSent": 4, "messagesReplied": 1,
-        "acceptanceRate": 0.286, "replyRate": 0.250
+        "invitesSent": 17,
+        "invitesAccepted": 4,
+        "messagesSent": 4,
+        "messagesReplied": 1,
+        "acceptanceRate": 0.235,
+        "replyRate": 0.25
       },
       "meetingBooked": 0
     }

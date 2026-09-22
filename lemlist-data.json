@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-22T17:57:50.726Z",
+    "updatedAt": "2026-09-22T21:08:40.352Z",
     "period": {
       "start": "2020-01-01T00:00:00.000Z",
-      "end": "2026-09-22T17:57:50.442Z"
+      "end": "2026-09-22T21:08:40.024Z"
     }
   },
   "campaigns": [
@@ -32,10 +32,10 @@
       },
       "linkedin": {
         "invitesSent": 15,
-        "invitesAccepted": 6,
-        "messagesSent": 5,
+        "invitesAccepted": 7,
+        "messagesSent": 6,
         "messagesReplied": 0,
-        "acceptanceRate": 0.4,
+        "acceptanceRate": 0.467,
         "replyRate": 0
       },
       "meetingBooked": 0
@@ -51,17 +51,17 @@
         "interrupted": 23
       },
       "email": {
-        "sent": 162,
-        "delivered": 139,
+        "sent": 178,
+        "delivered": 155,
         "bounced": 23,
-        "opened": 48,
+        "opened": 51,
         "clicked": 8,
         "replied": 2,
-        "deliveryRate": 0.858,
-        "bounceRate": 0.142,
-        "openRate": 0.345,
-        "clickRate": 0.058,
-        "replyRate": 0.014
+        "deliveryRate": 0.871,
+        "bounceRate": 0.129,
+        "openRate": 0.329,
+        "clickRate": 0.052,
+        "replyRate": 0.013
       },
       "linkedin": {
         "invitesSent": 30,
@@ -84,24 +84,24 @@
         "interrupted": 18
       },
       "email": {
-        "sent": 146,
-        "delivered": 128,
+        "sent": 166,
+        "delivered": 148,
         "bounced": 18,
-        "opened": 30,
+        "opened": 35,
         "clicked": 1,
         "replied": 2,
-        "deliveryRate": 0.877,
-        "bounceRate": 0.123,
-        "openRate": 0.234,
-        "clickRate": 0.008,
-        "replyRate": 0.016
+        "deliveryRate": 0.892,
+        "bounceRate": 0.108,
+        "openRate": 0.236,
+        "clickRate": 0.007,
+        "replyRate": 0.014
       },
       "linkedin": {
         "invitesSent": 17,
-        "invitesAccepted": 4,
+        "invitesAccepted": 5,
         "messagesSent": 4,
         "messagesReplied": 1,
-        "acceptanceRate": 0.235,
+        "acceptanceRate": 0.294,
         "replyRate": 0.25
       },
       "meetingBooked": 0

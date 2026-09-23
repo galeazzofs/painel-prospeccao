@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-23T10:50:06.998Z",
+    "updatedAt": "2026-09-23T13:20:29.900Z",
     "availablePortes": [],
     "porteCounts": {
-      "all": 108
+      "all": 114
     },
     "availableMonths": [
       "2026-09"
@@ -2310,12 +2310,139 @@
       "lostReason": null,
       "createdate": "2026-09-18T19:56:19.761Z",
       "createMonth": "2026-09"
+    },
+    {
+      "id": "65186375242",
+      "company": "CTC - Centro de Tecnologia Canavieira — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "Centro de Tecnologia Canavieira — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T13:02:44.684Z",
+        "24595559": "2026-09-23T13:02:46.707Z",
+        "72557853": "2026-09-23T13:02:39.138Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T13:02:39.138Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65176944133",
+      "company": "Gazeus Games — Prospecção | Renovação Próxima (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T13:03:06.777Z",
+        "24595559": "2026-09-23T13:03:10.315Z",
+        "72557853": "2026-09-23T13:02:57.634Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T13:02:57.634Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65207030281",
+      "company": "Agenda Edu — Prospecção | Dores Operacionais (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T13:10:43.613Z",
+        "24595559": "2026-09-23T13:10:45.403Z",
+        "72557853": "2026-09-23T13:03:27.425Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T13:03:27.425Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65206373204",
+      "company": "Inova Tecnologia — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T13:11:03.806Z",
+        "24595559": "2026-09-23T13:11:06.863Z",
+        "72557853": "2026-09-23T13:10:55.067Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T13:10:55.067Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65181914725",
+      "company": "Grupo Mabu — Prospecção | Renovação Próxima (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T13:17:02.841Z",
+        "24595559": "2026-09-23T13:17:05.111Z",
+        "72557853": "2026-09-23T13:16:56.839Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T13:16:56.839Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65170952588",
+      "company": "Atermon — Prospecção | Dores Operacionais (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T13:19:03.306Z",
+        "24595559": "2026-09-23T13:19:05.590Z",
+        "72557853": "2026-09-23T13:18:57.216Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T13:18:57.216Z",
+      "createMonth": "2026-09"
     }
   ],
   "filters": {
     "campaigns": [
       "Administradora de Benefícios — Prospecção | Renovação Próxima",
       "Aelbra — Prospecção | Renovação Próxima",
+      "Centro de Tecnologia Canavieira — Prospecção | Maturidade Estratégica (Whatsapp)",
       "Farmarcas — Prospecção | Renovação Próxima",
       "GOVBR — Prospecção | Renovação Próxima",
       "Mercadomóveis — Prospecção | Dores Operacionais",
@@ -2334,7 +2461,7 @@
     ]
   },
   "debug": {
-    "totalDeals": 108,
+    "totalDeals": 114,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

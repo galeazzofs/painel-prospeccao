@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-23T10:50:07.981Z",
+    "updatedAt": "2026-09-23T13:20:30.527Z",
     "period": {
       "start": "2020-01-01T00:00:00.000Z",
-      "end": "2026-09-23T10:50:07.049Z"
+      "end": "2026-09-23T13:20:29.955Z"
     }
   },
   "campaigns": [
@@ -31,11 +31,11 @@
         "replyRate": 0
       },
       "linkedin": {
-        "invitesSent": 15,
+        "invitesSent": 16,
         "invitesAccepted": 7,
         "messagesSent": 6,
         "messagesReplied": 0,
-        "acceptanceRate": 0.467,
+        "acceptanceRate": 0.438,
         "replyRate": 0
       },
       "meetingBooked": 0
@@ -45,30 +45,30 @@
       "label": "Dores Operacionais",
       "leads": {
         "total": 140,
-        "reached": 136,
+        "reached": 138,
         "answered": 2,
         "interested": 0,
         "interrupted": 23
       },
       "email": {
-        "sent": 178,
-        "delivered": 155,
+        "sent": 182,
+        "delivered": 159,
         "bounced": 23,
-        "opened": 52,
+        "opened": 53,
         "clicked": 8,
         "replied": 2,
-        "deliveryRate": 0.871,
-        "bounceRate": 0.129,
-        "openRate": 0.335,
-        "clickRate": 0.052,
+        "deliveryRate": 0.874,
+        "bounceRate": 0.126,
+        "openRate": 0.333,
+        "clickRate": 0.05,
         "replyRate": 0.013
       },
       "linkedin": {
-        "invitesSent": 30,
-        "invitesAccepted": 9,
-        "messagesSent": 8,
+        "invitesSent": 37,
+        "invitesAccepted": 10,
+        "messagesSent": 9,
         "messagesReplied": 0,
-        "acceptanceRate": 0.3,
+        "acceptanceRate": 0.27,
         "replyRate": 0
       },
       "meetingBooked": 0
@@ -78,31 +78,31 @@
       "label": "Renovação Próxima",
       "leads": {
         "total": 120,
-        "reached": 110,
+        "reached": 115,
         "answered": 3,
         "interested": 0,
         "interrupted": 18
       },
       "email": {
-        "sent": 166,
-        "delivered": 148,
+        "sent": 167,
+        "delivered": 149,
         "bounced": 18,
-        "opened": 36,
+        "opened": 38,
         "clicked": 1,
         "replied": 2,
         "deliveryRate": 0.892,
         "bounceRate": 0.108,
-        "openRate": 0.243,
+        "openRate": 0.255,
         "clickRate": 0.007,
-        "replyRate": 0.014
+        "replyRate": 0.013
       },
       "linkedin": {
-        "invitesSent": 17,
-        "invitesAccepted": 5,
-        "messagesSent": 4,
+        "invitesSent": 22,
+        "invitesAccepted": 6,
+        "messagesSent": 5,
         "messagesReplied": 1,
-        "acceptanceRate": 0.294,
-        "replyRate": 0.25
+        "acceptanceRate": 0.273,
+        "replyRate": 0.2
       },
       "meetingBooked": 0
     }

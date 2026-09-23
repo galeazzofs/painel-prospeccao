@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-23T19:27:25.530Z",
+    "updatedAt": "2026-09-23T22:42:02.145Z",
     "period": {
       "start": "2020-01-01T00:00:00.000Z",
-      "end": "2026-09-23T19:27:24.797Z"
+      "end": "2026-09-23T22:42:01.570Z"
     }
   },
   "campaigns": [
@@ -32,10 +32,10 @@
       },
       "linkedin": {
         "invitesSent": 16,
-        "invitesAccepted": 8,
+        "invitesAccepted": 9,
         "messagesSent": 7,
         "messagesReplied": 0,
-        "acceptanceRate": 0.5,
+        "acceptanceRate": 0.563,
         "replyRate": 0
       },
       "whatsapp": {
@@ -56,17 +56,17 @@
         "interrupted": 23
       },
       "email": {
-        "sent": 187,
-        "delivered": 164,
+        "sent": 195,
+        "delivered": 172,
         "bounced": 23,
         "opened": 55,
         "clicked": 8,
         "replied": 3,
-        "deliveryRate": 0.877,
-        "bounceRate": 0.123,
-        "openRate": 0.335,
-        "clickRate": 0.049,
-        "replyRate": 0.018
+        "deliveryRate": 0.882,
+        "bounceRate": 0.118,
+        "openRate": 0.32,
+        "clickRate": 0.047,
+        "replyRate": 0.017
       },
       "linkedin": {
         "invitesSent": 37,
@@ -91,7 +91,7 @@
         "reached": 115,
         "answered": 3,
         "interested": 0,
-        "interrupted": 18
+        "interrupted": 19
       },
       "email": {
         "sent": 167,
@@ -126,22 +126,22 @@
       "label": "Maturidade Estratégica (WA)",
       "leads": {
         "total": 124,
-        "reached": 21,
+        "reached": 28,
         "answered": 0,
         "interested": 0,
-        "interrupted": 3
+        "interrupted": 4
       },
       "email": {
-        "sent": 21,
-        "delivered": 18,
-        "bounced": 3,
-        "opened": 5,
+        "sent": 28,
+        "delivered": 24,
+        "bounced": 4,
+        "opened": 7,
         "clicked": 1,
         "replied": 0,
         "deliveryRate": 0.857,
         "bounceRate": 0.143,
-        "openRate": 0.278,
-        "clickRate": 0.056,
+        "openRate": 0.292,
+        "clickRate": 0.042,
         "replyRate": 0
       },
       "linkedin": {
@@ -164,21 +164,21 @@
       "label": "Dores Operacionais (WA)",
       "leads": {
         "total": 143,
-        "reached": 13,
+        "reached": 14,
         "answered": 0,
         "interested": 0,
         "interrupted": 4
       },
       "email": {
-        "sent": 13,
-        "delivered": 9,
+        "sent": 14,
+        "delivered": 10,
         "bounced": 4,
         "opened": 4,
         "clicked": 0,
         "replied": 0,
-        "deliveryRate": 0.692,
-        "bounceRate": 0.308,
-        "openRate": 0.444,
+        "deliveryRate": 0.714,
+        "bounceRate": 0.286,
+        "openRate": 0.4,
         "clickRate": 0,
         "replyRate": 0
       },
@@ -202,23 +202,23 @@
       "label": "Renovação Próxima (WA)",
       "leads": {
         "total": 95,
-        "reached": 18,
+        "reached": 25,
         "answered": 1,
         "interested": 0,
-        "interrupted": 1
+        "interrupted": 3
       },
       "email": {
-        "sent": 18,
-        "delivered": 17,
-        "bounced": 1,
-        "opened": 9,
+        "sent": 25,
+        "delivered": 22,
+        "bounced": 3,
+        "opened": 10,
         "clicked": 0,
         "replied": 1,
-        "deliveryRate": 0.944,
-        "bounceRate": 0.056,
-        "openRate": 0.529,
+        "deliveryRate": 0.88,
+        "bounceRate": 0.12,
+        "openRate": 0.455,
         "clickRate": 0,
-        "replyRate": 0.059
+        "replyRate": 0.045
       },
       "linkedin": {
         "invitesSent": 0,

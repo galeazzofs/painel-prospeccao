@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-23T15:17:44.969Z",
+    "updatedAt": "2026-09-23T18:23:58.779Z",
     "period": {
       "start": "2020-01-01T00:00:00.000Z",
-      "end": "2026-09-23T15:17:44.650Z"
+      "end": "2026-09-23T18:23:58.428Z"
     }
   },
   "campaigns": [
@@ -32,10 +32,15 @@
       },
       "linkedin": {
         "invitesSent": 16,
-        "invitesAccepted": 7,
-        "messagesSent": 6,
+        "invitesAccepted": 8,
+        "messagesSent": 7,
         "messagesReplied": 0,
-        "acceptanceRate": 0.438,
+        "acceptanceRate": 0.5,
+        "replyRate": 0
+      },
+      "whatsapp": {
+        "sent": 0,
+        "replied": 0,
         "replyRate": 0
       },
       "meetingBooked": 0
@@ -46,7 +51,7 @@
       "leads": {
         "total": 140,
         "reached": 138,
-        "answered": 2,
+        "answered": 3,
         "interested": 0,
         "interrupted": 23
       },
@@ -54,21 +59,26 @@
         "sent": 183,
         "delivered": 160,
         "bounced": 23,
-        "opened": 53,
+        "opened": 55,
         "clicked": 8,
-        "replied": 2,
+        "replied": 3,
         "deliveryRate": 0.874,
         "bounceRate": 0.126,
-        "openRate": 0.331,
+        "openRate": 0.344,
         "clickRate": 0.05,
-        "replyRate": 0.013
+        "replyRate": 0.019
       },
       "linkedin": {
         "invitesSent": 37,
-        "invitesAccepted": 11,
-        "messagesSent": 10,
+        "invitesAccepted": 12,
+        "messagesSent": 11,
         "messagesReplied": 0,
-        "acceptanceRate": 0.297,
+        "acceptanceRate": 0.324,
+        "replyRate": 0
+      },
+      "whatsapp": {
+        "sent": 0,
+        "replied": 0,
         "replyRate": 0
       },
       "meetingBooked": 0
@@ -103,6 +113,125 @@
         "messagesReplied": 1,
         "acceptanceRate": 0.273,
         "replyRate": 0.2
+      },
+      "whatsapp": {
+        "sent": 0,
+        "replied": 0,
+        "replyRate": 0
+      },
+      "meetingBooked": 0
+    },
+    {
+      "id": "cam_WmxMApikMppJ2HtrT",
+      "label": "Maturidade Estratégica (WA)",
+      "leads": {
+        "total": 124,
+        "reached": 16,
+        "answered": 0,
+        "interested": 0,
+        "interrupted": 3
+      },
+      "email": {
+        "sent": 16,
+        "delivered": 13,
+        "bounced": 3,
+        "opened": 4,
+        "clicked": 0,
+        "replied": 0,
+        "deliveryRate": 0.813,
+        "bounceRate": 0.188,
+        "openRate": 0.308,
+        "clickRate": 0,
+        "replyRate": 0
+      },
+      "linkedin": {
+        "invitesSent": 0,
+        "invitesAccepted": 0,
+        "messagesSent": 0,
+        "messagesReplied": 0,
+        "acceptanceRate": 0,
+        "replyRate": 0
+      },
+      "whatsapp": {
+        "sent": 0,
+        "replied": 0,
+        "replyRate": 0
+      },
+      "meetingBooked": 0
+    },
+    {
+      "id": "cam_ia9FdhubsTYvgJxJS",
+      "label": "Dores Operacionais (WA)",
+      "leads": {
+        "total": 143,
+        "reached": 13,
+        "answered": 0,
+        "interested": 0,
+        "interrupted": 4
+      },
+      "email": {
+        "sent": 13,
+        "delivered": 9,
+        "bounced": 4,
+        "opened": 4,
+        "clicked": 0,
+        "replied": 0,
+        "deliveryRate": 0.692,
+        "bounceRate": 0.308,
+        "openRate": 0.444,
+        "clickRate": 0,
+        "replyRate": 0
+      },
+      "linkedin": {
+        "invitesSent": 0,
+        "invitesAccepted": 0,
+        "messagesSent": 0,
+        "messagesReplied": 0,
+        "acceptanceRate": 0,
+        "replyRate": 0
+      },
+      "whatsapp": {
+        "sent": 0,
+        "replied": 0,
+        "replyRate": 0
+      },
+      "meetingBooked": 0
+    },
+    {
+      "id": "cam_XbWnNtqiDx5hHnpeC",
+      "label": "Renovação Próxima (WA)",
+      "leads": {
+        "total": 95,
+        "reached": 14,
+        "answered": 1,
+        "interested": 0,
+        "interrupted": 0
+      },
+      "email": {
+        "sent": 14,
+        "delivered": 14,
+        "bounced": 0,
+        "opened": 9,
+        "clicked": 0,
+        "replied": 1,
+        "deliveryRate": 1,
+        "bounceRate": 0,
+        "openRate": 0.643,
+        "clickRate": 0,
+        "replyRate": 0.071
+      },
+      "linkedin": {
+        "invitesSent": 0,
+        "invitesAccepted": 0,
+        "messagesSent": 0,
+        "messagesReplied": 0,
+        "acceptanceRate": 0,
+        "replyRate": 0
+      },
+      "whatsapp": {
+        "sent": 0,
+        "replied": 0,
+        "replyRate": 0
       },
       "meetingBooked": 0
     }

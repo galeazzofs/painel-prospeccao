@@ -31,40 +31,46 @@ function sumLinkedinInvites(steps = []) {
 }
 
 function transform(raw, label) {
-  const email = raw.perChannel?.email || {};
-  const li = raw.perChannel?.linkedin || {};
+  const email = raw.perChannel?.email    || {};
+  const li    = raw.perChannel?.linkedin || {};
+  const wa    = raw.perChannel?.whatsapp || {};
   const invitesSent = sumLinkedinInvites(raw.steps);
 
   return {
     id: raw.campaignId,
     label,
     leads: {
-      total: raw.nbLeads || 0,
-      reached: raw.nbLeadsReached || 0,
-      answered: raw.nbLeadsAnswered || 0,
-      interested: raw.nbLeadsInterested || 0,
+      total:       raw.nbLeads          || 0,
+      reached:     raw.nbLeadsReached   || 0,
+      answered:    raw.nbLeadsAnswered  || 0,
+      interested:  raw.nbLeadsInterested  || 0,
       interrupted: raw.nbLeadsInterrupted || 0,
     },
     email: {
-      sent: email.sent || 0,
-      delivered: email.delivered || 0,
-      bounced: email.bounced || 0,
-      opened: email.opened || 0,
-      clicked: email.clicked || 0,
-      replied: email.replied || 0,
+      sent:         email.sent      || 0,
+      delivered:    email.delivered || 0,
+      bounced:      email.bounced   || 0,
+      opened:       email.opened    || 0,
+      clicked:      email.clicked   || 0,
+      replied:      email.replied   || 0,
       deliveryRate: frac(email.delivered, email.sent),
-      bounceRate: frac(email.bounced, email.sent),
-      openRate: frac(email.opened, email.delivered),
-      clickRate: frac(email.clicked, email.delivered),
-      replyRate: frac(email.replied, email.delivered),
+      bounceRate:   frac(email.bounced,   email.sent),
+      openRate:     frac(email.opened,    email.delivered),
+      clickRate:    frac(email.clicked,   email.delivered),
+      replyRate:    frac(email.replied,   email.delivered),
     },
     linkedin: {
-      invitesSent,
-      invitesAccepted: li.invitationAccepted || 0,
-      messagesSent: li.sent || 0,
-      messagesReplied: li.replied || 0,
-      acceptanceRate: frac(li.invitationAccepted, invitesSent),
-      replyRate: frac(li.replied, li.sent),
+      invitesSent:      invitesSent,
+      invitesAccepted:  li.invitationAccepted || 0,
+      messagesSent:     li.sent    || 0,
+      messagesReplied:  li.replied || 0,
+      acceptanceRate:   frac(li.invitationAccepted, invitesSent),
+      replyRate:        frac(li.replied, li.sent),
+    },
+    whatsapp: {
+      sent:      wa.sent    || 0,
+      replied:   wa.replied || 0,
+      replyRate: frac(wa.replied, wa.sent),
     },
     meetingBooked: raw.meetingBooked || 0,
   };

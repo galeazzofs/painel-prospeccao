@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-:root{--bg:#FAFAF9;--surface:#FFF;--surface-2:#F5F5F4;--border:#E7E5E4;--border-strong:#D6D3D1;--text-1:#0C0A09;--text-2:#44403C;--text-3:#78716C;--text-4:#A8A29E;--accent:#1F5F3F;--accent-dark:#0F3D28;--accent-soft:#E8F2EC;--positive:#15803D;--positive-soft:#F0FDF4;--negative:#991B1B;--negative-soft:#FEF2F2;--warning:#92400E;--warning-soft:#FEF3C7;--shadow-sm:0 1px 2px rgba(12,10,9,.04)}
+:root{--bg:#FAFAF9;--surface:#FFF;--surface-2:#F5F5F4;--border:#E7E5E4;--border-strong:#D6D3D1;--text-1:#0C0A09;--text-2:#44403C;--text-3:#78716C;--text-4:#A8A29E;--accent:#1F5F3F;--accent-dark:#0F3D28;--accent-soft:#E8F2EC;--positive:#15803D;--positive-soft:#F0FDF4;--negative:#991B1B;--negative-soft:#FEF2F2;--warning:#92400E;--warning-soft:#FEF3C7;--wa:#25D366;--wa-soft:#F0FDF6;--shadow-sm:0 1px 2px rgba(12,10,9,.04)}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg);color:var(--text-1);font-family:'Geist',-apple-system,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
 .serif{font-family:'Fraunces',Georgia,serif;font-weight:400;letter-spacing:-.02em}
@@ -44,11 +44,13 @@ html,body{background:var(--bg);color:var(--text-1);font-family:'Geist',-apple-sy
 .pill:hover{background:var(--surface-2);color:var(--text-2)}
 .pill.active{background:var(--text-1);color:#fff}
 .pill .pill-count{font-size:11px;opacity:.6}
+.pill.wa-pill.active{background:var(--wa)}
 
 /* KPIs */
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .kpi{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 22px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:6px;transition:border-color .15s}
 .kpi:hover{border-color:var(--border-strong)}
+.kpi.wa-kpi{border-left:3px solid var(--wa)}
 .kpi-label{font-size:12px;color:var(--text-3)}
 .kpi-value{font-size:32px;letter-spacing:-.03em;line-height:1}
 .kpi-sub{font-size:12px;color:var(--text-3)}
@@ -103,6 +105,7 @@ table.perf tr:hover td{background:var(--surface-2)}
 .badge.good{background:var(--positive-soft);color:var(--positive)}
 .badge.warn{background:var(--warning-soft);color:var(--warning)}
 .badge.bad{background:var(--negative-soft);color:var(--negative)}
+.badge.wa{background:var(--wa-soft);color:var(--wa)}
 
 /* Benchmark card */
 .bench-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 26px;box-shadow:var(--shadow-sm)}
@@ -129,7 +132,8 @@ table.perf tr:hover td{background:var(--surface-2)}
 
 <script>
 const DASH='—';
-const COLORS=['#1F5F3F','#2563EB','#D97706'];
+const COLORS=['#1F5F3F','#2563EB','#D97706','#7C3AED','#DC2626','#0891B2'];
+const WA_COLOR='#25D366';
 
 // Benchmarks B2B outbound 2025-2026 (fontes: Instantly, Expandi, Cleverly, Apollo, Belkins)
 const BENCH={
@@ -162,8 +166,18 @@ function fmt(v,t='auto'){
 function fmtDate(iso){if(!iso)return DASH;const d=new Date(iso),m=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];return`${String(d.getDate()).padStart(2,'0')} ${m[d.getMonth()]} ${d.getFullYear()} · ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`}
 function timeAgo(iso){if(!iso)return DASH;const min=Math.floor((Date.now()-new Date(iso).getTime())/60000);if(min<1)return'agora';if(min<60)return`há ${min} min`;const h=Math.floor(min/60);if(h<24)return`há ${h} h`;return`há ${Math.floor(h/24)} d`}
 
+// Detecta canal principal de uma campanha
+function isWaCampaign(c){return (c.whatsapp?.sent||0)>0}
+function isEmailCampaign(c){return (c.email?.sent||0)>0}
+
 function totals(campaigns){
-  const t={leads:0,reached:0,answered:0,interested:0,interrupted:0,sent:0,delivered:0,bounced:0,opened:0,clicked:0,replied:0,invitesSent:0,invitesAccepted:0,liSent:0,liReplied:0,meetings:0};
+  const t={
+    leads:0,reached:0,answered:0,interested:0,interrupted:0,
+    sent:0,delivered:0,bounced:0,opened:0,clicked:0,replied:0,
+    invitesSent:0,invitesAccepted:0,liSent:0,liReplied:0,
+    waSent:0,waReplied:0,
+    meetings:0
+  };
   for(const c of campaigns){
     t.leads+=c.leads.total;t.reached+=c.leads.reached;t.answered+=c.leads.answered;
     t.interested+=c.leads.interested;t.interrupted+=c.leads.interrupted;
@@ -171,6 +185,7 @@ function totals(campaigns){
     t.opened+=c.email.opened;t.clicked+=c.email.clicked;t.replied+=c.email.replied;
     t.invitesSent+=c.linkedin.invitesSent;t.invitesAccepted+=c.linkedin.invitesAccepted;
     t.liSent+=c.linkedin.messagesSent;t.liReplied+=c.linkedin.messagesReplied;
+    t.waSent+=(c.whatsapp?.sent||0);t.waReplied+=(c.whatsapp?.replied||0);
     t.meetings+=c.meetingBooked;
   }
   return t;
@@ -225,8 +240,12 @@ function renderTopbar(){
 function renderFilter(){
   const all=gData.campaigns||[];
   const totalLeads=all.reduce((s,c)=>s+c.leads.total,0);
-  const pills=[{id:'all',label:'Todas',count:totalLeads},...all.map(c=>({id:c.id,label:c.label,count:c.leads.total}))];
-  return`<div class="filter-bar fade-in"><span class="filter-label">Campanha</span><div class="filter-pills">${pills.map(p=>`<button class="pill ${F.campaign===p.id?'active':''}" data-cid="${p.id}">${p.label} <span class="pill-count">${fmt(p.count,'int')}</span></button>`).join('')}</div></div>`;
+  const pills=[{id:'all',label:'Todas',count:totalLeads,isWa:false},...all.map(c=>({id:c.id,label:c.label,count:c.leads.total,isWa:isWaCampaign(c)}))];
+  return`<div class="filter-bar fade-in"><span class="filter-label">Campanha</span><div class="filter-pills">${pills.map(p=>{
+    const waClass=p.isWa?' wa-pill':'';
+    const waIcon=p.isWa?' 💬':'';
+    return`<button class="pill${waClass} ${F.campaign===p.id?'active':''}" data-cid="${p.id}">${waIcon}${p.label} <span class="pill-count">${fmt(p.count,'int')}</span></button>`;
+  }).join('')}</div></div>`;
 }
 
 function renderKpis(t){
@@ -237,6 +256,7 @@ function renderKpis(t){
   const rr=t.delivered>0?t.replied/t.delivered:0;
   const ar=t.invitesSent>0?t.invitesAccepted/t.invitesSent:0;
   const lr=t.liSent>0?t.liReplied/t.liSent:0;
+  const warr=t.waSent>0?t.waReplied/t.waSent:0;
 
   function benchNote(yours, bench){
     if(!bench)return'';
@@ -245,27 +265,40 @@ function renderKpis(t){
     return`<div class="kpi-bench"><span class="dot" style="background:${c}"></span>${verdictLabel(v)} do bench (${fmt(bench.avg,'pct')})</div>`;
   }
 
-  function kpi(label,value,sub,barPct,barColor,bench,yours){
+  function kpi(label,value,sub,barPct,barColor,bench,yours,extraClass=''){
     const bar=barPct!==null?`<div class="kpi-bar"><div class="kpi-bar-fill" style="width:${Math.min(100,barPct)}%;background:${barColor||'var(--accent)'}"></div></div>`:'';
     const bn=bench?benchNote(yours,bench):'';
-    return`<div class="kpi fade-in"><div class="kpi-label">${label}</div><div class="kpi-value serif">${value}</div><div class="kpi-sub">${sub}</div>${bar}${bn}</div>`;
+    return`<div class="kpi ${extraClass} fade-in"><div class="kpi-label">${label}</div><div class="kpi-value serif">${value}</div><div class="kpi-sub">${sub}</div>${bar}${bn}</div>`;
   }
 
-  return`<div class="kpi-grid" style="margin-top:8px">
-    ${kpi('Leads nas campanhas',fmt(t.leads,'int'),`${fmt(t.reached,'int')} alcançados · ${fmt(t.interrupted,'int')} interrompidos`,null,null,null,null)}
+  const emailKpis=t.sent>0?`
     ${kpi('Taxa de entrega',fmt(dr,'pct'),`${fmt(t.delivered,'int')} de ${fmt(t.sent,'int')} · ${fmt(t.bounced,'int')} bounces`,dr*100,'var(--accent)',BENCH.email.deliveryRate,dr)}
     ${kpi('Taxa de abertura',fmt(or_,'pct'),`${fmt(t.opened,'int')} aberturas`,or_*100,'#2563EB',BENCH.email.openRate,or_)}
     ${kpi('Taxa de clique',fmt(cr,'pct'),`${fmt(t.clicked,'int')} cliques`,cr*100,'#7C3AED',BENCH.email.clickRate,cr)}
-    ${kpi('Taxa de resposta',fmt(rr,'pct'),`${fmt(t.replied,'int')} respostas`,rr*100,'var(--positive)',BENCH.email.replyRate,rr)}
+    ${kpi('Taxa de resposta',fmt(rr,'pct'),`${fmt(t.replied,'int')} respostas`,rr*100,'var(--positive)',BENCH.email.replyRate,rr)}`:'';
+
+  const liKpis=t.invitesSent>0||t.liSent>0?`
     ${kpi('Aceite LinkedIn',fmt(ar,'pct'),`${fmt(t.invitesAccepted,'int')} de ${fmt(t.invitesSent,'int')} convites`,ar*100,'#D97706',BENCH.linkedin.acceptanceRate,ar)}
-    ${kpi('Resposta pós-conexão',fmt(lr,'pct'),`${fmt(t.liReplied,'int')} de ${fmt(t.liSent,'int')} msgs`,t.liSent>0?lr*100:0,'#D97706',BENCH.linkedin.replyRate,lr)}
-    ${(()=>{
-      const cl=selectedCampaignLabel();
-      const qualCount=countHubspotStage(HS_QUAL_AGENDADA,cl);
-      const sqlCount=countHubspotStage(HS_SQL,cl);
-      const saoCount=countHubspotStage(HS_SAO,cl);
-      return kpi('Qual. agendadas',fmt(qualCount,'int'),`${fmt(sqlCount,'int')} SQLs · ${fmt(saoCount,'int')} SAOs — via HubSpot`,null,null,null,null);
-    })()}
+    ${kpi('Resposta pós-conexão',fmt(lr,'pct'),`${fmt(t.liReplied,'int')} de ${fmt(t.liSent,'int')} msgs`,t.liSent>0?lr*100:0,'#D97706',BENCH.linkedin.replyRate,lr)}`:'';
+
+  const waKpi=t.waSent>0
+    ?kpi('💬 Resposta WhatsApp',fmt(warr,'pct'),`${fmt(t.waReplied,'int')} de ${fmt(t.waSent,'int')} msgs enviadas`,warr*100,WA_COLOR,null,null,'wa-kpi')
+    :'';
+
+  const hsKpi=(()=>{
+    const cl=selectedCampaignLabel();
+    const qualCount=countHubspotStage(HS_QUAL_AGENDADA,cl);
+    const sqlCount=countHubspotStage(HS_SQL,cl);
+    const saoCount=countHubspotStage(HS_SAO,cl);
+    return kpi('Qual. agendadas',fmt(qualCount,'int'),`${fmt(sqlCount,'int')} SQLs · ${fmt(saoCount,'int')} SAOs — via HubSpot`,null,null,null,null);
+  })();
+
+  return`<div class="kpi-grid" style="margin-top:8px">
+    ${kpi('Leads nas campanhas',fmt(t.leads,'int'),`${fmt(t.reached,'int')} alcançados · ${fmt(t.interrupted,'int')} interrompidos`,null,null,null,null)}
+    ${emailKpis}
+    ${liKpis}
+    ${waKpi}
+    ${hsKpi}
   </div>`;
 }
 
@@ -295,7 +328,9 @@ function renderFunnel(t){
 
 function renderCompare(){
   const all=gData.campaigns||[];
-  if(all.length<2||F.campaign!=='all')return'';
+  // Compara só campanhas de email — WA tem métricas diferentes
+  const emailAll=all.filter(c=>isEmailCampaign(c));
+  if(emailAll.length<2||F.campaign!=='all')return'';
 
   const metrics=[
     {label:'Entrega', get:c=>c.email.deliveryRate, bench:BENCH.email.deliveryRate.avg},
@@ -307,10 +342,10 @@ function renderCompare(){
   ];
 
   const rows=metrics.map(m=>{
-    const vals=all.map(c=>m.get(c));
+    const vals=emailAll.map(c=>m.get(c));
     const maxScale=Math.max(...vals, m.bench, 0.001)*1.2;
     const benchPct=(m.bench/maxScale)*100;
-    const bars=all.map((c,i)=>{
+    const bars=emailAll.map((c,i)=>{
       const v=vals[i];
       const w=(v/maxScale)*100;
       return`<div class="compare-bar-row">
@@ -325,13 +360,36 @@ function renderCompare(){
     return`<div class="compare-row"><div class="compare-metric">${m.label}</div><div class="compare-bars">${bars}</div></div>`;
   }).join('');
 
-  const legend=all.map((c,i)=>`<span><span class="legend-dot" style="background:${COLORS[i]}"></span>${c.label}</span>`).join('');
+  const legend=emailAll.map((c,i)=>`<span><span class="legend-dot" style="background:${COLORS[i]}"></span>${c.label}</span>`).join('');
 
-  return`<div class="section-header"><div class="section-title">Comparativo entre campanhas</div><div class="section-sub">Barras = suas taxas · Linha vertical = benchmark outbound B2B 2026</div></div>
+  return`<div class="section-header"><div class="section-title">Comparativo entre campanhas (email)</div><div class="section-sub">Barras = suas taxas · Linha vertical = benchmark outbound B2B 2026</div></div>
   <div class="compare-card fade-in"><div class="compare-grid">${rows}</div><div class="compare-legend" style="margin-top:20px">${legend}<span><span class="legend-dot" style="background:var(--text-1);width:3px;height:12px;border-radius:1px"></span>Benchmark B2B</span></div></div>`;
 }
 
+function renderCompareWa(){
+  const all=gData.campaigns||[];
+  const waAll=all.filter(c=>isWaCampaign(c));
+  if(waAll.length<2||F.campaign!=='all')return'';
+
+  const maxScale=Math.max(...waAll.map(c=>c.whatsapp.replyRate),0.001)*1.2;
+  const bars=waAll.map((c,i)=>{
+    const v=c.whatsapp.replyRate;
+    const w=(v/maxScale)*100;
+    return`<div class="compare-bar-row">
+      <div class="compare-bar-label">${c.label}</div>
+      <div class="compare-bar-track">
+        <div class="compare-bar-fill" style="width:${Math.max(w,1)}%;background:${WA_COLOR}"></div>
+      </div>
+      <div class="compare-bar-val">${fmt(v,'pct')}</div>
+    </div>`;
+  }).join('');
+
+  return`<div class="section-header"><div class="section-title">Comparativo entre campanhas (WhatsApp)</div><div class="section-sub">% de resposta por campanha</div></div>
+  <div class="compare-card fade-in"><div class="compare-grid"><div class="compare-row"><div class="compare-metric">% Resposta</div><div class="compare-bars">${bars}</div></div></div></div>`;
+}
+
 function renderBenchmarkTable(t){
+  if(t.sent===0)return'';
   const dr=t.sent>0?t.delivered/t.sent:0;
   const or_=t.delivered>0?t.opened/t.delivered:0;
   const cr=t.delivered>0?t.clicked/t.delivered:0;
@@ -370,20 +428,20 @@ function renderBenchmarkTable(t){
 }
 
 function renderEmailTable(campaigns){
-  const maxOpen=Math.max(...campaigns.map(c=>c.email.openRate),0.001);
-  const rows=campaigns.length
-    ?campaigns.map(c=>{
-      const bBounce=c.email.bounceRate>0.15?'<span class="badge bad">bounce alto</span>':'';
-      return`<tr>
-        <td>${c.label}</td>
-        <td>${fmt(c.email.sent,'int')}</td>
-        <td>${fmt(c.email.deliveryRate,'pct')}${bBounce}</td>
-        <td><span class="perf-mini-bar"><span class="perf-mini-bar-fill" style="width:${(c.email.openRate/maxOpen)*100}%"></span></span>${fmt(c.email.openRate,'pct')}</td>
-        <td>${fmt(c.email.clickRate,'pct')}</td>
-        <td>${fmt(c.email.replyRate,'pct')}</td>
-      </tr>`;
-    }).join('')
-    :'<tr class="empty-row"><td colspan="6">Nenhuma campanha configurada</td></tr>';
+  const emailCamps=campaigns.filter(c=>isEmailCampaign(c));
+  if(!emailCamps.length)return'';
+  const maxOpen=Math.max(...emailCamps.map(c=>c.email.openRate),0.001);
+  const rows=emailCamps.map(c=>{
+    const bBounce=c.email.bounceRate>0.15?'<span class="badge bad">bounce alto</span>':'';
+    return`<tr>
+      <td>${c.label}</td>
+      <td>${fmt(c.email.sent,'int')}</td>
+      <td>${fmt(c.email.deliveryRate,'pct')}${bBounce}</td>
+      <td><span class="perf-mini-bar"><span class="perf-mini-bar-fill" style="width:${(c.email.openRate/maxOpen)*100}%"></span></span>${fmt(c.email.openRate,'pct')}</td>
+      <td>${fmt(c.email.clickRate,'pct')}</td>
+      <td>${fmt(c.email.replyRate,'pct')}</td>
+    </tr>`;
+  }).join('');
   return`<div class="card fade-in"><div class="card-title">Email — detalhamento</div><div class="card-sub">Entrega, abertura, clique e resposta por campanha</div><table class="perf"><thead><tr><th>Campanha</th><th>Enviados</th><th>Entrega</th><th>Abertura</th><th>Clique</th><th>Resposta</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
@@ -402,6 +460,27 @@ function renderLinkedinTable(campaigns){
   return`<div class="card fade-in"><div class="card-title">LinkedIn — detalhamento</div><div class="card-sub">Convites → aceite → mensagens → resposta</div><table class="perf"><thead><tr><th>Campanha</th><th>Convites</th><th>Aceite</th><th>Aceitos</th><th>Msgs</th><th>Resposta</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
+function renderWhatsappTable(campaigns){
+  const waCamps=campaigns.filter(c=>isWaCampaign(c));
+  if(!waCamps.length)return'';
+  const maxReply=Math.max(...waCamps.map(c=>c.whatsapp.replyRate),0.001);
+  const rows=waCamps.map(c=>`<tr>
+    <td>${c.label}</td>
+    <td>${fmt(c.leads.total,'int')}</td>
+    <td>${fmt(c.whatsapp.sent,'int')}</td>
+    <td>${fmt(c.whatsapp.replied,'int')}</td>
+    <td><span class="perf-mini-bar"><span class="perf-mini-bar-fill" style="width:${(c.whatsapp.replyRate/maxReply)*100}%;background:${WA_COLOR}"></span></span>${fmt(c.whatsapp.replyRate,'pct')}${c.whatsapp.replied>0?'<span class="badge wa">✓</span>':''}</td>
+  </tr>`).join('');
+  return`<div class="card fade-in" style="border-left:3px solid ${WA_COLOR}">
+    <div class="card-title">💬 WhatsApp — detalhamento</div>
+    <div class="card-sub">Mensagens enviadas e respostas por campanha</div>
+    <table class="perf">
+      <thead><tr><th>Campanha</th><th>Leads</th><th>Enviadas</th><th>Respostas</th><th>% Resposta</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </div>`;
+}
+
 function renderLeadStatus(campaigns){
   const t=totals(campaigns);
   if(t.leads===0)return'';
@@ -418,7 +497,9 @@ function renderLeadStatus(campaigns){
 
 function renderFooter(){
   const total=(gData.campaigns||[]).reduce((s,c)=>s+c.leads.total,0);
-  return`<div class="footer"><div>Fonte: Lemlist API · sync GitHub Actions</div><div>Benchmarks: Instantly, Expandi, Apollo, Cleverly — 2025/2026</div><div>${fmt(total,'int')} leads · ${(gData.campaigns||[]).length} campanhas</div></div>`;
+  const emailCount=(gData.campaigns||[]).filter(isEmailCampaign).length;
+  const waCount=(gData.campaigns||[]).filter(isWaCampaign).length;
+  return`<div class="footer"><div>Fonte: Lemlist API · sync GitHub Actions</div><div>Benchmarks: Instantly, Expandi, Apollo, Cleverly — 2025/2026</div><div>${fmt(total,'int')} leads · ${emailCount} email · ${waCount} WA</div></div>`;
 }
 
 // ---- MAIN ----------------------------------------------------------------
@@ -428,6 +509,8 @@ function render(){
   const camps=filtered();
   const t=totals(camps);
   const allCamps=gData.campaigns||[];
+  const emailCamps=camps.filter(isEmailCampaign);
+  const waCamps=camps.filter(isWaCampaign);
 
   document.getElementById('root').innerHTML=`<div class="app">
     ${renderTopbar()}
@@ -436,9 +519,11 @@ function render(){
     ${renderKpis(t)}
     ${renderFunnel(t)}
     ${renderCompare()}
+    ${renderCompareWa()}
     ${renderBenchmarkTable(t)}
     <div class="section-header"><div class="section-title">Detalhamento por canal</div></div>
-    <div class="dual-grid">${renderEmailTable(camps)}${renderLinkedinTable(camps)}</div>
+    ${emailCamps.length ? `<div class="dual-grid">${renderEmailTable(emailCamps)}${renderLinkedinTable(emailCamps)}</div>` : ''}
+    ${waCamps.length ? renderWhatsappTable(waCamps) : ''}
     <div class="section-header"><div class="section-title">Engajamento dos leads</div></div>
     ${renderLeadStatus(camps)}
     <div class="note">Pra acompanhar uma campanha nova, adicione <span class="mono">{ "id", "label" }</span> em <span class="mono">lemlist-campaigns.json</span> — o próximo sync já traz os dados dela, sem mexer em código.</div>

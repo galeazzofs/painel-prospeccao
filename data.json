@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-23T18:23:58.369Z",
+    "updatedAt": "2026-09-23T19:27:24.745Z",
     "availablePortes": [],
     "porteCounts": {
-      "all": 142
+      "all": 149
     },
     "availableMonths": [
       "2026-09"
@@ -2009,6 +2009,7 @@
       "stages": {
         "24595558": "2026-09-18T14:16:25.339Z",
         "24595559": "2026-09-18T14:16:26.919Z",
+        "24595562": "2026-09-23T19:23:03.506Z",
         "72557853": "2026-09-18T14:16:20.903Z"
       },
       "amount": 0,
@@ -3028,6 +3029,153 @@
       "lostReason": null,
       "createdate": "2026-09-23T14:48:56.172Z",
       "createMonth": "2026-09"
+    },
+    {
+      "id": "65236247435",
+      "company": "Google Cloud BR — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T18:31:03.040Z",
+        "24595559": "2026-09-23T18:31:05.655Z",
+        "72557853": "2026-09-23T18:30:56.932Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T18:30:56.932Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65209682458",
+      "company": "Athié Wohnrath — Prospecção | Renovação Próxima (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T18:39:03.721Z",
+        "24595559": "2026-09-23T18:39:06.104Z",
+        "72557853": "2026-09-23T18:38:57.824Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T18:38:57.824Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65221560612",
+      "company": "Galileo — Prospecção | Renovação Próxima (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T18:51:04.734Z",
+        "24595559": "2026-09-23T18:51:06.883Z",
+        "72557853": "2026-09-23T18:50:59.224Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T18:50:59.224Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65232548747",
+      "company": "Clara Resorts — Prospecção | Renovação Próxima (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T19:03:00.379Z",
+        "24595559": "2026-09-23T19:03:02.713Z",
+        "72557853": "2026-09-23T19:02:54.553Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T19:02:54.553Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65237674047",
+      "company": "Axenya — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T19:09:05.095Z",
+        "24595559": "2026-09-23T19:09:07.536Z",
+        "72557853": "2026-09-23T19:08:59.283Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T19:08:59.283Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65234720894",
+      "company": "Muni Tienda — Prospecção | Renovação Próxima (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T19:19:03.255Z",
+        "24595559": "2026-09-23T19:19:05.461Z",
+        "72557853": "2026-09-23T19:18:57.071Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T19:18:57.071Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65233791253",
+      "company": "ETICE - Empresa de Tecnologia da Informação do Ceará — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "Empresa de Tecnologia da Informação do Ceará — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-23T19:25:04.938Z",
+        "24595559": "2026-09-23T19:25:07.505Z",
+        "72557853": "2026-09-23T19:24:58.558Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-23T19:24:58.558Z",
+      "createMonth": "2026-09"
     }
   ],
   "filters": {
@@ -3036,6 +3184,7 @@
       "Aelbra — Prospecção | Renovação Próxima",
       "Associação Paulista do Ministério Público — Prospecção | Dores Operacionais (Whatsapp)",
       "Centro de Tecnologia Canavieira — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "Empresa de Tecnologia da Informação do Ceará — Prospecção | Maturidade Estratégica (Whatsapp)",
       "FUNARBE — Prospecção | Renovação Próxima (Whatsapp)",
       "Farmarcas — Prospecção | Renovação Próxima",
       "GOVBR — Prospecção | Renovação Próxima",
@@ -3055,7 +3204,7 @@
     ]
   },
   "debug": {
-    "totalDeals": 142,
+    "totalDeals": 149,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

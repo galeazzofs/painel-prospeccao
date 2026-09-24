@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-24T01:06:41.050Z",
+    "updatedAt": "2026-09-24T07:14:44.277Z",
     "period": {
       "start": "2020-01-01T00:00:00.000Z",
-      "end": "2026-09-24T01:06:40.248Z"
+      "end": "2026-09-24T07:14:43.257Z"
     }
   },
   "campaigns": [
@@ -70,10 +70,10 @@
       },
       "linkedin": {
         "invitesSent": 37,
-        "invitesAccepted": 12,
+        "invitesAccepted": 13,
         "messagesSent": 11,
         "messagesReplied": 1,
-        "acceptanceRate": 0.324,
+        "acceptanceRate": 0.351,
         "replyRate": 0.091
       },
       "whatsapp": {

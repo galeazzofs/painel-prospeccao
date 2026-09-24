@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-24T18:13:11.056Z",
+    "updatedAt": "2026-09-24T21:59:10.724Z",
     "period": {
       "start": "2020-01-01T00:00:00.000Z",
-      "end": "2026-09-24T18:13:10.710Z"
+      "end": "2026-09-24T21:59:09.931Z"
     }
   },
   "campaigns": [
@@ -18,15 +18,15 @@
         "interrupted": 15
       },
       "email": {
-        "sent": 70,
-        "delivered": 55,
+        "sent": 72,
+        "delivered": 57,
         "bounced": 15,
         "opened": 8,
         "clicked": 0,
         "replied": 0,
-        "deliveryRate": 0.786,
-        "bounceRate": 0.214,
-        "openRate": 0.145,
+        "deliveryRate": 0.792,
+        "bounceRate": 0.208,
+        "openRate": 0.14,
         "clickRate": 0,
         "replyRate": 0
       },
@@ -70,11 +70,11 @@
       },
       "linkedin": {
         "invitesSent": 43,
-        "invitesAccepted": 16,
-        "messagesSent": 15,
+        "invitesAccepted": 17,
+        "messagesSent": 16,
         "messagesReplied": 1,
-        "acceptanceRate": 0.372,
-        "replyRate": 0.067
+        "acceptanceRate": 0.395,
+        "replyRate": 0.063
       },
       "whatsapp": {
         "sent": 0,
@@ -94,15 +94,15 @@
         "interrupted": 19
       },
       "email": {
-        "sent": 172,
-        "delivered": 154,
+        "sent": 177,
+        "delivered": 159,
         "bounced": 18,
         "opened": 40,
         "clicked": 1,
         "replied": 3,
-        "deliveryRate": 0.895,
-        "bounceRate": 0.105,
-        "openRate": 0.26,
+        "deliveryRate": 0.898,
+        "bounceRate": 0.102,
+        "openRate": 0.252,
         "clickRate": 0.006,
         "replyRate": 0.019
       },
@@ -126,22 +126,22 @@
       "label": "Maturidade Estratégica (WA)",
       "leads": {
         "total": 125,
-        "reached": 41,
+        "reached": 53,
         "answered": 0,
         "interested": 0,
-        "interrupted": 5
+        "interrupted": 11
       },
       "email": {
-        "sent": 41,
-        "delivered": 36,
-        "bounced": 5,
-        "opened": 11,
+        "sent": 53,
+        "delivered": 42,
+        "bounced": 11,
+        "opened": 13,
         "clicked": 1,
         "replied": 0,
-        "deliveryRate": 0.878,
-        "bounceRate": 0.122,
-        "openRate": 0.306,
-        "clickRate": 0.028,
+        "deliveryRate": 0.792,
+        "bounceRate": 0.208,
+        "openRate": 0.31,
+        "clickRate": 0.024,
         "replyRate": 0
       },
       "linkedin": {
@@ -164,23 +164,23 @@
       "label": "Dores Operacionais (WA)",
       "leads": {
         "total": 143,
-        "reached": 21,
+        "reached": 28,
         "answered": 1,
         "interested": 0,
-        "interrupted": 4
+        "interrupted": 5
       },
       "email": {
-        "sent": 21,
-        "delivered": 17,
-        "bounced": 4,
-        "opened": 7,
+        "sent": 28,
+        "delivered": 23,
+        "bounced": 5,
+        "opened": 8,
         "clicked": 0,
         "replied": 1,
-        "deliveryRate": 0.81,
-        "bounceRate": 0.19,
-        "openRate": 0.412,
+        "deliveryRate": 0.821,
+        "bounceRate": 0.179,
+        "openRate": 0.348,
         "clickRate": 0,
-        "replyRate": 0.059
+        "replyRate": 0.043
       },
       "linkedin": {
         "invitesSent": 0,
@@ -202,23 +202,23 @@
       "label": "Renovação Próxima (WA)",
       "leads": {
         "total": 96,
-        "reached": 33,
+        "reached": 43,
         "answered": 3,
         "interested": 0,
-        "interrupted": 4
+        "interrupted": 5
       },
       "email": {
-        "sent": 33,
-        "delivered": 30,
-        "bounced": 3,
-        "opened": 12,
+        "sent": 43,
+        "delivered": 39,
+        "bounced": 4,
+        "opened": 14,
         "clicked": 0,
         "replied": 3,
-        "deliveryRate": 0.909,
-        "bounceRate": 0.091,
-        "openRate": 0.4,
+        "deliveryRate": 0.907,
+        "bounceRate": 0.093,
+        "openRate": 0.359,
         "clickRate": 0,
-        "replyRate": 0.1
+        "replyRate": 0.077
       },
       "linkedin": {
         "invitesSent": 0,

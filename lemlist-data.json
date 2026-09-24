@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-24T07:14:44.277Z",
+    "updatedAt": "2026-09-24T13:15:05.498Z",
     "period": {
       "start": "2020-01-01T00:00:00.000Z",
-      "end": "2026-09-24T07:14:43.257Z"
+      "end": "2026-09-24T13:15:05.210Z"
     }
   },
   "campaigns": [
@@ -18,15 +18,15 @@
         "interrupted": 15
       },
       "email": {
-        "sent": 60,
-        "delivered": 45,
+        "sent": 67,
+        "delivered": 52,
         "bounced": 15,
-        "opened": 5,
+        "opened": 6,
         "clicked": 0,
         "replied": 0,
-        "deliveryRate": 0.75,
-        "bounceRate": 0.25,
-        "openRate": 0.111,
+        "deliveryRate": 0.776,
+        "bounceRate": 0.224,
+        "openRate": 0.115,
         "clickRate": 0,
         "replyRate": 0
       },
@@ -56,25 +56,25 @@
         "interrupted": 23
       },
       "email": {
-        "sent": 195,
-        "delivered": 172,
+        "sent": 201,
+        "delivered": 178,
         "bounced": 23,
         "opened": 55,
         "clicked": 8,
         "replied": 3,
-        "deliveryRate": 0.882,
-        "bounceRate": 0.118,
-        "openRate": 0.32,
-        "clickRate": 0.047,
+        "deliveryRate": 0.886,
+        "bounceRate": 0.114,
+        "openRate": 0.309,
+        "clickRate": 0.045,
         "replyRate": 0.017
       },
       "linkedin": {
-        "invitesSent": 37,
-        "invitesAccepted": 13,
-        "messagesSent": 11,
+        "invitesSent": 43,
+        "invitesAccepted": 14,
+        "messagesSent": 13,
         "messagesReplied": 1,
-        "acceptanceRate": 0.351,
-        "replyRate": 0.091
+        "acceptanceRate": 0.326,
+        "replyRate": 0.077
       },
       "whatsapp": {
         "sent": 0,
@@ -88,30 +88,30 @@
       "label": "Renovação Próxima",
       "leads": {
         "total": 120,
-        "reached": 115,
+        "reached": 116,
         "answered": 3,
         "interested": 0,
         "interrupted": 19
       },
       "email": {
-        "sent": 167,
-        "delivered": 149,
+        "sent": 171,
+        "delivered": 153,
         "bounced": 18,
-        "opened": 38,
+        "opened": 39,
         "clicked": 1,
         "replied": 2,
-        "deliveryRate": 0.892,
-        "bounceRate": 0.108,
+        "deliveryRate": 0.895,
+        "bounceRate": 0.105,
         "openRate": 0.255,
         "clickRate": 0.007,
         "replyRate": 0.013
       },
       "linkedin": {
-        "invitesSent": 22,
-        "invitesAccepted": 6,
+        "invitesSent": 26,
+        "invitesAccepted": 7,
         "messagesSent": 5,
         "messagesReplied": 1,
-        "acceptanceRate": 0.273,
+        "acceptanceRate": 0.269,
         "replyRate": 0.2
       },
       "whatsapp": {
@@ -126,22 +126,22 @@
       "label": "Maturidade Estratégica (WA)",
       "leads": {
         "total": 124,
-        "reached": 28,
+        "reached": 35,
         "answered": 0,
         "interested": 0,
         "interrupted": 4
       },
       "email": {
-        "sent": 28,
-        "delivered": 24,
+        "sent": 35,
+        "delivered": 31,
         "bounced": 4,
-        "opened": 7,
+        "opened": 8,
         "clicked": 1,
         "replied": 0,
-        "deliveryRate": 0.857,
-        "bounceRate": 0.143,
-        "openRate": 0.292,
-        "clickRate": 0.042,
+        "deliveryRate": 0.886,
+        "bounceRate": 0.114,
+        "openRate": 0.258,
+        "clickRate": 0.032,
         "replyRate": 0
       },
       "linkedin": {
@@ -164,21 +164,21 @@
       "label": "Dores Operacionais (WA)",
       "leads": {
         "total": 143,
-        "reached": 14,
+        "reached": 20,
         "answered": 0,
         "interested": 0,
         "interrupted": 4
       },
       "email": {
-        "sent": 14,
-        "delivered": 10,
+        "sent": 20,
+        "delivered": 16,
         "bounced": 4,
-        "opened": 4,
+        "opened": 6,
         "clicked": 0,
         "replied": 0,
-        "deliveryRate": 0.714,
-        "bounceRate": 0.286,
-        "openRate": 0.4,
+        "deliveryRate": 0.8,
+        "bounceRate": 0.2,
+        "openRate": 0.375,
         "clickRate": 0,
         "replyRate": 0
       },
@@ -202,23 +202,23 @@
       "label": "Renovação Próxima (WA)",
       "leads": {
         "total": 95,
-        "reached": 25,
+        "reached": 31,
         "answered": 1,
         "interested": 0,
         "interrupted": 3
       },
       "email": {
-        "sent": 25,
-        "delivered": 22,
+        "sent": 31,
+        "delivered": 28,
         "bounced": 3,
-        "opened": 10,
+        "opened": 11,
         "clicked": 0,
         "replied": 1,
-        "deliveryRate": 0.88,
-        "bounceRate": 0.12,
-        "openRate": 0.455,
+        "deliveryRate": 0.903,
+        "bounceRate": 0.097,
+        "openRate": 0.393,
         "clickRate": 0,
-        "replyRate": 0.045
+        "replyRate": 0.036
       },
       "linkedin": {
         "invitesSent": 0,

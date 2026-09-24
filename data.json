@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-24T13:46:21.822Z",
+    "updatedAt": "2026-09-24T18:13:10.654Z",
     "availablePortes": [],
     "porteCounts": {
-      "all": 174
+      "all": 179
     },
     "availableMonths": [
       "2026-09"
@@ -3483,6 +3483,7 @@
       "stages": {
         "24595558": "2026-09-24T12:23:02.058Z",
         "24595559": "2026-09-24T12:23:04.076Z",
+        "24595562": "2026-09-24T17:59:00.346Z",
         "72557853": "2026-09-24T12:22:55.836Z"
       },
       "amount": 0,
@@ -3703,6 +3704,112 @@
       "lostReason": null,
       "createdate": "2026-09-24T13:38:56.752Z",
       "createMonth": "2026-09"
+    },
+    {
+      "id": "65216706123",
+      "company": "[link removed] — Prospecção | Dores Operacionais (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-24T13:59:03.665Z",
+        "24595559": "2026-09-24T13:59:06.398Z",
+        "72557853": "2026-09-24T13:58:56.823Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-24T13:58:56.823Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65216707459",
+      "company": "Grupo Senff — Prospecção | Renovação Próxima (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-24T14:15:01.923Z",
+        "24595559": "2026-09-24T14:15:04.617Z",
+        "24595562": "2026-09-24T14:59:00.135Z",
+        "72557853": "2026-09-24T14:14:56.011Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-24T14:14:56.011Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65243801164",
+      "company": "Edify Educacional — Prospecção | Dores Operacionais (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-24T14:17:05.228Z",
+        "24595559": "2026-09-24T14:17:08.103Z",
+        "72557853": "2026-09-24T14:16:58.166Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-24T14:16:58.166Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65223779864",
+      "company": "Incentive.me — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-24T14:21:03.223Z",
+        "24595559": "2026-09-24T14:21:06.051Z",
+        "72557853": "2026-09-24T14:20:56.052Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-24T14:20:56.052Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65234005142",
+      "company": "Acqio — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-24T14:25:05.884Z",
+        "24595559": "2026-09-24T14:25:08.596Z",
+        "72557853": "2026-09-24T14:24:57.398Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-24T14:24:57.398Z",
+      "createMonth": "2026-09"
     }
   ],
   "filters": {
@@ -3733,7 +3840,7 @@
     ]
   },
   "debug": {
-    "totalDeals": 174,
+    "totalDeals": 179,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

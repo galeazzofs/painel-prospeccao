@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-24T13:15:05.171Z",
+    "updatedAt": "2026-09-24T13:46:21.822Z",
     "availablePortes": [],
     "porteCounts": {
-      "all": 167
+      "all": 174
     },
     "availableMonths": [
       "2026-09"
@@ -671,6 +671,30 @@
       "lostFunnel": null,
       "lostReason": null,
       "createdate": "2026-09-15T19:58:42.616Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65027341413",
+      "company": "CSP Tech - Prospecção | Renovação Próxima",
+      "campaign": "Prospecção | Renovação Próxima",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-16T20:01:25.866Z",
+        "24595559": "2026-09-16T20:01:29.136Z",
+        "24595560": "2026-09-17T14:27:19.659Z",
+        "24595561": "2026-09-23T19:40:19.037Z",
+        "24595562": "2026-09-16T20:01:34.012Z",
+        "72557853": "2026-09-16T20:01:19.258Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-16T20:01:19.258Z",
       "createMonth": "2026-09"
     },
     {
@@ -3501,6 +3525,7 @@
       "stages": {
         "24595558": "2026-09-24T12:45:02.254Z",
         "24595559": "2026-09-24T12:45:04.594Z",
+        "24595562": "2026-09-24T13:45:01.204Z",
         "72557853": "2026-09-24T12:44:56.402Z"
       },
       "amount": 0,
@@ -3552,6 +3577,132 @@
       "lostReason": null,
       "createdate": "2026-09-24T13:08:54.333Z",
       "createMonth": "2026-09"
+    },
+    {
+      "id": "65229607803",
+      "company": "Coplana - Cooperativa Agroindustrial — Prospecção | Dores Operacionais (Whatsapp)",
+      "campaign": "Cooperativa Agroindustrial — Prospecção | Dores Operacionais (Whatsapp)",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-24T13:17:03.433Z",
+        "24595559": "2026-09-24T13:17:05.710Z",
+        "72557853": "2026-09-24T13:16:57.197Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-24T13:16:57.197Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65258890885",
+      "company": "Credipar Financeira — Prospecção | Renovação Próxima (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-24T13:27:06.037Z",
+        "24595559": "2026-09-24T13:27:08.418Z",
+        "72557853": "2026-09-24T13:26:59.265Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-24T13:26:59.265Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65212365874",
+      "company": "FFA Ferrareze e Freitas — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-24T13:33:01.253Z",
+        "24595559": "2026-09-24T13:33:03.977Z",
+        "72557853": "2026-09-24T13:32:55.550Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-24T13:32:55.550Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65229198738",
+      "company": "Construtora e Incorporadora Pride Ltda — Prospecção | Dores Operacionais (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-24T13:35:06.185Z",
+        "24595559": "2026-09-24T13:35:08.915Z",
+        "72557853": "2026-09-24T13:34:59.432Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-24T13:34:59.432Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65222089053",
+      "company": "Alicomvc — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-24T13:37:03.557Z",
+        "24595559": "2026-09-24T13:37:06.466Z",
+        "72557853": "2026-09-24T13:36:56.706Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-24T13:36:56.706Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65238964329",
+      "company": "InfoPrice — Prospecção | Renovação Próxima (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-24T13:39:03.930Z",
+        "24595559": "2026-09-24T13:39:06.436Z",
+        "72557853": "2026-09-24T13:38:56.752Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-24T13:38:56.752Z",
+      "createMonth": "2026-09"
     }
   ],
   "filters": {
@@ -3561,12 +3712,14 @@
       "Associação Paulista do Ministério Público — Prospecção | Dores Operacionais (Whatsapp)",
       "Banco Nacional de Empregos — Prospecção | Maturidade Estratégica (Whatsapp)",
       "Centro de Tecnologia Canavieira — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "Cooperativa Agroindustrial — Prospecção | Dores Operacionais (Whatsapp)",
       "Empresa de Tecnologia da Informação do Ceará — Prospecção | Maturidade Estratégica (Whatsapp)",
       "FUNARBE — Prospecção | Renovação Próxima (Whatsapp)",
       "Farmarcas — Prospecção | Renovação Próxima",
       "GOVBR — Prospecção | Renovação Próxima",
       "Mercadomóveis — Prospecção | Dores Operacionais",
       "Plano de Saúde — Prospecção | Dores Operacionais",
+      "Prospecção | Renovação Próxima",
       "— sem campanha"
     ],
     "cns": [
@@ -3580,7 +3733,7 @@
     ]
   },
   "debug": {
-    "totalDeals": 167,
+    "totalDeals": 174,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

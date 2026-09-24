@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-09-23T22:42:01.514Z",
+    "updatedAt": "2026-09-24T01:06:40.200Z",
     "availablePortes": [],
     "porteCounts": {
       "all": 160
@@ -14,7 +14,7 @@
         "start": "2026-09-01",
         "end": "2026-09-30",
         "businessDays": 20,
-        "businessDaysElapsed": 17,
+        "businessDaysElapsed": 18,
         "targets": [
           {
             "id": "72557853",

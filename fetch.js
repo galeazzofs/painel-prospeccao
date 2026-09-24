@@ -14,7 +14,9 @@ const HUBSPOT_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN;
 if (!HUBSPOT_TOKEN) { console.error('❌ HUBSPOT_ACCESS_TOKEN não definido'); process.exit(1); }
 
 const API = 'https://api.hubapi.com';
+
 const PIPELINE_ID = '8582978';
+const PIPELINE_ID_OPP = 'default';
 
 const STAGES_SDR = [
   { id: '72557853',  name: 'Mapeamento' },
@@ -49,13 +51,22 @@ const DEAL_PROPS = [
 // Filtro: origem=Prospecção + origem_micro_=Motor sinais (SEM filtro de mês)
 function buildSearchBody() {
   return {
-    filterGroups: [{
-      filters: [
-        { propertyName: 'pipeline',      operator: 'EQ', value: PIPELINE_ID },
-        { propertyName: 'origem',        operator: 'EQ', value: 'Prospecção' },
-        { propertyName: 'origem_micro_', operator: 'EQ', value: 'Motor sinais' },
-      ]
-    }],
+    filterGroups: [
+      {
+        filters: [
+          { propertyName: 'pipeline',      operator: 'EQ', value: PIPELINE_ID },
+          { propertyName: 'origem',        operator: 'EQ', value: 'Prospecção' },
+          { propertyName: 'origem_micro_', operator: 'EQ', value: 'Motor sinais' },
+        ]
+      },
+      {
+        filters: [
+          { propertyName: 'pipeline',      operator: 'EQ', value: PIPELINE_ID_OPP },
+          { propertyName: 'origem',        operator: 'EQ', value: 'Prospecção' },
+          { propertyName: 'origem_micro_', operator: 'EQ', value: 'Motor sinais' },
+        ]
+      },
+    ],
     properties: DEAL_PROPS,
     limit: 100,
     sorts: [{ propertyName: 'createdate', direction: 'ASCENDING' }],
@@ -163,6 +174,7 @@ async function main() {
   console.log('📊 Buscando deals (origem=Prospecção, origem_micro_=Motor sinais)…');
   const rawDeals = await fetchAllDeals(buildSearchBody());
   console.log(`   ${rawDeals.length} deals\n`);
+  
 
   const deals = rawDeals.map(d => transformDeal(d, owners));
 

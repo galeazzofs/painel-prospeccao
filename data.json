@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-25T16:38:06.591Z",
+    "updatedAt": "2026-09-25T20:16:33.046Z",
     "availablePortes": [],
     "porteCounts": {
-      "all": 223
+      "all": 236
     },
     "availableMonths": [
       "2026-09"
@@ -4735,6 +4735,279 @@
       "lostReason": null,
       "createdate": "2026-09-25T14:38:55.736Z",
       "createMonth": "2026-09"
+    },
+    {
+      "id": "65265983262",
+      "company": "Oliveira Trust — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T18:35:01.551Z",
+        "24595559": "2026-09-25T18:35:04.725Z",
+        "72557853": "2026-09-25T18:34:54.376Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T18:34:54.376Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65266307355",
+      "company": "Revolution — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T18:49:02.184Z",
+        "24595559": "2026-09-25T18:49:05.164Z",
+        "72557853": "2026-09-25T18:48:55.196Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T18:48:55.196Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65266399069",
+      "company": "MJV — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T19:01:03.849Z",
+        "24595559": "2026-09-25T19:01:07.188Z",
+        "72557853": "2026-09-25T19:00:55.747Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T19:00:55.747Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65266328159",
+      "company": "Pirelli — Prospecção | Renovação Próxima (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T19:07:02.815Z",
+        "24595559": "2026-09-25T19:07:05.696Z",
+        "72557853": "2026-09-25T19:06:55.176Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T19:06:55.176Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65265968174",
+      "company": "Octadesk — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T19:15:03.671Z",
+        "24595559": "2026-09-25T19:15:06.350Z",
+        "72557853": "2026-09-25T19:14:56.519Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T19:14:56.519Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65266326275",
+      "company": "Check Up Hospital — Prospecção | Dores Operacionais (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T19:17:04.290Z",
+        "24595559": "2026-09-25T19:17:06.929Z",
+        "72557853": "2026-09-25T19:16:56.915Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T19:16:56.915Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65266399926",
+      "company": "Ncr — Prospecção | Renovação Próxima (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T19:25:03.354Z",
+        "24595559": "2026-09-25T19:25:06.566Z",
+        "72557853": "2026-09-25T19:24:56.471Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T19:24:56.471Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65266139828",
+      "company": "Blue Sol Energia Solar LTDA — Prospecção | Dores Operacionais (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T19:29:04.310Z",
+        "24595559": "2026-09-25T19:29:07.803Z",
+        "72557853": "2026-09-25T19:28:55.991Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T19:28:55.991Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65266464265",
+      "company": "Edha Digital — Prospecção | Dores Operacionais (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T19:43:04.917Z",
+        "24595559": "2026-09-25T19:43:07.893Z",
+        "72557853": "2026-09-25T19:42:57.092Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T19:42:57.092Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65267156559",
+      "company": "Dürr — Prospecção | Dores Operacionais (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T19:55:01.776Z",
+        "24595559": "2026-09-25T19:55:04.635Z",
+        "72557853": "2026-09-25T19:54:54.911Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T19:54:54.911Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65266649989",
+      "company": "Saggezza — Prospecção | Renovação Próxima (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T20:03:01.328Z",
+        "24595559": "2026-09-25T20:03:03.865Z",
+        "72557853": "2026-09-25T20:02:54.953Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T20:02:54.953Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65256514634",
+      "company": "Netshow.me — Prospecção | Maturidade Estratégica (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T20:07:03.621Z",
+        "24595559": "2026-09-25T20:07:06.893Z",
+        "72557853": "2026-09-25T20:06:56.251Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T20:06:56.251Z",
+      "createMonth": "2026-09"
+    },
+    {
+      "id": "65267264262",
+      "company": "byou.app — Prospecção | Dores Operacionais (Whatsapp)",
+      "campaign": "— sem campanha",
+      "porte": null,
+      "setor": "— sem categoria",
+      "cn": "Barbara Costa Borges",
+      "ev": "Barbara Costa Borges",
+      "stages": {
+        "24595558": "2026-09-25T20:09:03.946Z",
+        "24595559": "2026-09-25T20:09:07.037Z",
+        "72557853": "2026-09-25T20:08:56.431Z"
+      },
+      "amount": 0,
+      "isLost": false,
+      "lostStage": null,
+      "lostFunnel": null,
+      "lostReason": null,
+      "createdate": "2026-09-25T20:08:56.430Z",
+      "createMonth": "2026-09"
     }
   ],
   "filters": {
@@ -4766,7 +5039,7 @@
     ]
   },
   "debug": {
-    "totalDeals": 223,
+    "totalDeals": 236,
     "query": "origem=Prospecção AND origem_micro_=Motor sinais"
   }
 }

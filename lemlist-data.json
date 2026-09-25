@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-25T05:51:45.561Z",
+    "updatedAt": "2026-09-25T11:14:34.583Z",
     "period": {
       "start": "2020-01-01T00:00:00.000Z",
-      "end": "2026-09-25T05:51:44.923Z"
+      "end": "2026-09-25T11:14:33.985Z"
     }
   },
   "campaigns": [
@@ -69,11 +69,11 @@
         "replyRate": 0.017
       },
       "linkedin": {
-        "invitesSent": 43,
+        "invitesSent": 39,
         "invitesAccepted": 17,
         "messagesSent": 16,
         "messagesReplied": 1,
-        "acceptanceRate": 0.395,
+        "acceptanceRate": 0.436,
         "replyRate": 0.063
       },
       "whatsapp": {
@@ -107,11 +107,11 @@
         "replyRate": 0.019
       },
       "linkedin": {
-        "invitesSent": 26,
+        "invitesSent": 24,
         "invitesAccepted": 9,
         "messagesSent": 6,
         "messagesReplied": 1,
-        "acceptanceRate": 0.346,
+        "acceptanceRate": 0.375,
         "replyRate": 0.167
       },
       "whatsapp": {

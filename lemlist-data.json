@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-25T11:14:34.583Z",
+    "updatedAt": "2026-09-25T16:38:07.200Z",
     "period": {
       "start": "2020-01-01T00:00:00.000Z",
-      "end": "2026-09-25T11:14:33.985Z"
+      "end": "2026-09-25T16:38:06.648Z"
     }
   },
   "campaigns": [
@@ -50,7 +50,7 @@
       "label": "Dores Operacionais",
       "leads": {
         "total": 140,
-        "reached": 138,
+        "reached": 139,
         "answered": 4,
         "interested": 0,
         "interrupted": 23
@@ -59,21 +59,21 @@
         "sent": 201,
         "delivered": 178,
         "bounced": 23,
-        "opened": 55,
+        "opened": 56,
         "clicked": 8,
         "replied": 3,
         "deliveryRate": 0.886,
         "bounceRate": 0.114,
-        "openRate": 0.309,
+        "openRate": 0.315,
         "clickRate": 0.045,
         "replyRate": 0.017
       },
       "linkedin": {
-        "invitesSent": 39,
+        "invitesSent": 40,
         "invitesAccepted": 17,
         "messagesSent": 16,
         "messagesReplied": 1,
-        "acceptanceRate": 0.436,
+        "acceptanceRate": 0.425,
         "replyRate": 0.063
       },
       "whatsapp": {
@@ -89,30 +89,30 @@
       "leads": {
         "total": 120,
         "reached": 116,
-        "answered": 4,
+        "answered": 5,
         "interested": 0,
         "interrupted": 19
       },
       "email": {
-        "sent": 177,
-        "delivered": 159,
+        "sent": 191,
+        "delivered": 173,
         "bounced": 18,
-        "opened": 40,
+        "opened": 46,
         "clicked": 1,
-        "replied": 3,
-        "deliveryRate": 0.898,
-        "bounceRate": 0.102,
-        "openRate": 0.252,
+        "replied": 4,
+        "deliveryRate": 0.906,
+        "bounceRate": 0.094,
+        "openRate": 0.266,
         "clickRate": 0.006,
-        "replyRate": 0.019
+        "replyRate": 0.023
       },
       "linkedin": {
-        "invitesSent": 24,
-        "invitesAccepted": 9,
-        "messagesSent": 6,
+        "invitesSent": 27,
+        "invitesAccepted": 11,
+        "messagesSent": 7,
         "messagesReplied": 1,
-        "acceptanceRate": 0.375,
-        "replyRate": 0.167
+        "acceptanceRate": 0.407,
+        "replyRate": 0.143
       },
       "whatsapp": {
         "sent": 0,
@@ -126,22 +126,22 @@
       "label": "Maturidade Estratégica (WA)",
       "leads": {
         "total": 125,
-        "reached": 53,
+        "reached": 67,
         "answered": 0,
         "interested": 0,
-        "interrupted": 11
+        "interrupted": 14
       },
       "email": {
-        "sent": 53,
-        "delivered": 42,
-        "bounced": 11,
-        "opened": 13,
+        "sent": 67,
+        "delivered": 53,
+        "bounced": 14,
+        "opened": 16,
         "clicked": 1,
         "replied": 0,
-        "deliveryRate": 0.792,
-        "bounceRate": 0.208,
-        "openRate": 0.31,
-        "clickRate": 0.024,
+        "deliveryRate": 0.791,
+        "bounceRate": 0.209,
+        "openRate": 0.302,
+        "clickRate": 0.019,
         "replyRate": 0
       },
       "linkedin": {
@@ -164,23 +164,23 @@
       "label": "Dores Operacionais (WA)",
       "leads": {
         "total": 143,
-        "reached": 28,
+        "reached": 38,
         "answered": 1,
         "interested": 0,
-        "interrupted": 5
+        "interrupted": 7
       },
       "email": {
-        "sent": 28,
-        "delivered": 23,
-        "bounced": 5,
-        "opened": 8,
+        "sent": 38,
+        "delivered": 31,
+        "bounced": 7,
+        "opened": 10,
         "clicked": 0,
         "replied": 1,
-        "deliveryRate": 0.821,
-        "bounceRate": 0.179,
-        "openRate": 0.348,
+        "deliveryRate": 0.816,
+        "bounceRate": 0.184,
+        "openRate": 0.323,
         "clickRate": 0,
-        "replyRate": 0.043
+        "replyRate": 0.032
       },
       "linkedin": {
         "invitesSent": 0,
@@ -201,24 +201,24 @@
       "id": "cam_XbWnNtqiDx5hHnpeC",
       "label": "Renovação Próxima (WA)",
       "leads": {
-        "total": 96,
-        "reached": 43,
+        "total": 97,
+        "reached": 54,
         "answered": 3,
         "interested": 0,
-        "interrupted": 5
+        "interrupted": 6
       },
       "email": {
-        "sent": 43,
-        "delivered": 39,
-        "bounced": 4,
-        "opened": 14,
+        "sent": 54,
+        "delivered": 49,
+        "bounced": 5,
+        "opened": 15,
         "clicked": 0,
         "replied": 3,
         "deliveryRate": 0.907,
         "bounceRate": 0.093,
-        "openRate": 0.359,
+        "openRate": 0.306,
         "clickRate": 0,
-        "replyRate": 0.077
+        "replyRate": 0.061
       },
       "linkedin": {
         "invitesSent": 0,
